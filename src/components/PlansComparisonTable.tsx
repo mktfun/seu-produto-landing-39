@@ -75,12 +75,12 @@ const PlansComparisonTable = () => {
   const renderValue = (value: boolean | string) => {
     if (typeof value === "boolean") {
       return value ? (
-        <Check className="w-5 h-5 text-primary mx-auto" />
+        <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary mx-auto" />
       ) : (
-        <X className="w-5 h-5 text-muted-foreground mx-auto" />
+        <X className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground mx-auto" />
       );
     }
-    return <span className="text-sm font-medium text-center block">{value}</span>;
+    return <span className="text-xs sm:text-sm font-medium text-center block">{value}</span>;
   };
 
   return (
