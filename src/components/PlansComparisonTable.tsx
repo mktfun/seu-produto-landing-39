@@ -10,85 +10,31 @@ interface ComparisonItem {
 
 const comparisonData: ComparisonItem[] = [
   {
-    service: "Indicação de mão de obra",
-    essencial: "3 utilizações",
-    completo: "3 utilizações", 
-    completoPlus: "3 utilizações"
+    service: "Serviços emergenciais",
+    essencial: "Básico",
+    completo: "Completo", 
+    completoPlus: "Completo"
   },
   {
-    service: "Serviços emergenciais (encanador, eletricista, chaveiro)",
-    essencial: "4 conjuntos",
-    completo: "12 conjuntos",
-    completoPlus: "12 conjuntos"
-  },
-  {
-    service: "Cobertura provisória de telhados",
+    service: "Chaveiro e vidraceiro",
     essencial: true,
     completo: true,
     completoPlus: true
   },
   {
-    service: "Vigilante",
+    service: "Cobertura de telhados",
     essencial: true,
     completo: true,
     completoPlus: true
   },
   {
-    service: "Limpeza",
-    essencial: true,
-    completo: true,
-    completoPlus: true
-  },
-  {
-    service: "Regresso antecipado",
+    service: "Hospedagem temporária",
     essencial: false,
     completo: true,
     completoPlus: true
   },
   {
-    service: "Hospedagem",
-    essencial: false,
-    completo: true,
-    completoPlus: true
-  },
-  {
-    service: "Restaurante e lavanderia",
-    essencial: false,
-    completo: true,
-    completoPlus: true
-  },
-  {
-    service: "Locação de eletrodomésticos",
-    essencial: false,
-    completo: true,
-    completoPlus: true
-  },
-  {
-    service: "Locação de televisão",
-    essencial: false,
-    completo: true,
-    completoPlus: true
-  },
-  {
-    service: "Escritório provisório",
-    essencial: false,
-    completo: true,
-    completoPlus: true
-  },
-  {
-    service: "Mudança e guarda móveis",
-    essencial: false,
-    completo: true,
-    completoPlus: true
-  },
-  {
-    service: "Conserto de eletrodomésticos",
-    essencial: false,
-    completo: true,
-    completoPlus: true
-  },
-  {
-    service: "Reparo ar condicionado",
+    service: "Mudança e transporte",
     essencial: false,
     completo: true,
     completoPlus: true
@@ -100,34 +46,28 @@ const comparisonData: ComparisonItem[] = [
     completoPlus: true
   },
   {
-    service: "Assistência a bike",
+    service: "Conserto de eletrodomésticos",
     essencial: false,
     completo: true,
     completoPlus: true
   },
   {
-    service: "Manutenção geral (3 serviços à escolha)",
+    service: "Manutenção preventiva",
     essencial: false,
     completo: false,
     completoPlus: true
   },
   {
-    service: "Inspeção domiciliar (2 serviços à escolha)",
+    service: "Inspeção domiciliar",
     essencial: false,
     completo: false,
     completoPlus: true
   },
   {
-    service: "Descarte sustentável",
+    service: "Serviços sustentáveis",
     essencial: true,
     completo: true,
     completoPlus: true
-  },
-  {
-    service: "Consultoria ambiental",
-    essencial: "Ilimitado",
-    completo: "Ilimitado",
-    completoPlus: "Ilimitado"
   }
 ];
 
@@ -147,10 +87,10 @@ const PlansComparisonTable = () => {
     <Card className="w-full card-gradient shadow-lg">
       <CardHeader className="text-center">
         <CardTitle className="text-2xl font-bold text-secondary">
-          Comparação Detalhada dos Planos
+          Comparação dos Planos
         </CardTitle>
         <p className="text-muted-foreground">
-          Compare todos os serviços incluídos em cada plano Zurich Residência
+          Veja rapidamente as principais diferenças entre os planos
         </p>
       </CardHeader>
       <CardContent>
@@ -158,19 +98,19 @@ const PlansComparisonTable = () => {
           <table className="w-full">
             <thead>
               <tr className="border-b border-border">
-                <th className="text-left py-4 px-4 font-semibold text-secondary min-w-[250px]">
-                  Serviços
+                <th className="text-left py-4 px-4 font-semibold text-secondary min-w-[200px]">
+                  Principais Serviços
                 </th>
-                <th className="text-center py-4 px-4 font-semibold text-secondary min-w-[150px]">
+                <th className="text-center py-4 px-4 font-semibold text-secondary min-w-[120px]">
                   Essencial
                 </th>
-                <th className="text-center py-4 px-4 font-semibold text-primary min-w-[150px]">
+                <th className="text-center py-4 px-4 font-semibold text-primary min-w-[120px]">
                   Completo
                   <div className="text-xs font-normal text-primary/80 mt-1">
-                    Mais Popular
+                    Popular
                   </div>
                 </th>
-                <th className="text-center py-4 px-4 font-semibold text-secondary min-w-[150px]">
+                <th className="text-center py-4 px-4 font-semibold text-secondary min-w-[120px]">
                   Completo+
                 </th>
               </tr>
@@ -203,7 +143,7 @@ const PlansComparisonTable = () => {
         
         <div className="mt-6 text-center">
           <p className="text-sm text-muted-foreground">
-            <strong>Legenda:</strong> ✓ = Incluído | ✗ = Não incluído | Valores específicos quando aplicável
+            <strong>Legenda:</strong> ✓ = Incluído | ✗ = Não incluído
           </p>
         </div>
       </CardContent>
