@@ -41,7 +41,7 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mb-16">
           {services.map((service, index) => (
             <Card key={index} className="hover-lift card-gradient border-0 shadow-lg animate-fade-in" style={{
               animationDelay: `${index * 0.1}s`
@@ -72,7 +72,7 @@ const ServicesSection = () => {
         </div>
 
         {/* Seção Eletrônicos e Bikes */}
-        <div className="bg-slate-50 rounded-xl p-8 mb-12">
+        <div className="bg-slate-50 rounded-xl p-4 sm:p-8 mb-12">
           <div>
             <div className="text-center mb-10">
               <h3 className="text-2xl lg:text-3xl font-bold text-secondary mb-4">
@@ -83,7 +83,7 @@ const ServicesSection = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 max-w-4xl mx-auto">
               {/* Eletrônicos Card */}
               <div>
                 <Card className="shadow-lg hover:shadow-xl transition-shadow">
