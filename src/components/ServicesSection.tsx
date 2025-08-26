@@ -110,6 +110,44 @@ const ServicesSection = () => {
             </Card>)}
         </div>
 
+        {/* Destaque Sustentabilidade */}
+        <div className="mt-16 bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-8 border border-green-200">
+          <div className="text-center">
+            <div className="flex items-center justify-center space-x-2 mb-4">
+              <Leaf className="w-8 h-8 text-green-600" />
+              <h3 className="text-2xl font-bold text-secondary">Compromisso Sustentável</h3>
+            </div>
+            <p className="text-muted-foreground max-w-3xl mx-auto mb-6">
+              A Zurich se preocupa com o meio ambiente. Todos os nossos planos incluem serviços
+              sustentáveis para descarte ecológico e consultoria ambiental, ajudando você a
+              cuidar da sua casa e do planeta.
+            </p>
+            <div className="grid md:grid-cols-3 gap-6 text-center">
+              <div className="flex flex-col items-center space-y-2">
+                <div className="w-12 h-12 bg-green-200 rounded-full flex items-center justify-center">
+                  <Recycle className="w-6 h-6 text-green-600" />
+                </div>
+                <h4 className="font-semibold text-secondary">Descarte Ecológico</h4>
+                <p className="text-sm text-muted-foreground">Descarte correto de móveis e entulhos</p>
+              </div>
+              <div className="flex flex-col items-center space-y-2">
+                <div className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center">
+                  <Leaf className="w-6 h-6 text-blue-600" />
+                </div>
+                <h4 className="font-semibold text-secondary">Consultoria Ambiental</h4>
+                <p className="text-sm text-muted-foreground">Orientação ilimitada para práticas sustentáveis</p>
+              </div>
+              <div className="flex flex-col items-center space-y-2">
+                <div className="w-12 h-12 bg-green-200 rounded-full flex items-center justify-center">
+                  <Shield className="w-6 h-6 text-green-600" />
+                </div>
+                <h4 className="font-semibold text-secondary">Projetos Sustentáveis</h4>
+                <p className="text-sm text-muted-foreground">Apoio em iniciativas ecológicas</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="text-center mt-12">
           <div className="inline-flex items-center space-x-2 bg-primary/10 rounded-full px-6 py-3">
             <Phone className="w-5 h-5 text-primary" />
