@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Shield, CheckCircle, Clock, Users } from "lucide-react";
 
@@ -75,13 +74,28 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="relative animate-scale-in">
-            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-3xl"></div>
-            <img
-              src="/lovable-uploads/98786726-1f5a-4a7b-b00b-78e645c14be3.png"
-              alt="Casal feliz em casa - Zurich Residência"
-              className="rounded-3xl shadow-2xl w-full h-[600px] object-cover"
-            />
+          <div className="relative animate-scale-in flex items-center justify-center">
+            {/* Elementos decorativos do lado esquerdo */}
+            <div className="absolute left-0 top-1/4 w-20 h-20 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full opacity-80 animate-float"></div>
+            <div className="absolute left-4 bottom-1/4 w-12 h-12 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full opacity-70 animate-float" style={{animationDelay: '1s'}}></div>
+
+            {/* Elementos decorativos do lado direito */}
+            <div className="absolute right-0 top-1/3 w-16 h-16 bg-gradient-to-r from-green-400 to-green-600 rounded-full opacity-75 animate-float" style={{animationDelay: '2s'}}></div>
+            <div className="absolute right-6 bottom-1/3 w-10 h-10 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full opacity-80 animate-float" style={{animationDelay: '0.5s'}}></div>
+
+            {/* Container circular da imagem */}
+            <div className="relative w-96 h-96 rounded-full overflow-hidden shadow-2xl border-4 border-white/20 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F8db09fcbd19243afa37a84aaf6b10caf%2F08877a4f5c4b473993b0855efed19714?format=webp&width=800"
+                alt="Casal feliz em casa - Zurich Residência"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Elementos decorativos adicionais */}
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full opacity-60 animate-float" style={{animationDelay: '1.5s'}}></div>
+            <div className="absolute bottom-0 left-1/3 w-6 h-6 bg-gradient-to-r from-pink-400 to-pink-600 rounded-full opacity-70 animate-float" style={{animationDelay: '2.5s'}}></div>
           </div>
         </div>
       </div>
