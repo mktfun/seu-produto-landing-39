@@ -42,7 +42,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
                 size="lg"
-                variant="transparent-white"
+                variant="transparentWhite"
                 onClick={() => navigate("/onboard")}
               >
                 Solicitar Cotação Gratuita
