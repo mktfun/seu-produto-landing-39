@@ -5,21 +5,21 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-semibold ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 transform active:scale-95 shadow-lg hover:shadow-xl",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white hover:from-blue-700 hover:via-blue-800 hover:to-blue-900 hover:scale-105 shadow-blue-500/25",
+        default: "bg-blue-600 text-white hover:bg-blue-700",
         destructive:
-          "bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-600 hover:to-red-700 shadow-red-500/25",
+          "bg-red-500 text-white hover:bg-red-600",
         outline:
-          "border-2 border-blue-200 bg-white/80 backdrop-blur-sm hover:bg-blue-50 hover:border-blue-300 text-blue-700 hover:text-blue-800 shadow-blue-100/50",
+          "border border-blue-600 bg-white hover:bg-blue-50 text-blue-600 hover:text-blue-700",
         secondary:
-          "bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800 hover:from-gray-200 hover:to-gray-300 shadow-gray-300/25",
+          "bg-gray-200 text-gray-800 hover:bg-gray-300",
         ghost: "hover:bg-blue-50 hover:text-blue-700 text-gray-600",
         link: "text-blue-600 underline-offset-4 hover:underline hover:text-blue-700",
-        premium: "bg-gradient-to-r from-purple-600 via-blue-600 to-teal-600 text-white hover:from-purple-700 hover:via-blue-700 hover:to-teal-700 shadow-purple-500/25 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700",
-        hero: "bg-gradient-to-r from-white to-blue-50 text-blue-800 hover:from-blue-50 hover:to-white border-2 border-white/20 backdrop-blur-sm shadow-white/25 hover:shadow-white/40 hover:scale-105"
+        premium: "bg-blue-600 text-white hover:bg-blue-700",
+        hero: "bg-white text-blue-600 hover:bg-blue-50 border border-white"
       },
       size: {
         default: "h-12 px-6 py-3",
