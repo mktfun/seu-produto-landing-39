@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, Star, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import PlansComparisonTable from "./PlansComparisonTable";
 
 const plans = [
   {
@@ -67,7 +68,7 @@ const plans = [
       "• Fixação de quadros, persianas e prateleiras (3 itens)",
       "• Fixação de telas e grades de segurança (25m²)",
       "• Instalação de chuveiro e torneira",
-      "• Instalação de pias e tanques",
+      "• Instalaç��o de pias e tanques",
       "• Instalação ou substituição de fechaduras",
       "• Lubrificação de fechaduras e dobradiças (3 unidades)",
       "• Limpeza de ralos e sifões",
