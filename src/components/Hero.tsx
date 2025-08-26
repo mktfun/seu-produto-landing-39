@@ -106,12 +106,13 @@ const Hero = () => {
             <div className="absolute -top-24 right-1/3 w-4 h-4 bg-white/35 rounded-full animate-float opacity-50" style={{animationDelay: '0.9s'}}></div>
 
             {/* Zurich logo background - behind and to the left (verde) */}
-            <div className="absolute -top-10 -left-10 w-80 h-80 rounded-full opacity-30 z-0 bg-gradient-to-br from-white/60 to-blue-200/60 p-1">
-              <div className="w-full h-full bg-gradient-to-br from-blue-50/40 to-blue-100/60 rounded-full p-8 flex items-center justify-center">
+            <div className="absolute -top-10 -left-10 w-80 h-80 rounded-full opacity-35 z-0 border-2 border-white/80">
+              <div className="w-full h-full bg-gradient-to-br from-white/80 to-white/60 rounded-full p-8 flex items-center justify-center">
                 <img
                   src="https://cdn.builder.io/api/v1/image/assets%2F341d59d887524a4696fe7d894c9eaabb%2F306ae11207464861be1cb081421d2766?format=webp&width=800"
                   alt="Zurich Logo"
-                  className="w-64 h-64 object-contain opacity-80"
+                  className="w-64 h-64 object-contain brightness-150 contrast-125"
+                  style={{filter: 'brightness(1.5) contrast(1.2) saturate(0.3)'}}
                 />
               </div>
             </div>
