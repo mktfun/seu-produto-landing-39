@@ -178,47 +178,6 @@ const PlansSection = () => {
           <PlansComparisonTable />
         </div>
 
-        {/* Informações Legais */}
-        <div className="mt-16 text-center">
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground mb-4">
-            <span className="flex items-center">
-              <Check className="w-4 h-4 mr-1 text-green-600" /> Sem taxa de adesão
-            </span>
-            <span className="flex items-center">
-              <Check className="w-4 h-4 mr-1 text-green-600" /> Cancelamento gratuito
-            </span>
-            <span className="flex items-center">
-              <Phone className="w-4 h-4 mr-1 text-blue-600" /> 0800 729 14 00
-            </span>
-          </div>
-          <p className="text-xs text-muted-foreground max-w-2xl mx-auto">
-            Plano garantido pela Zurich Minas Brasil Seguros S.A. (CNPJ 17.197.385/0001-21)
-            registrado na SUSEP nº 15414.004664_2004-95.
-          </p>
-        </div>
-        
-        {/* FAQ Rápido */}
-        <div className="mt-16">
-          <h3 className="text-2xl font-bold text-center text-secondary mb-8">Dúvidas Frequentes</h3>
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h4 className="font-semibold text-secondary mb-2">🤔 Como funciona o atendimento?</h4>
-              <p className="text-sm text-muted-foreground">Ligue 24h/7dias ou use nosso app. Chegamos em até 2 horas nas emergências.</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h4 className="font-semibold text-secondary mb-2">💳 Posso cancelar quando quiser?</h4>
-              <p className="text-sm text-muted-foreground">Sim! Cancelamento gratuito a qualquer momento, sem multas ou burocracias.</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h4 className="font-semibold text-secondary mb-2">🏠 Cobre minha região?</h4>
-              <p className="text-sm text-muted-foreground">Atendemos todo Brasil com rede credenciada em mais de 5.000 cidades.</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h4 className="font-semibold text-secondary mb-2">⚖️ Tem carência?</h4>
-              <p className="text-sm text-muted-foreground">Apenas 30 dias para serviços eletivos. Emergências são atendidas imediatamente.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
