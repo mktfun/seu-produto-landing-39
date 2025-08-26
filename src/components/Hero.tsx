@@ -17,24 +17,24 @@ const Hero = () => {
         <div className="absolute top-3/4 right-1/3 w-28 h-28 rounded-full bg-white animate-float" style={{animationDelay: '2.5s'}}></div>
       </div>
 
-      <div className="container mx-auto px-4 py-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-4 py-16 sm:py-20 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="text-white space-y-6 animate-fade-in">
             <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
               <Shield className="w-5 h-5" />
               <span className="text-sm font-medium">Assistência 24h Garantida</span>
             </div>
             
-            <h1 className="text-4xl lg:text-6xl font-bold leading-tight text-white">
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight text-white">
               Zurich<br />
               <span className="text-white/90">Residência</span>
             </h1>
             
-            <p className="text-xl lg:text-2xl text-white/90 max-w-lg">
+            <p className="text-lg sm:text-xl lg:text-2xl text-white/90 max-w-lg">
               Serviços de Assistência 24h e Sustentáveis
             </p>
             
-            <p className="text-lg text-white/80 max-w-xl">
+            <p className="text-base sm:text-lg text-white/80 max-w-xl">
               Proteção completa para sua casa com cobertura diferenciada,
               pensada com todo cuidado para garantir itens básicos do dia-a-dia.
             </p>
@@ -59,66 +59,56 @@ const Hero = () => {
               </Button>
             </div>
 
-            <div className="grid grid-cols-3 gap-6 pt-8">
+            <div className="grid grid-cols-3 gap-4 sm:gap-6 pt-6 sm:pt-8">
               <div className="text-center">
-                <div className="flex items-center justify-center w-12 h-12 bg-white/20 rounded-full mb-2 mx-auto">
-                  <Clock className="w-6 h-6" />
+                <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-full mb-2 mx-auto">
+                  <Clock className="w-4 h-4 sm:w-6 sm:h-6" />
                 </div>
-                <p className="text-sm font-medium">24h</p>
+                <p className="text-xs sm:text-sm font-medium">24h</p>
                 <p className="text-xs text-white/80">Atendimento</p>
               </div>
               <div className="text-center">
-                <div className="flex items-center justify-center w-12 h-12 bg-white/20 rounded-full mb-2 mx-auto">
-                  <Users className="w-6 h-6" />
+                <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-full mb-2 mx-auto">
+                  <Users className="w-4 h-4 sm:w-6 sm:h-6" />
                 </div>
-                <p className="text-sm font-medium">+50K</p>
+                <p className="text-xs sm:text-sm font-medium">+50K</p>
                 <p className="text-xs text-white/80">Clientes</p>
               </div>
               <div className="text-center">
-                <div className="flex items-center justify-center w-12 h-12 bg-white/20 rounded-full mb-2 mx-auto">
-                  <CheckCircle className="w-6 h-6" />
+                <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-full mb-2 mx-auto">
+                  <CheckCircle className="w-4 h-4 sm:w-6 sm:h-6" />
                 </div>
-                <p className="text-sm font-medium">100%</p>
+                <p className="text-xs sm:text-sm font-medium">100%</p>
                 <p className="text-xs text-white/80">Garantia</p>
               </div>
             </div>
           </div>
 
-          <div className="relative animate-scale-in flex items-center justify-center">
-            {/* Floating bubbles around the image */}
-            <div className="absolute -top-8 -left-8 w-6 h-6 bg-white/40 rounded-full animate-float opacity-60" style={{animationDelay: '0.5s'}}></div>
-            <div className="absolute -top-12 left-20 w-4 h-4 bg-white/30 rounded-full animate-float opacity-70" style={{animationDelay: '1.2s'}}></div>
-            <div className="absolute top-8 -left-12 w-8 h-8 bg-white/35 rounded-full animate-float opacity-50" style={{animationDelay: '2.1s'}}></div>
-            <div className="absolute top-32 -left-6 w-5 h-5 bg-white/45 rounded-full animate-float opacity-65" style={{animationDelay: '0.8s'}}></div>
+          <div className="relative animate-scale-in flex items-center justify-center mt-8 lg:mt-0">
+            {/* Floating bubbles around the image - reduced for mobile */}
+            <div className="hidden sm:block absolute -top-8 -left-8 w-6 h-6 bg-white/40 rounded-full animate-float opacity-60" style={{animationDelay: '0.5s'}}></div>
+            <div className="hidden lg:block absolute -top-12 left-20 w-4 h-4 bg-white/30 rounded-full animate-float opacity-70" style={{animationDelay: '1.2s'}}></div>
+            <div className="hidden sm:block absolute top-8 -left-12 w-8 h-8 bg-white/35 rounded-full animate-float opacity-50" style={{animationDelay: '2.1s'}}></div>
+            <div className="hidden lg:block absolute top-32 -left-6 w-5 h-5 bg-white/45 rounded-full animate-float opacity-65" style={{animationDelay: '0.8s'}}></div>
 
-            <div className="absolute -top-6 -right-10 w-7 h-7 bg-white/40 rounded-full animate-float opacity-55" style={{animationDelay: '1.5s'}}></div>
-            <div className="absolute top-12 -right-8 w-4 h-4 bg-white/35 rounded-full animate-float opacity-60" style={{animationDelay: '2.8s'}}></div>
-            <div className="absolute top-40 -right-4 w-6 h-6 bg-white/30 rounded-full animate-float opacity-70" style={{animationDelay: '0.3s'}}></div>
+            <div className="hidden sm:block absolute -top-6 -right-10 w-7 h-7 bg-white/40 rounded-full animate-float opacity-55" style={{animationDelay: '1.5s'}}></div>
+            <div className="hidden lg:block absolute top-12 -right-8 w-4 h-4 bg-white/35 rounded-full animate-float opacity-60" style={{animationDelay: '2.8s'}}></div>
+            <div className="hidden sm:block absolute top-40 -right-4 w-6 h-6 bg-white/30 rounded-full animate-float opacity-70" style={{animationDelay: '0.3s'}}></div>
 
-            <div className="absolute -bottom-8 -left-6 w-5 h-5 bg-white/45 rounded-full animate-float opacity-50" style={{animationDelay: '1.8s'}}></div>
-            <div className="absolute -bottom-4 left-16 w-7 h-7 bg-white/35 rounded-full animate-float opacity-65" style={{animationDelay: '2.5s'}}></div>
-            <div className="absolute bottom-20 -right-8 w-4 h-4 bg-white/40 rounded-full animate-float opacity-55" style={{animationDelay: '1.1s'}}></div>
-            <div className="absolute -bottom-10 right-12 w-6 h-6 bg-white/30 rounded-full animate-float opacity-60" style={{animationDelay: '0.7s'}}></div>
-
-            {/* Above the image */}
-            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-5 h-5 bg-white/50 rounded-full animate-float opacity-70" style={{animationDelay: '1.9s'}}></div>
-            <div className="absolute -top-20 left-1/3 w-3 h-3 bg-white/40 rounded-full animate-float opacity-60" style={{animationDelay: '2.3s'}}></div>
-            <div className="absolute -top-24 right-1/3 w-4 h-4 bg-white/35 rounded-full animate-float opacity-50" style={{animationDelay: '0.9s'}}></div>
-
-            {/* Zurich logo background - behind and to the left (verde) */}
-            <div className="absolute -top-10 -left-10 w-80 h-80 rounded-full opacity-35 z-0 border-2 border-white/80">
-              <div className="w-full h-full bg-gradient-to-br from-white/80 to-white/60 rounded-full p-8 flex items-center justify-center">
+            {/* Zurich logo background - responsive size */}
+            <div className="absolute -top-6 sm:-top-10 -left-6 sm:-left-10 w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full opacity-35 z-0 border-2 border-white/80">
+              <div className="w-full h-full bg-gradient-to-br from-white/80 to-white/60 rounded-full p-4 sm:p-6 lg:p-8 flex items-center justify-center">
                 <img
                   src="https://cdn.builder.io/api/v1/image/assets%2F341d59d887524a4696fe7d894c9eaabb%2F306ae11207464861be1cb081421d2766?format=webp&width=800"
                   alt="Zurich Logo"
-                  className="w-64 h-64 object-contain brightness-150 contrast-125"
+                  className="w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 object-contain brightness-150 contrast-125"
                   style={{filter: 'brightness(1.5) contrast(1.2) saturate(0.3)'}}
                 />
               </div>
             </div>
 
-            {/* Main family image - front and to the right, overlapping logo (vermelho) */}
-            <div className="relative w-96 h-96 rounded-full overflow-hidden shadow-2xl border-4 border-white/20 z-10 ml-20">
+            {/* Main family image - responsive size and positioning */}
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl border-4 border-white/20 z-10 ml-8 sm:ml-12 lg:ml-20">
               <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/10"></div>
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F8db09fcbd19243afa37a84aaf6b10caf%2F648ae6f7d2264f4985ef246a9db8f10b?format=webp&width=800"
