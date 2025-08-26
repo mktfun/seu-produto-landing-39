@@ -55,14 +55,35 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => <Card key={index} className="hover-lift card-gradient border-0 shadow-lg animate-fade-in" style={{
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {services.map((service, index) => <Card key={index} className={`hover-lift border-0 shadow-lg animate-fade-in ${
+            service.isEco
+              ? 'bg-gradient-to-br from-green-50 to-green-100 border-green-200'
+              : 'card-gradient'
+          }`} style={{
           animationDelay: `${index * 0.1}s`
         }}>
               <CardContent className="p-6">
+                {service.isEco && (
+                  <div className="flex items-center justify-center w-full mb-4">
+                    <div className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium flex items-center space-x-1">
+                      <Recycle className="w-3 h-3" />
+                      <span>Sustentável</span>
+                    </div>
+                  </div>
+                )}
+
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                    <service.icon className="w-6 h-6 text-primary" />
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                    service.isEco
+                      ? 'bg-green-200/50'
+                      : 'bg-primary/10'
+                  }`}>
+                    <service.icon className={`w-6 h-6 ${
+                      service.isEco
+                        ? 'text-green-600'
+                        : 'text-primary'
+                    }`} />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-secondary">
@@ -70,14 +91,18 @@ const ServicesSection = () => {
                     </h3>
                   </div>
                 </div>
-                
+
                 <p className="text-muted-foreground mb-4">
                   {service.description}
                 </p>
-                
+
                 <ul className="space-y-2">
                   {service.items.map((item, itemIndex) => <li key={itemIndex} className="flex items-center space-x-2 text-sm">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                      <div className={`w-1.5 h-1.5 rounded-full ${
+                        service.isEco
+                          ? 'bg-green-600'
+                          : 'bg-primary'
+                      }`}></div>
                       <span>{item}</span>
                     </li>)}
                 </ul>
