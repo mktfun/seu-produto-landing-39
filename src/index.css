@@ -165,3 +165,20 @@
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-primary/80;
 }
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
+
+  /* Reduce font sizes on very small screens */
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  /* Ensure mobile menu doesn't interfere */
+  body.menu-open {
+    overflow: hidden;
+  }
+}
