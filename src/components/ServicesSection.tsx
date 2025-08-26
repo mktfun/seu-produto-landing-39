@@ -9,22 +9,6 @@ const services = [
     items: ["Encanamento", "Elétrica", "Chaveiro", "Vidraceiro"]
   },
   {
-    icon: Smartphone,
-    title: "Eletrônicos",
-    description: "Proteção para seus dispositivos",
-    items: ["Smartphones", "Notebooks", "TVs", "Tablets"],
-    isHighlight: true,
-    highlightText: "Até R$ 5.000"
-  },
-  {
-    icon: Bike,
-    title: "Assistência Bike",
-    description: "Cuidados com sua bicicleta",
-    items: ["Resgate", "Reparo", "Manutenção", "Cobertura"],
-    isHighlight: true,
-    highlightText: "Até R$ 5.000"
-  },
-  {
     icon: Shield,
     title: "Proteção & Segurança",
     description: "Segurança para sua residência",
@@ -57,60 +41,19 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        {/* Destaque Especial - Eletrônicos e Bikes */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 mb-12 text-white text-center">
-          <h3 className="text-2xl font-bold mb-4">🎯 Destaques Especiais</h3>
-          <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            <div className="bg-white/20 rounded-lg p-6 backdrop-blur-sm">
-              <Smartphone className="w-12 h-12 mx-auto mb-3" />
-              <h4 className="text-xl font-semibold mb-2">📱 Eletrônicos</h4>
-              <p className="text-sm mb-2">Smartphones, notebooks, TVs, tablets</p>
-              <p className="text-lg font-bold">Cobertura até R$ 5.000</p>
-            </div>
-            <div className="bg-white/20 rounded-lg p-6 backdrop-blur-sm">
-              <Bike className="w-12 h-12 mx-auto mb-3" />
-              <h4 className="text-xl font-semibold mb-2">🚲 Bikes</h4>
-              <p className="text-sm mb-2">Assistência completa e resgate</p>
-              <p className="text-lg font-bold">Cobertura até R$ 5.000</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mb-16">
           {services.map((service, index) => (
-            <Card key={index} className={`hover-lift border-0 shadow-lg animate-fade-in ${
-              service.isHighlight 
-                ? 'bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-blue-200 ring-2 ring-blue-100' 
-                : 'card-gradient'
-            }`} style={{
+            <Card key={index} className="hover-lift card-gradient border-0 shadow-lg animate-fade-in" style={{
               animationDelay: `${index * 0.1}s`
             }}>
               <CardContent className="p-6 text-center">
-                {service.isHighlight && (
-                  <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1 rounded-full text-xs font-medium mb-4 inline-block">
-                    ⭐ DESTAQUE
-                  </div>
-                )}
-                
-                <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${
-                  service.isHighlight 
-                    ? 'bg-gradient-to-r from-blue-100 to-purple-100' 
-                    : 'bg-primary/10'
-                }`}>
-                  <service.icon className={`w-8 h-8 ${
-                    service.isHighlight ? 'text-blue-600' : 'text-primary'
-                  }`} />
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <service.icon className="w-8 h-8 text-primary" />
                 </div>
                 
                 <h3 className="text-lg font-semibold text-secondary mb-2">
                   {service.title}
                 </h3>
-                
-                {service.isHighlight && (
-                  <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold mb-3">
-                    {service.highlightText}
-                  </div>
-                )}
                 
                 <p className="text-muted-foreground text-sm mb-4">
                   {service.description}
@@ -118,11 +61,7 @@ const ServicesSection = () => {
                 
                 <div className="flex flex-wrap justify-center gap-2">
                   {service.items.map((item, itemIndex) => (
-                    <span key={itemIndex} className={`text-xs px-2 py-1 rounded-full ${
-                      service.isHighlight 
-                        ? 'bg-blue-100 text-blue-700' 
-                        : 'bg-primary/10 text-primary'
-                    }`}>
+                    <span key={itemIndex} className="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">
                       {item}
                     </span>
                   ))}
@@ -130,6 +69,111 @@ const ServicesSection = () => {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* Seção Elegante - Eletrônicos e Bikes */}
+        <div className="relative overflow-hidden bg-gradient-to-r from-slate-50 to-gray-100 rounded-3xl p-12 mb-12">
+          {/* Elementos decorativos de fundo */}
+          <div className="absolute top-0 left-0 w-full h-full">
+            <div className="absolute top-10 left-10 w-32 h-32 bg-primary/5 rounded-full animate-pulse"></div>
+            <div className="absolute bottom-10 right-10 w-24 h-24 bg-secondary/5 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+            <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-accent/5 rounded-full animate-pulse" style={{animationDelay: '2s'}}></div>
+          </div>
+
+          <div className="relative z-10">
+            <div className="text-center mb-10">
+              <h3 className="text-2xl lg:text-3xl font-bold text-secondary mb-4">
+                Proteção Além da Casa
+              </h3>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Cuidamos também dos seus itens mais importantes do dia a dia
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+              {/* Eletrônicos Card */}
+              <div className="group">
+                <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+                  <CardContent className="p-8 text-center">
+                    <div className="relative mb-6">
+                      {/* Smartphone mockup */}
+                      <div className="relative mx-auto w-20 h-32 bg-gradient-to-b from-slate-800 to-slate-900 rounded-2xl border-2 border-slate-700 group-hover:rotate-12 transition-transform duration-500">
+                        <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-slate-600 rounded-full"></div>
+                        <div className="absolute top-4 bottom-6 left-1 right-1 bg-gradient-to-b from-blue-400 to-purple-500 rounded-xl flex items-center justify-center">
+                          <Smartphone className="w-8 h-8 text-white animate-bounce" />
+                        </div>
+                        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-8 h-8 border-2 border-slate-600 rounded-full"></div>
+                      </div>
+                      
+                      {/* Elementos flutuantes */}
+                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full animate-ping"></div>
+                      <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-blue-400 rounded-full animate-pulse"></div>
+                    </div>
+                    
+                    <h4 className="text-xl font-bold text-secondary mb-3">Dispositivos Móveis</h4>
+                    <p className="text-muted-foreground text-sm mb-4">
+                      Smartphones, tablets e outros eletrônicos portáteis essenciais para o seu dia
+                    </p>
+                    
+                    <div className="flex justify-center space-x-2 text-xs">
+                      <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full">📱 Smartphones</span>
+                      <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full">📱 Tablets</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Bikes Card */}
+              <div className="group">
+                <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+                  <CardContent className="p-8 text-center">
+                    <div className="relative mb-6">
+                      {/* Bike mockup */}
+                      <div className="relative mx-auto group-hover:translate-x-4 transition-transform duration-700">
+                        {/* Bike body */}
+                        <div className="relative">
+                          {/* Wheels */}
+                          <div className="flex items-center justify-between w-24">
+                            <div className="w-8 h-8 border-4 border-slate-700 rounded-full bg-gradient-to-br from-slate-300 to-slate-500 group-hover:rotate-180 transition-transform duration-1000"></div>
+                            <div className="w-8 h-8 border-4 border-slate-700 rounded-full bg-gradient-to-br from-slate-300 to-slate-500 group-hover:rotate-180 transition-transform duration-1000"></div>
+                          </div>
+                          {/* Frame */}
+                          <div className="absolute top-3 left-2 w-20 h-0.5 bg-gradient-to-r from-blue-500 to-green-500 transform rotate-12"></div>
+                          <div className="absolute top-1 left-4 w-12 h-0.5 bg-gradient-to-r from-blue-500 to-green-500 transform -rotate-45"></div>
+                          <div className="absolute top-1 right-4 w-8 h-0.5 bg-gradient-to-r from-blue-500 to-green-500 transform rotate-45"></div>
+                          {/* Seat */}
+                          <div className="absolute -top-1 left-6 w-6 h-2 bg-slate-800 rounded-full"></div>
+                          {/* Handlebars */}
+                          <div className="absolute -top-1 right-2 w-6 h-1 bg-slate-700 rounded-full"></div>
+                        </div>
+                      </div>
+                      
+                      {/* Elementos flutuantes */}
+                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full animate-ping"></div>
+                      <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-blue-400 rounded-full animate-pulse"></div>
+                    </div>
+                    
+                    <h4 className="text-xl font-bold text-secondary mb-3">Ciclismo</h4>
+                    <p className="text-muted-foreground text-sm mb-4">
+                      Assistência completa para ciclistas e proteção para sua bicicleta
+                    </p>
+                    
+                    <div className="flex justify-center space-x-2 text-xs">
+                      <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full">🚲 Resgate</span>
+                      <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full">🔧 Reparo</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            <div className="text-center mt-8">
+              <p className="text-sm text-muted-foreground">
+                <span className="font-semibold">Disponível nos planos Completo e Completo+</span> - 
+                Proteção adicional para o que você mais valoriza
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="text-center mt-10">
