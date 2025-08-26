@@ -39,7 +39,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
                 size="lg"
-                className="bg-white text-secondary hover:bg-white/90"
+                variant="transparent-white"
                 onClick={() => navigate("/onboard")}
               >
                 Solicitar Cotação Gratuita
@@ -83,6 +83,26 @@ const Hero = () => {
           </div>
 
           <div className="relative animate-scale-in flex items-center justify-center">
+            {/* Floating bubbles around the image */}
+            <div className="absolute -top-8 -left-8 w-6 h-6 bg-white/40 rounded-full animate-float opacity-60" style={{animationDelay: '0.5s'}}></div>
+            <div className="absolute -top-12 left-20 w-4 h-4 bg-white/30 rounded-full animate-float opacity-70" style={{animationDelay: '1.2s'}}></div>
+            <div className="absolute top-8 -left-12 w-8 h-8 bg-white/35 rounded-full animate-float opacity-50" style={{animationDelay: '2.1s'}}></div>
+            <div className="absolute top-32 -left-6 w-5 h-5 bg-white/45 rounded-full animate-float opacity-65" style={{animationDelay: '0.8s'}}></div>
+
+            <div className="absolute -top-6 -right-10 w-7 h-7 bg-white/40 rounded-full animate-float opacity-55" style={{animationDelay: '1.5s'}}></div>
+            <div className="absolute top-12 -right-8 w-4 h-4 bg-white/35 rounded-full animate-float opacity-60" style={{animationDelay: '2.8s'}}></div>
+            <div className="absolute top-40 -right-4 w-6 h-6 bg-white/30 rounded-full animate-float opacity-70" style={{animationDelay: '0.3s'}}></div>
+
+            <div className="absolute -bottom-8 -left-6 w-5 h-5 bg-white/45 rounded-full animate-float opacity-50" style={{animationDelay: '1.8s'}}></div>
+            <div className="absolute -bottom-4 left-16 w-7 h-7 bg-white/35 rounded-full animate-float opacity-65" style={{animationDelay: '2.5s'}}></div>
+            <div className="absolute bottom-20 -right-8 w-4 h-4 bg-white/40 rounded-full animate-float opacity-55" style={{animationDelay: '1.1s'}}></div>
+            <div className="absolute -bottom-10 right-12 w-6 h-6 bg-white/30 rounded-full animate-float opacity-60" style={{animationDelay: '0.7s'}}></div>
+
+            {/* Above the image */}
+            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-5 h-5 bg-white/50 rounded-full animate-float opacity-70" style={{animationDelay: '1.9s'}}></div>
+            <div className="absolute -top-20 left-1/3 w-3 h-3 bg-white/40 rounded-full animate-float opacity-60" style={{animationDelay: '2.3s'}}></div>
+            <div className="absolute -top-24 right-1/3 w-4 h-4 bg-white/35 rounded-full animate-float opacity-50" style={{animationDelay: '0.9s'}}></div>
+
             <div className="relative w-96 h-96 rounded-full overflow-hidden shadow-2xl border-4 border-white/20">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F8db09fcbd19243afa37a84aaf6b10caf%2F648ae6f7d2264f4985ef246a9db8f10b?format=webp&width=800"
