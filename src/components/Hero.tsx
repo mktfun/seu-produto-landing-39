@@ -17,23 +17,21 @@ const Hero = () => {
       <div className="container mx-auto px-4 py-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-white space-y-6 animate-fade-in">
-            <div className="inline-flex items-center space-x-3 bg-gradient-to-r from-white/25 to-blue-100/25 backdrop-blur-md rounded-full px-6 py-3 border border-white/30 shadow-xl group hover:scale-105 transition-all duration-300">
-              <div className="p-1 bg-white/20 rounded-full">
-                <Shield className="w-5 h-5 text-white group-hover:rotate-12 transition-transform" />
-              </div>
-              <span className="text-sm font-semibold text-white drop-shadow-md">Assistência 24h Garantida</span>
+            <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
+              <Shield className="w-5 h-5" />
+              <span className="text-sm font-medium">Assistência 24h Garantida</span>
             </div>
             
-            <h1 className="text-5xl lg:text-7xl xl:text-8xl font-black leading-tight">
-              <span className="bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent drop-shadow-2xl animate-pulse">Zurich</span><br />
-              <span className="bg-gradient-to-r from-blue-200 via-white to-blue-100 bg-clip-text text-transparent drop-shadow-lg">Residência</span>
+            <h1 className="text-4xl lg:text-6xl font-bold leading-tight text-white">
+              Zurich<br />
+              <span className="text-white/90">Residência</span>
             </h1>
             
-            <p className="text-xl lg:text-3xl font-semibold text-white/95 max-w-lg leading-relaxed drop-shadow-lg">
-              Serviços de <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent font-bold">Assistência 24h</span> e <span className="bg-gradient-to-r from-green-300 to-emerald-300 bg-clip-text text-transparent font-bold">Sustentáveis</span>
+            <p className="text-xl lg:text-2xl text-white/90 max-w-lg">
+              Serviços de Assistência 24h e Sustentáveis
             </p>
             
-            <p className="text-lg lg:text-xl text-white/85 max-w-xl leading-relaxed font-medium drop-shadow-md">
+            <p className="text-lg text-white/80 max-w-xl">
               Proteção completa para sua casa com cobertura diferenciada,
               pensada com todo cuidado para garantir itens básicos do dia-a-dia.
             </p>
@@ -41,48 +39,45 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
                 size="lg"
-                variant="hero"
-                className="font-bold text-lg shadow-2xl group"
+                className="bg-white text-secondary hover:bg-white/90"
                 onClick={() => navigate("/onboard")}
               >
-                <Shield className="w-5 h-5 group-hover:rotate-12 transition-transform" />
                 Solicitar Cotação Gratuita
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 backdrop-blur-sm font-semibold text-lg group"
+                className="border-white text-white hover:bg-white hover:text-secondary"
                 onClick={() => {
                   const planosElement = document.getElementById('planos');
                   planosElement?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
-                <CheckCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 Ver Planos Disponíveis
               </Button>
             </div>
 
             <div className="grid grid-cols-3 gap-6 pt-8">
-              <div className="text-center group">
-                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-400/30 to-blue-600/40 rounded-2xl mb-3 mx-auto backdrop-blur-sm border border-white/20 shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                  <Clock className="w-8 h-8 text-white drop-shadow-lg group-hover:animate-pulse" />
+              <div className="text-center">
+                <div className="flex items-center justify-center w-12 h-12 bg-white/20 rounded-full mb-2 mx-auto">
+                  <Clock className="w-6 h-6" />
                 </div>
-                <p className="text-lg font-bold bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">24h</p>
-                <p className="text-sm text-white/90 font-medium">Atendimento</p>
+                <p className="text-sm font-medium">24h</p>
+                <p className="text-xs text-white/80">Atendimento</p>
               </div>
-              <div className="text-center group">
-                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-400/30 to-emerald-600/40 rounded-2xl mb-3 mx-auto backdrop-blur-sm border border-white/20 shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                  <Users className="w-8 h-8 text-white drop-shadow-lg group-hover:animate-bounce" />
+              <div className="text-center">
+                <div className="flex items-center justify-center w-12 h-12 bg-white/20 rounded-full mb-2 mx-auto">
+                  <Users className="w-6 h-6" />
                 </div>
-                <p className="text-lg font-bold bg-gradient-to-r from-white to-green-100 bg-clip-text text-transparent">+50K</p>
-                <p className="text-sm text-white/90 font-medium">Clientes</p>
+                <p className="text-sm font-medium">+50K</p>
+                <p className="text-xs text-white/80">Clientes</p>
               </div>
-              <div className="text-center group">
-                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-yellow-400/30 to-orange-600/40 rounded-2xl mb-3 mx-auto backdrop-blur-sm border border-white/20 shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                  <CheckCircle className="w-8 h-8 text-white drop-shadow-lg group-hover:animate-spin" />
+              <div className="text-center">
+                <div className="flex items-center justify-center w-12 h-12 bg-white/20 rounded-full mb-2 mx-auto">
+                  <CheckCircle className="w-6 h-6" />
                 </div>
-                <p className="text-lg font-bold bg-gradient-to-r from-white to-yellow-100 bg-clip-text text-transparent">100%</p>
-                <p className="text-sm text-white/90 font-medium">Garantia</p>
+                <p className="text-sm font-medium">100%</p>
+                <p className="text-xs text-white/80">Garantia</p>
               </div>
             </div>
           </div>
