@@ -128,24 +128,9 @@ const ServicesSection = () => {
                 <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
                   <CardContent className="p-8 text-center">
                     <div className="relative mb-6">
-                      {/* Bike mockup */}
-                      <div className="relative mx-auto group-hover:translate-x-4 transition-transform duration-700">
-                        {/* Bike body */}
-                        <div className="relative">
-                          {/* Wheels */}
-                          <div className="flex items-center justify-between w-24">
-                            <div className="w-8 h-8 border-4 border-slate-700 rounded-full bg-gradient-to-br from-slate-300 to-slate-500 group-hover:rotate-180 transition-transform duration-1000"></div>
-                            <div className="w-8 h-8 border-4 border-slate-700 rounded-full bg-gradient-to-br from-slate-300 to-slate-500 group-hover:rotate-180 transition-transform duration-1000"></div>
-                          </div>
-                          {/* Frame */}
-                          <div className="absolute top-3 left-2 w-20 h-0.5 bg-gradient-to-r from-blue-500 to-green-500 transform rotate-12"></div>
-                          <div className="absolute top-1 left-4 w-12 h-0.5 bg-gradient-to-r from-blue-500 to-green-500 transform -rotate-45"></div>
-                          <div className="absolute top-1 right-4 w-8 h-0.5 bg-gradient-to-r from-blue-500 to-green-500 transform rotate-45"></div>
-                          {/* Seat */}
-                          <div className="absolute -top-1 left-6 w-6 h-2 bg-slate-800 rounded-full"></div>
-                          {/* Handlebars */}
-                          <div className="absolute -top-1 right-2 w-6 h-1 bg-slate-700 rounded-full"></div>
-                        </div>
+                      {/* Bike icon */}
+                      <div className="flex items-center justify-center">
+                        <Bike className="w-16 h-16 text-blue-600" />
                       </div>
                       
                       {/* Elementos flutuantes */}
