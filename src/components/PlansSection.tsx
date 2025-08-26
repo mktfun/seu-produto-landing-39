@@ -8,6 +8,8 @@ const plans = [
   {
     name: "Essencial",
     description: "Proteção básica para emergências domésticas",
+    dailyPrice: "2,90",
+    monthlyPrice: "87,00",
     popular: false,
     features: [
       "Serviços emergenciais básicos",
@@ -29,6 +31,8 @@ const plans = [
   {
     name: "Completo",
     description: "Cobertura completa para o dia a dia",
+    dailyPrice: "4,50",
+    monthlyPrice: "135,00",
     popular: true,
     features: [
       "Todos os serviços do Essencial",
@@ -49,6 +53,8 @@ const plans = [
   {
     name: "Completo+",
     description: "Máxima proteção com serviços premium",
+    dailyPrice: "6,80",
+    monthlyPrice: "204,00",
     popular: false,
     features: [
       "Todos os serviços do Completo",
@@ -103,6 +109,16 @@ const PlansSection = () => {
                 <CardTitle className="text-2xl font-bold text-secondary mb-2">
                   {plan.name}
                 </CardTitle>
+                <div className="mb-4">
+                  <div className="flex items-baseline justify-center space-x-1">
+                    <span className="text-sm text-muted-foreground">apenas</span>
+                    <span className="text-4xl font-bold text-primary">R$ {plan.dailyPrice}</span>
+                    <span className="text-sm text-muted-foreground">/dia</span>
+                  </div>
+                  <div className="text-xs text-muted-foreground mt-1">
+                    ou R$ {plan.monthlyPrice}/mês
+                  </div>
+                </div>
                 <p className="text-muted-foreground">
                   {plan.description}
                 </p>
