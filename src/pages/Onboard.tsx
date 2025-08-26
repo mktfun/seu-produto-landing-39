@@ -321,8 +321,8 @@ Gostaria de receber uma cotação personalizada!
               <Bike className="w-16 h-16 text-primary mx-auto mb-4" />
               <h2 className="text-3xl font-bold text-secondary mb-2">Você tem bicicleta?</h2>
               <p className="text-muted-foreground">🚴‍♀️ Bike comum, elétrica ou de alto valor</p>
-              <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 mt-4">
-                <p className="text-sm font-medium text-primary">🚲 Assistência e cobertura para bikes até R$ 5.000</p>
+              <div className="bg-gradient-to-r from-slate-50 to-gray-50 rounded-lg p-4 mt-4 border border-gray-200">
+                <p className="text-sm font-medium text-secondary">🚲 Assistência completa e proteção para ciclistas</p>
               </div>
             </div>
 
