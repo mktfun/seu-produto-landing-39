@@ -105,14 +105,9 @@ const Hero = () => {
             <div className="absolute -top-20 left-1/3 w-3 h-3 bg-white/40 rounded-full animate-float opacity-60" style={{animationDelay: '2.3s'}}></div>
             <div className="absolute -top-24 right-1/3 w-4 h-4 bg-white/35 rounded-full animate-float opacity-50" style={{animationDelay: '0.9s'}}></div>
 
-            {/* Zurich logo background - partially visible with custom border */}
-            <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-25 z-0"
-                 style={{
-                   background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(255, 255, 255, 0.2) 100%)',
-                   border: '4px solid',
-                   borderImage: 'linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(59, 130, 246, 0.6)) 1'
-                 }}>
-              <div className="w-full h-full bg-gradient-to-br from-blue-50/40 to-blue-100/60 p-8 flex items-center justify-center rounded-full">
+            {/* Zurich logo background - partially visible with gradient border effect */}
+            <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-25 z-0 bg-gradient-to-br from-white/60 to-blue-200/60 p-1">
+              <div className="w-full h-full bg-gradient-to-br from-blue-50/40 to-blue-100/60 rounded-full p-8 flex items-center justify-center">
                 <img
                   src="https://cdn.builder.io/api/v1/image/assets%2F341d59d887524a4696fe7d894c9eaabb%2F306ae11207464861be1cb081421d2766?format=webp&width=800"
                   alt="Zurich Logo"
