@@ -123,16 +123,16 @@ const PlansComparisonTable = () => {
                     index % 2 === 0 ? 'bg-muted/10' : ''
                   }`}
                 >
-                  <td className="py-3 px-4 text-sm">
+                  <td className="py-2 px-2 sm:py-3 sm:px-4 text-xs sm:text-sm">
                     {item.service}
                   </td>
-                  <td className="py-3 px-4 text-center">
+                  <td className="py-2 px-2 sm:py-3 sm:px-4 text-center">
                     {renderValue(item.essencial)}
                   </td>
-                  <td className="py-3 px-4 text-center bg-primary/5">
+                  <td className="py-2 px-2 sm:py-3 sm:px-4 text-center bg-primary/5">
                     {renderValue(item.completo)}
                   </td>
-                  <td className="py-3 px-4 text-center">
+                  <td className="py-2 px-2 sm:py-3 sm:px-4 text-center">
                     {renderValue(item.completoPlus)}
                   </td>
                 </tr>
