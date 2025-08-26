@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, CheckCircle, Phone, Star, Crown, Shield, Home, Zap, Users, Heart, Wrench, DollarSign } from "lucide-react";
+import { ArrowLeft, CheckCircle, Phone, Star, Crown, Shield, Home, Zap, Users, Heart, Wrench, DollarSign, Smartphone, Bike } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Onboard = () => {
@@ -14,13 +14,14 @@ const Onboard = () => {
     propertyType: "",
     propertyValue: "",
     workFromHome: "",
+    hasElectronics: "",
+    hasBike: "",
     mainPriority: "",
-    concerns: [],
     budgetRange: "",
     recommendedPlan: ""
   });
 
-  const totalSteps = 7;
+  const totalSteps = 8;
 
   const handleNext = () => {
     if (currentStep < totalSteps) {
@@ -66,6 +67,21 @@ const Onboard = () => {
       scores.essencial += 1;
     }
 
+    // Eletrônicos - NOVO DESTAQUE
+    if (formData.hasElectronics === "sim-muito") {
+      scores.completo += 3;
+      scores.completoPlus += 2;
+    } else if (formData.hasElectronics === "sim-normal") {
+      scores.completo += 2;
+      scores.completoPlus += 1;
+    }
+
+    // Bike - NOVO DESTAQUE
+    if (formData.hasBike === "sim-valiosa" || formData.hasBike === "sim-normal") {
+      scores.completo += 2;
+      scores.completoPlus += 2;
+    }
+
     // Prioridade principal
     if (formData.mainPriority === "preco") {
       scores.essencial += 3;
@@ -75,6 +91,9 @@ const Onboard = () => {
       scores.completoPlus += 3;
     } else if (formData.mainPriority === "completo") {
       scores.completo += 2;
+      scores.completoPlus += 2;
+    } else if (formData.mainPriority === "eletronicos") {
+      scores.completo += 3;
       scores.completoPlus += 2;
     }
 
@@ -109,6 +128,8 @@ Telefone: ${formData.phone}
 Tipo: ${formData.propertyType}
 Valor: ${formData.propertyValue}
 Trabalha em casa: ${formData.workFromHome}
+Eletrônicos: ${formData.hasElectronics}
+Bike: ${formData.hasBike}
 Prioridade: ${formData.mainPriority}
 Orçamento: ${formData.budgetRange}
 
@@ -261,27 +282,29 @@ Gostaria de receber uma cotação personalizada!
         return (
           <div className="space-y-6 text-center">
             <div className="mb-8">
-              <Star className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-secondary mb-2">O que é MAIS importante para você?</h2>
-              <p className="text-muted-foreground">Escolha sua principal prioridade em um seguro residencial</p>
+              <Smartphone className="w-16 h-16 text-primary mx-auto mb-4" />
+              <h2 className="text-3xl font-bold text-secondary mb-2">Você tem eletrônicos de valor?</h2>
+              <p className="text-muted-foreground">📱 Smartphones, notebooks, TVs, tablets, etc.</p>
+              <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 mt-4">
+                <p className="text-sm font-medium text-primary">✨ Cobertura especial para eletrônicos até R$ 5.000</p>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
               {[
-                { id: "preco", label: "Menor preço", icon: "💰", description: "Economia em primeiro lugar" },
-                { id: "emergencias", label: "Cobertura emergencial", icon: "🚨", description: "Atendimento 24h para emergências" },
-                { id: "manutencao", label: "Manutenção preventiva", icon: "🔧", description: "Cuidado contínuo da casa" },
-                { id: "completo", label: "Proteção completa", icon: "🛡️", description: "Máxima tranquilidade" }
+                { id: "sim-muito", label: "Sim, muitos", icon: "📱💻📺", description: "iPhone, notebook, smart TV..." },
+                { id: "sim-normal", label: "Alguns", icon: "📱💻", description: "Smartphone e um notebook" },
+                { id: "nao", label: "Poucos/Antigos", icon: "📺", description: "Apenas TV e básicos" }
               ].map((option) => (
                 <Card 
                   key={option.id}
                   className={`cursor-pointer transition-all hover:scale-105 border-2 hover:border-primary ${
-                    formData.mainPriority === option.id ? 'border-primary bg-primary/5' : 'border-border'
+                    formData.hasElectronics === option.id ? 'border-primary bg-primary/5' : 'border-border'
                   }`}
-                  onClick={() => selectOption('mainPriority', option.id)}
+                  onClick={() => selectOption('hasElectronics', option.id)}
                 >
                   <CardContent className="p-6 text-center">
-                    <div className="text-4xl mb-3">{option.icon}</div>
+                    <div className="text-3xl mb-3">{option.icon}</div>
                     <h3 className="font-semibold text-lg mb-2">{option.label}</h3>
                     <p className="text-sm text-muted-foreground">{option.description}</p>
                   </CardContent>
@@ -295,26 +318,29 @@ Gostaria de receber uma cotação personalizada!
         return (
           <div className="space-y-6 text-center">
             <div className="mb-8">
-              <DollarSign className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-secondary mb-2">Qual sua faixa de orçamento mensal?</h2>
-              <p className="text-muted-foreground">Queremos oferecer a melhor opção dentro do seu orçamento</p>
+              <Bike className="w-16 h-16 text-primary mx-auto mb-4" />
+              <h2 className="text-3xl font-bold text-secondary mb-2">Você tem bicicleta?</h2>
+              <p className="text-muted-foreground">🚴‍♀️ Bike comum, elétrica ou de alto valor</p>
+              <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 mt-4">
+                <p className="text-sm font-medium text-primary">🚲 Assistência e cobertura para bikes até R$ 5.000</p>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
               {[
-                { id: "economico", label: "Econômico", icon: "💚", description: "Foco no essencial" },
-                { id: "medio", label: "Intermediário", icon: "💙", description: "Boa relação custo-benefício" },
-                { id: "premium", label: "Premium", icon: "💜", description: "Máxima proteção" }
+                { id: "sim-valiosa", label: "Sim, de valor", icon: "🚴‍♂️⚡", description: "Bike elétrica ou esportiva" },
+                { id: "sim-normal", label: "Sim, comum", icon: "🚲", description: "Bike tradicional" },
+                { id: "nao", label: "Não tenho", icon: "🚶‍♀️", description: "Não uso bicicleta" }
               ].map((option) => (
                 <Card 
                   key={option.id}
                   className={`cursor-pointer transition-all hover:scale-105 border-2 hover:border-primary ${
-                    formData.budgetRange === option.id ? 'border-primary bg-primary/5' : 'border-border'
+                    formData.hasBike === option.id ? 'border-primary bg-primary/5' : 'border-border'
                   }`}
-                  onClick={() => selectOption('budgetRange', option.id)}
+                  onClick={() => selectOption('hasBike', option.id)}
                 >
                   <CardContent className="p-6 text-center">
-                    <div className="text-4xl mb-3">{option.icon}</div>
+                    <div className="text-3xl mb-3">{option.icon}</div>
                     <h3 className="font-semibold text-lg mb-2">{option.label}</h3>
                     <p className="text-sm text-muted-foreground">{option.description}</p>
                   </CardContent>
@@ -325,25 +351,63 @@ Gostaria de receber uma cotação personalizada!
         );
 
       case 7:
+        return (
+          <div className="space-y-6 text-center">
+            <div className="mb-8">
+              <Star className="w-16 h-16 text-primary mx-auto mb-4" />
+              <h2 className="text-3xl font-bold text-secondary mb-2">O que é MAIS importante para você?</h2>
+              <p className="text-muted-foreground">Escolha sua principal prioridade em um seguro residencial</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+              {[
+                { id: "preco", label: "Menor preço", icon: "💰", description: "Economia em primeiro lugar" },
+                { id: "emergencias", label: "Cobertura emergencial", icon: "🚨", description: "Atendimento 24h para emergências" },
+                { id: "eletronicos", label: "Proteção eletrônicos", icon: "📱", description: "Smartphones, notebooks, TVs" },
+                { id: "manutencao", label: "Manutenção preventiva", icon: "🔧", description: "Cuidado contínuo da casa" },
+                { id: "completo", label: "Proteção completa", icon: "🛡️", description: "Máxima tranquilidade" }
+              ].map((option) => (
+                <Card 
+                  key={option.id}
+                  className={`cursor-pointer transition-all hover:scale-105 border-2 hover:border-primary ${
+                    formData.mainPriority === option.id ? 'border-primary bg-primary/5' : 'border-border'
+                  } ${option.id === 'eletronicos' ? 'ring-2 ring-blue-200' : ''}`}
+                  onClick={() => selectOption('mainPriority', option.id)}
+                >
+                  <CardContent className="p-6 text-center">
+                    <div className="text-4xl mb-3">{option.icon}</div>
+                    <h3 className="font-semibold text-lg mb-2">{option.label}</h3>
+                    <p className="text-sm text-muted-foreground">{option.description}</p>
+                    {option.id === 'eletronicos' && (
+                      <div className="mt-2 text-xs text-blue-600 font-medium">⭐ DESTAQUE</div>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 8:
         const recommendation = calculateRecommendation();
         const planDetails = {
           "Essencial": {
             icon: "💚",
             color: "green",
             description: "Proteção básica com excelente custo-benefício",
-            features: ["Emergências essenciais", "Atendimento 24h", "Serviços básicos"]
+            features: ["Emergências essenciais", "Atendimento 24h", "Serviços básicos", "Cobertura eletrônicos até R$ 2k"]
           },
           "Completo": {
             icon: "💙", 
             color: "blue",
             description: "Cobertura completa para o dia a dia",
-            features: ["Todas as emergências", "Hospedagem", "Assistência para pets", "Mudanças"]
+            features: ["Todas as emergências", "📱 Eletrônicos até R$ 5k", "🚲 Assistência bike", "Hospedagem", "Assistência para pets"]
           },
           "Completo+": {
             icon: "💜",
             color: "purple", 
             description: "Máxima proteção com manutenção preventiva",
-            features: ["Tudo do Completo", "Manutenção preventiva", "Inspeção domiciliar", "Atendimento VIP"]
+            features: ["Tudo do Completo", "📱 Eletrônicos premium", "🚲 Bikes até R$ 5k", "Manutenção preventiva", "Atendimento VIP"]
           }
         };
 
@@ -373,6 +437,20 @@ Gostaria de receber uma cotação personalizada!
                     </div>
                   ))}
                 </div>
+
+                {(formData.hasElectronics !== "nao" || formData.hasBike !== "nao") && (
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 mb-6">
+                    <p className="text-sm font-semibold text-primary mb-2">🎯 Destaque para você:</p>
+                    <div className="space-y-1 text-xs">
+                      {formData.hasElectronics !== "nao" && (
+                        <div>📱 Cobertura especial para smartphones e eletrônicos</div>
+                      )}
+                      {formData.hasBike !== "nao" && (
+                        <div>🚲 Assistência completa para sua bike</div>
+                      )}
+                    </div>
+                  </div>
+                )}
 
                 <Button 
                   onClick={handleSubmit}
