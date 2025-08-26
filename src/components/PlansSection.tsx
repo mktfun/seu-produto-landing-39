@@ -68,7 +68,7 @@ const plans = [
       "• Fixação de quadros, persianas e prateleiras (3 itens)",
       "• Fixação de telas e grades de segurança (25m²)",
       "• Instalação de chuveiro e torneira",
-      "• Instalaç��o de pias e tanques",
+      "• Instalação de pias e tanques",
       "• Instalação ou substituição de fechaduras",
       "• Lubrificação de fechaduras e dobradiças (3 unidades)",
       "• Limpeza de ralos e sifões",
@@ -101,7 +101,7 @@ const PlansSection = () => {
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Planos oficiais Zurich com coberturas e limites definidos. 
-            Compare as opções e encontre a proteção ideal para sua residência.
+            Compare as opções e encontre a prote��ão ideal para sua residência.
           </p>
         </div>
 
@@ -184,9 +184,14 @@ const PlansSection = () => {
           ))}
         </div>
 
+        {/* Tabela de Comparação */}
+        <div className="mt-20">
+          <PlansComparisonTable />
+        </div>
+
         <div className="text-center mt-12 space-y-4">
           <p className="text-muted-foreground">
-            <strong>Importante:</strong> Seguro cobre o valor da mão de obra. 
+            <strong>Importante:</strong> Seguro cobre o valor da mão de obra.
             As peças ficam por conta do cliente.
           </p>
           <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
@@ -195,7 +200,7 @@ const PlansSection = () => {
             <span>✓ Atendimento 24h: 0800 729 14 00</span>
           </div>
           <p className="text-xs text-muted-foreground max-w-2xl mx-auto">
-            Este plano de seguro é garantido pela Zurich Minas Brasil Seguros S.A. (CNPJ 17.197.385/0001-21) 
+            Este plano de seguro é garantido pela Zurich Minas Brasil Seguros S.A. (CNPJ 17.197.385/0001-21)
             e está registrado na SUSEP sob o número 15414.004664_2004-95.
           </p>
         </div>
