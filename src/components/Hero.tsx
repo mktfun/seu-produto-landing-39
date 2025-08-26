@@ -32,21 +32,26 @@ const Hero = () => {
             </p>
             
             <p className="text-lg text-white/80 max-w-xl">
-              Prote��ão completa para sua casa com cobertura diferenciada, 
+              Proteção completa para sua casa com cobertura diferenciada, 
               pensada com todo cuidado para garantir itens básicos do dia-a-dia.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="bg-white text-secondary hover:bg-white/90 shadow-lg hover-lift"
+                onClick={() => navigate("/onboard")}
               >
                 Solicitar Cotação Gratuita
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
+              <Button
+                size="lg"
+                variant="outline"
                 className="border-white text-white hover:bg-white hover:text-secondary"
+                onClick={() => {
+                  const planosElement = document.getElementById('planos');
+                  planosElement?.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
                 Ver Planos Disponíveis
               </Button>
