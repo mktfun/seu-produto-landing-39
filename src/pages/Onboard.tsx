@@ -395,19 +395,19 @@ Gostaria de receber uma cotação personalizada!
             icon: "💚",
             color: "green",
             description: "Proteção básica com excelente custo-benefício",
-            features: ["Emergências essenciais", "Atendimento 24h", "Serviços básicos", "Cobertura eletrônicos até R$ 2k"]
+            features: ["Emergências essenciais", "Atendimento 24h", "Serviços básicos", "Cobertura eletrônicos básica"]
           },
           "Completo": {
-            icon: "💙", 
+            icon: "💙",
             color: "blue",
             description: "Cobertura completa para o dia a dia",
-            features: ["Todas as emergências", "📱 Eletrônicos até R$ 5k", "🚲 Assistência bike", "Hospedagem", "Assistência para pets"]
+            features: ["Todas as emergências", "📱 Proteção para eletrônicos", "🚲 Assistência para bikes", "Hospedagem", "Assistência para pets"]
           },
           "Completo+": {
             icon: "💜",
-            color: "purple", 
+            color: "purple",
             description: "Máxima proteção com manutenção preventiva",
-            features: ["Tudo do Completo", "📱 Eletrônicos premium", "🚲 Bikes até R$ 5k", "Manutenção preventiva", "Atendimento VIP"]
+            features: ["Tudo do Completo", "📱 Eletrônicos premium", "🚲 Assistência completa bikes", "Manutenção preventiva", "Atendimento VIP"]
           }
         };
 
