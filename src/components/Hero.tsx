@@ -87,7 +87,7 @@ const Hero = () => {
             <div className="relative w-96 h-96 rounded-full overflow-hidden shadow-2xl border-4 border-white/20 backdrop-blur-sm">
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
               <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F8db09fcbd19243afa37a84aaf6b10caf%2F08877a4f5c4b473993b0855efed19714?format=webp&width=800"
+                src="https://images.pexels.com/photos/9069278/pexels-photo-9069278.jpeg"
                 alt="Casal feliz em casa - Zurich Residência"
                 className="w-full h-full object-cover"
               />
