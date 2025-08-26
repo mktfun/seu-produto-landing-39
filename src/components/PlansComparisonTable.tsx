@@ -98,19 +98,19 @@ const PlansComparisonTable = () => {
           <table className="w-full">
             <thead>
               <tr className="border-b border-border">
-                <th className="text-left py-4 px-4 font-semibold text-secondary min-w-[200px]">
+                <th className="text-left py-3 px-2 sm:py-4 sm:px-4 font-semibold text-secondary min-w-[150px] sm:min-w-[200px] text-sm sm:text-base">
                   Principais Serviços
                 </th>
-                <th className="text-center py-4 px-4 font-semibold text-secondary min-w-[120px]">
+                <th className="text-center py-3 px-2 sm:py-4 sm:px-4 font-semibold text-secondary min-w-[80px] sm:min-w-[120px] text-sm sm:text-base">
                   Essencial
                 </th>
-                <th className="text-center py-4 px-4 font-semibold text-primary min-w-[120px]">
+                <th className="text-center py-3 px-2 sm:py-4 sm:px-4 font-semibold text-primary min-w-[80px] sm:min-w-[120px] text-sm sm:text-base">
                   Completo
                   <div className="text-xs font-normal text-primary/80 mt-1">
                     Popular
                   </div>
                 </th>
-                <th className="text-center py-4 px-4 font-semibold text-secondary min-w-[120px]">
+                <th className="text-center py-3 px-2 sm:py-4 sm:px-4 font-semibold text-secondary min-w-[80px] sm:min-w-[120px] text-sm sm:text-base">
                   Completo+
                 </th>
               </tr>
