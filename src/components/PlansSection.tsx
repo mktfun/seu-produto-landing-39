@@ -10,21 +10,18 @@ const plans = [
     description: "Proteção básica para emergências domésticas",
     popular: false,
     features: [
-      "3 utilizações de indicação de mão de obra",
-      "4 conjuntos de serviços emergenciais (R$ 200 por evento)",
-      "Cobertura provisória de telhados (R$ 400)",
-      "Vigilante (R$ 300)",
-      "Limpeza (R$ 300)",
-      "2 utilizações de descarte sustentável",
-      "Consultoria ambiental sem limite"
+      "Serviços emergenciais básicos",
+      "Chaveiro e vidraceiro",
+      "Cobertura provisória de telhados",
+      "Serviços de limpeza",
+      "Descarte sustentável",
+      "Consultoria ambiental"
     ],
     notIncluded: [
-      "Regresso antecipado",
-      "Hospedagem",
-      "Locação de eletrodomésticos",
-      "Manutenção geral",
-      "Inspeção domiciliar",
-      "Assistência a pets"
+      "Hospedagem temporária",
+      "Mudanças e transporte",
+      "Manutenção preventiva",
+      "Assistência para pets"
     ]
   },
   {
@@ -32,29 +29,17 @@ const plans = [
     description: "Cobertura completa para o dia a dia",
     popular: true,
     features: [
-      "3 utilizações de indicação de mão de obra",
-      "12 conjuntos de serviços emergenciais (R$ 200 por evento)",
-      "Cobertura provisória de telhados (R$ 400)",
-      "Vigilante (R$ 300)",
-      "Limpeza (R$ 300)",
-      "Regresso antecipado (1 MTA)",
-      "Hospedagem (R$ 300)",
-      "Restaurante e lavanderia (R$ 300)",
-      "Locação de eletrodomésticos (R$ 120)",
-      "Locação de televisão (R$ 120)",
-      "Escritório provisório (3 diárias R$ 60)",
-      "Mudança e guarda móveis (R$ 600)",
-      "Conserto de eletrodomésticos (R$ 300)",
-      "Reparo ar condicionado (R$ 200)",
-      "Guarda de animal doméstico (R$ 200)",
-      "Funeral pet (R$ 200)",
-      "Assistência a bike (R$ 200)",
-      "Resgate/apoio ao ciclista (15 KM)",
-      "2 utilizações de descarte sustentável",
-      "Consultoria ambiental sem limite"
+      "Todos os serviços do Essencial",
+      "Hospedagem e alimentação",
+      "Mudança e guarda de móveis",
+      "Conserto de eletrodomésticos",
+      "Assistência para pets",
+      "Assistência a bike",
+      "Regresso antecipado",
+      "Locação de equipamentos"
     ],
     notIncluded: [
-      "Manutenção geral",
+      "Manutenção preventiva",
       "Inspeção domiciliar"
     ]
   },
@@ -63,27 +48,12 @@ const plans = [
     description: "Máxima proteção com serviços premium",
     popular: false,
     features: [
-      "Todos os serviços do plano Completo",
-      "Manutenção geral (escolha de até 3 serviços):",
-      "• Fixação de quadros, persianas e prateleiras (3 itens)",
-      "• Fixação de telas e grades de segurança (25m²)",
-      "• Instalação de chuveiro e torneira",
-      "• Instalação de pias e tanques",
-      "• Instalação ou substituição de fechaduras",
-      "• Lubrificação de fechaduras e dobradiças (3 unidades)",
-      "• Limpeza de ralos e sifões",
-      "• Revisão hidráulica para vazamentos",
-      "• Revisão elétrica",
-      "• Troca de lâmpadas, interruptores e tomadas (3 unidades)",
-      "• Instalação de luz de emergência",
-      "• Inspeção para combate a dengue",
-      "Inspeção domiciliar (escolha de até 2 serviços):",
-      "• Limpeza de caixa d'água (até 5 mil litros)",
-      "• Limpeza de calhas (até 30 metros)",
-      "• Dedetização",
-      "• Caçamba",
-      "• Mudança de móveis entre cômodos",
-      "• Reversão de gás para fogão"
+      "Todos os serviços do Completo",
+      "Manutenção preventiva da residência",
+      "Inspeção domiciliar completa",
+      "Serviços especializados",
+      "Cobertura ampliada",
+      "Atendimento prioritário"
     ],
     notIncluded: []
   }
@@ -100,12 +70,12 @@ const PlansSection = () => {
             Escolha Seu Plano
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Planos oficiais Zurich com coberturas e limites definidos. 
-            Compare as opções e encontre a prote��ão ideal para sua residência.
+            Planos oficiais Zurich com diferentes níveis de proteção. 
+            Compare as opções e encontre a cobertura ideal para sua residência.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {plans.map((plan, index) => (
             <Card 
               key={index}
@@ -137,7 +107,7 @@ const PlansSection = () => {
                 <div className="flex-1">
                   <h4 className="font-semibold text-secondary mb-3 flex items-center">
                     <Check className="w-5 h-5 text-primary mr-2" />
-                    Incluído no plano:
+                    Incluído:
                   </h4>
                   <ul className="space-y-2 mb-6">
                     {plan.features.map((feature, featureIndex) => (
@@ -184,15 +154,14 @@ const PlansSection = () => {
           ))}
         </div>
 
-        {/* Tabela de Comparação */}
-        <div className="mt-20">
+        {/* Tabela de Comparação Simplificada */}
+        <div className="mt-16">
           <PlansComparisonTable />
         </div>
 
         <div className="text-center mt-12 space-y-4">
           <p className="text-muted-foreground">
-            <strong>Importante:</strong> Seguro cobre o valor da mão de obra.
-            As peças ficam por conta do cliente.
+            <strong>Importante:</strong> Valores e condições serão apresentados na cotação personalizada.
           </p>
           <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
             <span>✓ Sem taxa de adesão</span>
@@ -200,7 +169,7 @@ const PlansSection = () => {
             <span>✓ Atendimento 24h: 0800 729 14 00</span>
           </div>
           <p className="text-xs text-muted-foreground max-w-2xl mx-auto">
-            Este plano de seguro é garantido pela Zurich Minas Brasil Seguros S.A. (CNPJ 17.197.385/0001-21)
+            Este plano de seguro é garantido pela Zurich Minas Brasil Seguros S.A. (CNPJ 17.197.385/0001-21) 
             e está registrado na SUSEP sob o número 15414.004664_2004-95.
           </p>
         </div>
