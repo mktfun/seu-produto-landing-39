@@ -39,7 +39,11 @@ const Header = () => {
                 <span>+55 11 97969-9832</span>
               </div>
             </div>
-            <Button variant="default" className="bg-primary hover:bg-primary/90">
+            <Button
+              variant="default"
+              className="bg-primary hover:bg-primary/90"
+              onClick={() => navigate("/onboard")}
+            >
               Solicitar Cotação
             </Button>
           </div>
