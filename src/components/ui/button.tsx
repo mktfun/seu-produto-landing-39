@@ -19,7 +19,8 @@ const buttonVariants = cva(
         ghost: "hover:bg-blue-50 hover:text-blue-700 text-gray-600",
         link: "text-blue-600 underline-offset-4 hover:underline hover:text-blue-700",
         premium: "bg-blue-600 text-white hover:bg-blue-700",
-        hero: "bg-white text-blue-600 hover:bg-blue-50 border border-white"
+        hero: "bg-white text-blue-600 hover:bg-blue-50 border border-white",
+        "transparent-white": "bg-transparent text-white border-2 border-white hover:bg-white hover:text-blue-600"
       },
       size: {
         default: "h-12 px-6 py-3",
