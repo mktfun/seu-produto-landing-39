@@ -105,12 +105,27 @@ const Hero = () => {
             <div className="absolute -top-20 left-1/3 w-3 h-3 bg-white/40 rounded-full animate-float opacity-60" style={{animationDelay: '2.3s'}}></div>
             <div className="absolute -top-24 right-1/3 w-4 h-4 bg-white/35 rounded-full animate-float opacity-50" style={{animationDelay: '0.9s'}}></div>
 
-            <div className="relative w-96 h-96 rounded-full overflow-hidden shadow-2xl border-4 border-white/20">
+            {/* Zurich logo background - partially visible */}
+            <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full overflow-hidden border-4 border-gradient-to-br from-white/60 to-blue-200/60 opacity-25 z-0">
+              <div className="w-full h-full bg-gradient-to-br from-blue-50 to-blue-100 p-8 flex items-center justify-center">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets%2F341d59d887524a4696fe7d894c9eaabb%2F306ae11207464861be1cb081421d2766?format=webp&width=800"
+                  alt="Zurich Logo"
+                  className="w-64 h-64 object-contain opacity-70"
+                />
+              </div>
+            </div>
+
+            {/* Main family image with shadow */}
+            <div className="relative w-96 h-96 rounded-full overflow-hidden shadow-2xl border-4 border-white/20 z-10">
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/10"></div>
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F8db09fcbd19243afa37a84aaf6b10caf%2F648ae6f7d2264f4985ef246a9db8f10b?format=webp&width=800"
                 alt="Família feliz em casa - Zurich Residência"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover drop-shadow-2xl"
               />
+              {/* Additional shadow overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-transparent opacity-30"></div>
             </div>
           </div>
         </div>
