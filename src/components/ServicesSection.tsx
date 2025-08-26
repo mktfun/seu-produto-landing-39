@@ -22,14 +22,25 @@ const services = [{
   items: ["Chaves perdidas", "Troca de fechaduras", "Cofres", "Alarmes"]
 }, {
   icon: Shield,
-  title: "Vidraçaria",
-  description: "Reparo e instalação de vidros",
-  items: ["Janelas", "Portas", "Box de banheiro", "Espelhos"]
+  title: "Vidraçaria & Proteção",
+  description: "Reparo e instalação de vidros e telhados",
+  items: ["Janelas", "Portas", "Box de banheiro", "Cobertura provisória"]
 }, {
   icon: Truck,
-  title: "Mudanças",
-  description: "Assistência em mudanças residenciais",
-  items: ["Transporte", "Embalagem", "Montagem", "Armazenagem"]
+  title: "Mudanças & Transporte",
+  description: "Assistência em mudanças e transporte",
+  items: ["Transporte", "Embalagem", "Montagem", "Guarda de móveis"]
+}, {
+  icon: Users,
+  title: "Serviços Especializados",
+  description: "Assistência para necessidades específicas",
+  items: ["Assistência para pets", "Assistência a bike", "Hospedagem", "Vigilante"]
+}, {
+  icon: Leaf,
+  title: "Serviços Sustentáveis",
+  description: "Soluções ecológicas para sua residência",
+  items: ["Descarte de móveis/eletrodomésticos", "Descarte de entulho", "Consultoria ambiental", "Projetos sustentáveis"],
+  isEco: true
 }];
 const ServicesSection = () => {
   return <section id="servicos" className="py-20 bg-muted/30">
