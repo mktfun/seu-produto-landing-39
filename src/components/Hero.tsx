@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Shield, CheckCircle, Clock, Users } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   return (
