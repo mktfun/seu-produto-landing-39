@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Wrench, Zap, Shield, Droplets, Lock, Flame, Users, Truck, Phone } from "lucide-react";
+import { Wrench, Zap, Shield, Droplets, Lock, Flame, Users, Truck, Phone, Leaf, Recycle } from "lucide-react";
 const services = [{
   icon: Wrench,
   title: "Reparos Residenciais",
