@@ -42,7 +42,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
                 size="lg"
-                variant="transparentWhite"
+                className="bg-white text-blue-600 hover:bg-blue-50 font-semibold shadow-lg"
                 onClick={() => navigate("/onboard")}
               >
                 Solicitar Cotação Gratuita
