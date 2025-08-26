@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, Star, X, Shield, Home, Crown, Users, Clock, Phone, Award } from "lucide-react";
+import { Check, Star, Shield, Home, Crown, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import PlansComparisonTable from "./PlansComparisonTable";
 
