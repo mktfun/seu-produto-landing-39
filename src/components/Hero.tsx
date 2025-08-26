@@ -3,6 +3,8 @@ import { Shield, CheckCircle, Clock, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative min-h-screen flex items-center hero-gradient overflow-hidden">
       {/* Background decoration */}
@@ -30,7 +32,7 @@ const Hero = () => {
             </p>
             
             <p className="text-lg text-white/80 max-w-xl">
-              Proteção completa para sua casa com cobertura diferenciada, 
+              Prote��ão completa para sua casa com cobertura diferenciada, 
               pensada com todo cuidado para garantir itens básicos do dia-a-dia.
             </p>
 
