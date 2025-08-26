@@ -8,10 +8,13 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center hero-gradient overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 opacity-15">
         <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-white animate-float"></div>
         <div className="absolute bottom-20 right-10 w-24 h-24 rounded-full bg-white animate-float" style={{animationDelay: '1s'}}></div>
         <div className="absolute top-1/2 right-1/4 w-16 h-16 rounded-full bg-white animate-float" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/3 left-1/4 w-20 h-20 rounded-full bg-white animate-float" style={{animationDelay: '0.5s'}}></div>
+        <div className="absolute bottom-1/3 left-1/3 w-12 h-12 rounded-full bg-white animate-float" style={{animationDelay: '1.5s'}}></div>
+        <div className="absolute top-3/4 right-1/3 w-28 h-28 rounded-full bg-white animate-float" style={{animationDelay: '2.5s'}}></div>
       </div>
 
       <div className="container mx-auto px-4 py-20 relative z-10">
