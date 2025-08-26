@@ -14,6 +14,7 @@ const plans = [
       "Chaveiro e vidraceiro",
       "Cobertura provisória de telhados",
       "Serviços de limpeza",
+      "📱 Eletrônicos básicos (até R$ 2k)",
       "Descarte sustentável",
       "Consultoria ambiental"
     ],
@@ -21,7 +22,8 @@ const plans = [
       "Hospedagem temporária",
       "Mudanças e transporte",
       "Manutenção preventiva",
-      "Assistência para pets"
+      "🚲 Assistência para bikes",
+      "📱 Eletrônicos premium"
     ]
   },
   {
@@ -30,11 +32,12 @@ const plans = [
     popular: true,
     features: [
       "Todos os serviços do Essencial",
+      "📱 Eletrônicos até R$ 5.000",
+      "🚲 Assistência completa para bikes",
       "Hospedagem e alimentação",
       "Mudança e guarda de móveis",
       "Conserto de eletrodomésticos",
       "Assistência para pets",
-      "Assistência a bike",
       "Regresso antecipado",
       "Locação de equipamentos"
     ],
@@ -49,11 +52,13 @@ const plans = [
     popular: false,
     features: [
       "Todos os serviços do Completo",
+      "📱 Eletrônicos premium (até R$ 5k)",
+      "🚲 Bikes até R$ 5.000 + resgate",
       "Manutenção preventiva da residência",
       "Inspeção domiciliar completa",
       "Serviços especializados",
       "Cobertura ampliada",
-      "Atendimento prioritário"
+      "Atendimento prioritário VIP"
     ],
     notIncluded: []
   }
