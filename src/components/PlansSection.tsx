@@ -14,7 +14,7 @@ const plans = [
       "Chaveiro e vidraceiro",
       "Cobertura provisória de telhados",
       "Serviços de limpeza",
-      "📱 Eletrônicos básicos (até R$ 2k)",
+      "📱 Proteção eletrônicos básica",
       "Descarte sustentável",
       "Consultoria ambiental"
     ],
@@ -32,7 +32,7 @@ const plans = [
     popular: true,
     features: [
       "Todos os serviços do Essencial",
-      "📱 Eletrônicos até R$ 5.000",
+      "📱 Proteção completa eletrônicos",
       "🚲 Assistência completa para bikes",
       "Hospedagem e alimentação",
       "Mudança e guarda de móveis",
@@ -52,8 +52,8 @@ const plans = [
     popular: false,
     features: [
       "Todos os serviços do Completo",
-      "📱 Eletrônicos premium (até R$ 5k)",
-      "🚲 Bikes até R$ 5.000 + resgate",
+      "📱 Eletrônicos premium + resgate",
+      "🚲 Assistência bikes + resgate 24h",
       "Manutenção preventiva da residência",
       "Inspeção domiciliar completa",
       "Serviços especializados",
