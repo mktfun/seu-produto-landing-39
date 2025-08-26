@@ -6,6 +6,8 @@ import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const ContactSection = () => {
+  const navigate = useNavigate();
+
   return (
     <section id="contato" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
