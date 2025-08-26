@@ -21,31 +21,28 @@ const Header = () => {
           </div>
 
           <nav className="hidden md:flex items-center space-x-6">
-            <a href="#servicos" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium hover:scale-105 px-3 py-2 rounded-lg hover:bg-blue-50">
+            <a href="#servicos" className="text-foreground hover:text-primary transition-colors">
               Serviços
             </a>
-            <a href="#planos" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium hover:scale-105 px-3 py-2 rounded-lg hover:bg-blue-50">
+            <a href="#planos" className="text-foreground hover:text-primary transition-colors">
               Planos
             </a>
-            <a href="#contato" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium hover:scale-105 px-3 py-2 rounded-lg hover:bg-blue-50">
+            <a href="#contato" className="text-foreground hover:text-primary transition-colors">
               Contato
             </a>
           </nav>
 
           <div className="flex items-center space-x-4">
             <div className="hidden lg:flex items-center space-x-4 text-sm">
-              <div className="flex items-center space-x-2 text-blue-700 bg-blue-50/50 rounded-lg px-3 py-2 hover:bg-blue-100/70 transition-colors group">
-                <Phone className="w-4 h-4 group-hover:animate-bounce" />
-                <span className="font-medium">+55 11 97969-9832</span>
+              <div className="flex items-center space-x-2 text-muted-foreground">
+                <Phone className="w-4 h-4" />
+                <span>+55 11 97969-9832</span>
               </div>
             </div>
             <Button
-              variant="premium"
-              size="default"
-              className="font-semibold group"
+              variant="default"
               onClick={() => navigate("/onboard")}
             >
-              <Phone className="w-4 h-4 group-hover:animate-pulse" />
               Solicitar Cotação
             </Button>
           </div>
