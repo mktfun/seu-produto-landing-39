@@ -93,11 +93,6 @@ const PlansSection = () => {
             Planos oficiais Zurich com diferentes níveis de proteção. 
             Compare as opções e encontre a cobertura ideal para sua residência.
           </p>
-          <div className="flex justify-center">
-            <div className="inline-flex items-center bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium">
-              🔥 Oferta especial: Primeira mensalidade com 50% de desconto!
-            </div>
-          </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -158,22 +153,6 @@ const PlansSection = () => {
                     ))}
                   </ul>
 
-                  {plan.notIncluded.length > 0 && (
-                    <div>
-                      <h4 className="font-semibold text-muted-foreground mb-3 flex items-center">
-                        <X className="w-5 h-5 text-muted-foreground mr-2" />
-                        Não incluído:
-                      </h4>
-                      <ul className="space-y-2">
-                        {plan.notIncluded.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-center space-x-2">
-                            <X className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-                            <span className="text-sm text-muted-foreground">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
                 </div>
 
                 <div className="pt-4 border-t">
@@ -199,52 +178,23 @@ const PlansSection = () => {
           <PlansComparisonTable />
         </div>
 
-        {/* Social Proof e Garantias */}
-        <div className="mt-16 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-secondary mb-4">Por que mais de 50.000 famílias confiam na Zurich?</h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="flex flex-col items-center">
-                <Users className="w-8 h-8 text-primary mb-2" />
-                <span className="text-2xl font-bold text-primary">+50.000</span>
-                <span className="text-sm text-muted-foreground">Famílias protegidas</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <Clock className="w-8 h-8 text-primary mb-2" />
-                <span className="text-2xl font-bold text-primary">24h/7dias</span>
-                <span className="text-sm text-muted-foreground">Atendimento</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <Award className="w-8 h-8 text-primary mb-2" />
-                <span className="text-2xl font-bold text-primary">95%</span>
-                <span className="text-sm text-muted-foreground">Satisfação</span>
-              </div>
-            </div>
+        {/* Informações Legais */}
+        <div className="mt-16 text-center">
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground mb-4">
+            <span className="flex items-center">
+              <Check className="w-4 h-4 mr-1 text-green-600" /> Sem taxa de adesão
+            </span>
+            <span className="flex items-center">
+              <Check className="w-4 h-4 mr-1 text-green-600" /> Cancelamento gratuito
+            </span>
+            <span className="flex items-center">
+              <Phone className="w-4 h-4 mr-1 text-blue-600" /> 0800 729 14 00
+            </span>
           </div>
-          
-          <div className="text-center space-y-4">
-            <div className="flex flex-wrap justify-center gap-6 text-sm">
-              <span className="flex items-center text-green-700 bg-green-100 px-3 py-1 rounded-full">
-                <Check className="w-4 h-4 mr-1" /> Sem taxa de adesão
-              </span>
-              <span className="flex items-center text-green-700 bg-green-100 px-3 py-1 rounded-full">
-                <Check className="w-4 h-4 mr-1" /> Cancelamento gratuito
-              </span>
-              <span className="flex items-center text-blue-700 bg-blue-100 px-3 py-1 rounded-full">
-                <Phone className="w-4 h-4 mr-1" /> 0800 729 14 00
-              </span>
-            </div>
-            
-            <div className="mt-6 p-4 bg-white/60 rounded-lg">
-              <p className="text-sm text-muted-foreground mb-2">
-                <strong>🔒 Garantia Total:</strong> Satisfação garantida ou seu dinheiro de volta em 30 dias.
-              </p>
-              <p className="text-xs text-muted-foreground">
-                Plano garantido pela Zurich Minas Brasil Seguros S.A. (CNPJ 17.197.385/0001-21) 
-                registrado na SUSEP nº 15414.004664_2004-95.
-              </p>
-            </div>
-          </div>
+          <p className="text-xs text-muted-foreground max-w-2xl mx-auto">
+            Plano garantido pela Zurich Minas Brasil Seguros S.A. (CNPJ 17.197.385/0001-21)
+            registrado na SUSEP nº 15414.004664_2004-95.
+          </p>
         </div>
         
         {/* FAQ Rápido */}
