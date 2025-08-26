@@ -439,14 +439,14 @@ Gostaria de receber uma cotação personalizada!
                 </div>
 
                 {(formData.hasElectronics !== "nao" || formData.hasBike !== "nao") && (
-                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 mb-6">
-                    <p className="text-sm font-semibold text-primary mb-2">🎯 Destaque para você:</p>
-                    <div className="space-y-1 text-xs">
+                  <div className="bg-gradient-to-r from-slate-50 to-gray-50 rounded-lg p-4 mb-6 border border-gray-200">
+                    <p className="text-sm font-semibold text-secondary mb-2">🎯 Perfeito para seu perfil:</p>
+                    <div className="space-y-1 text-xs text-muted-foreground">
                       {formData.hasElectronics !== "nao" && (
-                        <div>📱 Cobertura especial para smartphones e eletrônicos</div>
+                        <div>📱 Proteção especial para seus dispositivos eletrônicos</div>
                       )}
                       {formData.hasBike !== "nao" && (
-                        <div>🚲 Assistência completa para sua bike</div>
+                        <div>🚲 Assistência completa para ciclistas</div>
                       )}
                     </div>
                   </div>
