@@ -71,16 +71,9 @@ const ServicesSection = () => {
           ))}
         </div>
 
-        {/* Seção Elegante - Eletrônicos e Bikes */}
-        <div className="relative overflow-hidden bg-gradient-to-r from-slate-50 to-gray-100 rounded-3xl p-12 mb-12">
-          {/* Elementos decorativos de fundo */}
-          <div className="absolute top-0 left-0 w-full h-full">
-            <div className="absolute top-10 left-10 w-32 h-32 bg-primary/5 rounded-full animate-pulse"></div>
-            <div className="absolute bottom-10 right-10 w-24 h-24 bg-secondary/5 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-            <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-accent/5 rounded-full animate-pulse" style={{animationDelay: '2s'}}></div>
-          </div>
-
-          <div className="relative z-10">
+        {/* Seção Eletrônicos e Bikes */}
+        <div className="bg-slate-50 rounded-xl p-8 mb-12">
+          <div>
             <div className="text-center mb-10">
               <h3 className="text-2xl lg:text-3xl font-bold text-secondary mb-4">
                 Proteção Além da Casa
@@ -92,22 +85,11 @@ const ServicesSection = () => {
 
             <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
               {/* Eletrônicos Card */}
-              <div className="group">
-                <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
-                  <CardContent className="p-8 text-center">
-                    <div className="relative mb-6">
-                      {/* Smartphone mockup */}
-                      <div className="relative mx-auto w-20 h-32 bg-gradient-to-b from-slate-800 to-slate-900 rounded-2xl border-2 border-slate-700 group-hover:rotate-12 transition-transform duration-500">
-                        <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-slate-600 rounded-full"></div>
-                        <div className="absolute top-4 bottom-6 left-1 right-1 bg-gradient-to-b from-blue-400 to-purple-500 rounded-xl flex items-center justify-center">
-                          <Smartphone className="w-8 h-8 text-white animate-bounce" />
-                        </div>
-                        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-8 h-8 border-2 border-slate-600 rounded-full"></div>
-                      </div>
-                      
-                      {/* Elementos flutuantes */}
-                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full animate-ping"></div>
-                      <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-blue-400 rounded-full animate-pulse"></div>
+              <div>
+                <Card className="shadow-lg hover:shadow-xl transition-shadow">
+                  <CardContent className="p-6 text-center">
+                    <div className="mb-6">
+                      <Smartphone className="w-16 h-16 text-blue-600 mx-auto" />
                     </div>
                     
                     <h4 className="text-xl font-bold text-secondary mb-3">Dispositivos Móveis</h4>
@@ -124,18 +106,11 @@ const ServicesSection = () => {
               </div>
 
               {/* Bikes Card */}
-              <div className="group">
-                <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
-                  <CardContent className="p-8 text-center">
-                    <div className="relative mb-6">
-                      {/* Bike icon */}
-                      <div className="flex items-center justify-center">
-                        <Bike className="w-16 h-16 text-blue-600" />
-                      </div>
-                      
-                      {/* Elementos flutuantes */}
-                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full animate-ping"></div>
-                      <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-blue-400 rounded-full animate-pulse"></div>
+              <div>
+                <Card className="shadow-lg hover:shadow-xl transition-shadow">
+                  <CardContent className="p-6 text-center">
+                    <div className="mb-6">
+                      <Bike className="w-16 h-16 text-blue-600 mx-auto" />
                     </div>
                     
                     <h4 className="text-xl font-bold text-secondary mb-3">Ciclismo</h4>
