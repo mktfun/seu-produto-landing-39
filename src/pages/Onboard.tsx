@@ -285,8 +285,8 @@ Gostaria de receber uma cotação personalizada!
               <Smartphone className="w-16 h-16 text-primary mx-auto mb-4" />
               <h2 className="text-3xl font-bold text-secondary mb-2">Você tem eletrônicos de valor?</h2>
               <p className="text-muted-foreground">📱 Smartphones, notebooks, TVs, tablets, etc.</p>
-              <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 mt-4">
-                <p className="text-sm font-medium text-primary">✨ Cobertura especial para eletrônicos até R$ 5.000</p>
+              <div className="bg-gradient-to-r from-slate-50 to-gray-50 rounded-lg p-4 mt-4 border border-gray-200">
+                <p className="text-sm font-medium text-secondary">✨ Proteção especial disponível para dispositivos eletrônicos</p>
               </div>
             </div>
 
