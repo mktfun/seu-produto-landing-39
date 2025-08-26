@@ -2,7 +2,7 @@ import { Separator } from "@/components/ui/separator";
 const Footer = () => {
   return <footer className="bg-secondary text-white py-12">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
               <img src="/lovable-uploads/286307c9-2b48-4465-8943-9d890a8bfd04.png" alt="Zurich Logo" className="h-8 w-auto brightness-0 invert" />
