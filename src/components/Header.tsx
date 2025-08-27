@@ -19,8 +19,14 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b shadow-sm">
-      <div className="container mx-auto px-4 py-3">
+    <header className={`fixed z-50 transition-all duration-500 ease-in-out ${
+        isScrolled
+          ? 'top-4 left-4 right-4 bg-white/98 backdrop-blur-lg border border-gray-200/50 shadow-xl rounded-2xl'
+          : 'top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b shadow-sm'
+      }`}>
+      <div className={`container mx-auto transition-all duration-500 ease-in-out ${
+        isScrolled ? 'px-6 py-2' : 'px-4 py-3'
+      }`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <img 
