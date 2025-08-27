@@ -307,10 +307,8 @@ const createEmailHTML = (data: EmailData): string => {
 
 export const sendEmailViaResend = async (formData: FormData): Promise<boolean> => {
   try {
-    // Determinar a URL base da API
-    const apiBaseUrl = import.meta.env.DEV
-      ? 'http://localhost:3001'
-      : window.location.origin;
+    // Usar a mesma origem para a API (agora integrada no Vite)
+    const apiBaseUrl = window.location.origin;
 
     console.log('📧 Usando API em:', `${apiBaseUrl}/api/send-email`);
 
