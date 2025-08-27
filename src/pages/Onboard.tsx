@@ -324,13 +324,13 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
             <div className="space-y-8 max-w-2xl mx-auto">
               {/* Tipo de propriedade */}
               <div>
-                <h3 className="text-lg font-semibold text-secondary mb-4">Tipo de residência:</h3>
+                <h3 className="text-lg font-semibold text-secondary mb-2">Tipo de residência que você mora:</h3>
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    { id: "apartamento", label: "Apartamento", icon: "🏢" },
-                    { id: "casa", label: "Casa", icon: "🏠" },
-                    { id: "sobrado", label: "Sobrado", icon: "🏘️" },
-                    { id: "chacara", label: "Chácara/Sítio", icon: "🌳" }
+                    { id: "apartamento", label: "Apartamento", icon: "🏢", description: "Unidade em edifício" },
+                    { id: "casa", label: "Casa", icon: "🏠", description: "Residência térrea ou com múltiplos andares" },
+                    { id: "sobrado", label: "Sobrado", icon: "🏘️", description: "Casa de dois ou mais pavimentos" },
+                    { id: "chacara", label: "Chácara/Sítio", icon: "🌳", description: "Propriedade rural ou de lazer" }
                   ].map((option) => (
                     <button
                       key={option.id}
@@ -340,7 +340,8 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
                       }`}
                     >
                       <div className="text-2xl mb-2">{option.icon}</div>
-                      <div className="text-sm font-medium">{option.label}</div>
+                      <div className="text-sm font-medium mb-1">{option.label}</div>
+                      <div className="text-xs text-muted-foreground">{option.description}</div>
                     </button>
                   ))}
                 </div>
@@ -349,13 +350,13 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
               {/* Valor da propriedade */}
               {formData.propertyType && (
                 <div>
-                  <h3 className="text-lg font-semibold text-secondary mb-4">Valor estimado:</h3>
+                  <h3 className="text-lg font-semibold text-secondary mb-2">Valor estimado do seu imóvel:</h3>
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      { id: "ate-300k", label: "Até R$ 300mil", icon: "💰" },
-                      { id: "300-600k", label: "R$ 300k - 600k", icon: "💎" },
-                      { id: "600k-1m", label: "R$ 600k - 1M", icon: "👑" },
-                      { id: "acima-1m", label: "Acima R$ 1M", icon: "🏆" }
+                      { id: "ate-300k", label: "Até R$ 300mil", icon: "💰", description: "Residências de entrada" },
+                      { id: "300-600k", label: "R$ 300k - 600k", icon: "💎", description: "Padrão médio do mercado" },
+                      { id: "600k-1m", label: "R$ 600k - 1M", icon: "👑", description: "Imóveis de alto padrão" },
+                      { id: "acima-1m", label: "Acima R$ 1M", icon: "🏆", description: "Propriedades de luxo" }
                     ].map((option) => (
                       <button
                         key={option.id}
@@ -365,7 +366,8 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
                         }`}
                       >
                         <div className="text-2xl mb-2">{option.icon}</div>
-                        <div className="text-sm font-medium">{option.label}</div>
+                        <div className="text-sm font-medium mb-1">{option.label}</div>
+                        <div className="text-xs text-muted-foreground">{option.description}</div>
                       </button>
                     ))}
                   </div>
@@ -538,167 +540,6 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
                     <>
                       <div className="w-5 h-5 mr-2 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
                       Enviando automaticamente...
-                    </>
-                  ) : (
-                    <>
-                      <Phone className="w-5 h-5 mr-2" />
-                      Solicitar Cotação no WhatsApp
-                    </>
-                  )}
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        );
-
-      case 6:
-        return (
-          <div className="space-y-6 text-center">
-            <div className="mb-8">
-              <Bike className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-secondary mb-2">Você tem bicicleta?</h2>
-              <p className="text-muted-foreground">���‍♀️ Bike comum, elétrica ou de alto valor</p>
-              <div className="bg-gradient-to-r from-slate-50 to-gray-50 rounded-lg p-4 mt-4 border border-gray-200">
-                <p className="text-sm font-medium text-secondary">🚲 Assistência completa e proteção para ciclistas</p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
-              {[
-                { id: "sim-valiosa", label: "Sim, de valor", icon: "🚴‍♂️⚡", description: "Bike elétrica ou esportiva" },
-                { id: "sim-normal", label: "Sim, comum", icon: "🚲", description: "Bike tradicional" },
-                { id: "nao", label: "Não tenho", icon: "🚶‍♀️", description: "Não uso bicicleta" }
-              ].map((option) => (
-                <Card 
-                  key={option.id}
-                  className={`cursor-pointer transition-all hover:scale-105 border-2 hover:border-primary ${
-                    formData.hasBike === option.id ? 'border-primary bg-primary/5' : 'border-border'
-                  }`}
-                  onClick={() => selectOption('hasBike', option.id)}
-                >
-                  <CardContent className="p-6 text-center">
-                    <div className="text-3xl mb-3">{option.icon}</div>
-                    <h3 className="font-semibold text-lg mb-2">{option.label}</h3>
-                    <p className="text-sm text-muted-foreground">{option.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        );
-
-      case 7:
-        return (
-          <div className="space-y-6 text-center">
-            <div className="mb-8">
-              <Star className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-secondary mb-2">O que é MAIS importante para você?</h2>
-              <p className="text-muted-foreground">Escolha sua principal prioridade em um seguro residencial</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
-              {[
-                { id: "preco", label: "Menor preço", icon: "💰", description: "Economia em primeiro lugar" },
-                { id: "emergencias", label: "Cobertura emergencial", icon: "🚨", description: "Atendimento 24h para emergências" },
-                { id: "eletronicos", label: "Proteção eletr��nicos", icon: "📱", description: "Smartphones, notebooks, TVs" },
-                { id: "manutencao", label: "Manutenção preventiva", icon: "🔧", description: "Cuidado contínuo da casa" },
-                { id: "completo", label: "Proteção completa", icon: "🛡️", description: "Máxima tranquilidade" }
-              ].map((option) => (
-                <Card 
-                  key={option.id}
-                  className={`cursor-pointer transition-all hover:scale-105 border-2 hover:border-primary ${
-                    formData.mainPriority === option.id ? 'border-primary bg-primary/5' : 'border-border'
-                  } ${option.id === 'eletronicos' ? 'ring-2 ring-blue-200' : ''}`}
-                  onClick={() => selectOption('mainPriority', option.id)}
-                >
-                  <CardContent className="p-6 text-center">
-                    <div className="text-4xl mb-3">{option.icon}</div>
-                    <h3 className="font-semibold text-lg mb-2">{option.label}</h3>
-                    <p className="text-sm text-muted-foreground">{option.description}</p>
-                    {option.id === 'eletronicos' && (
-                      <div className="mt-2 text-xs text-blue-600 font-medium">⭐ DESTAQUE</div>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        );
-
-      case 8:
-        const finalRecommendation = calculateRecommendation();
-        const finalPlanDetails = {
-          "Essencial": {
-            icon: "💚",
-            color: "green",
-            description: "Proteção básica com excelente custo-benefício",
-            features: ["Emergências essenciais", "Atendimento 24h", "Serviços básicos", "Cobertura eletrônicos básica"]
-          },
-          "Completo": {
-            icon: "💙",
-            color: "blue",
-            description: "Cobertura completa para o dia a dia",
-            features: ["Todas as emergências", "📱 Proteção para eletrônicos", "🚲 Assistência para bikes", "Hospedagem", "Assistência para pets"]
-          },
-          "Completo+": {
-            icon: "💜",
-            color: "purple",
-            description: "Máxima proteção com manutenção preventiva",
-            features: ["Tudo do Completo", "📱 Eletrônicos premium", "🚲 Assistência completa bikes", "Manutenção preventiva", "Atendimento VIP"]
-          }
-        };
-
-        const finalPlan = finalPlanDetails[finalRecommendation as keyof typeof finalPlanDetails];
-
-        return (
-          <div className="space-y-6 text-center">
-            <div className="mb-8">
-              <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="w-12 h-12 text-white" />
-              </div>
-              <h2 className="text-3xl font-bold text-secondary mb-2">Perfeito, {formData.name}!</h2>
-              <p className="text-muted-foreground">Baseado no seu perfil, encontramos o plano ideal</p>
-            </div>
-
-            <Card className="border-4 border-primary bg-gradient-to-br from-primary/10 via-white to-primary/5 max-w-md mx-auto">
-              <CardContent className="p-8 text-center">
-                <div className="text-6xl mb-4">{finalPlan.icon}</div>
-                <h3 className="text-3xl font-bold text-primary mb-2">Plano {finalRecommendation}</h3>
-                <p className="text-lg text-muted-foreground mb-6">{finalPlan.description}</p>
-
-                <div className="space-y-2 mb-6">
-                  {finalPlan.features.map((feature, index) => (
-                    <div key={index} className="flex items-center justify-center space-x-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      <span className="text-sm">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {(formData.hasElectronics !== "nao" || formData.hasBike !== "nao") && (
-                  <div className="bg-gradient-to-r from-slate-50 to-gray-50 rounded-lg p-4 mb-6 border border-gray-200">
-                    <p className="text-sm font-semibold text-secondary mb-2">🎯 Perfeito para seu perfil:</p>
-                    <div className="space-y-1 text-xs text-muted-foreground">
-                      {formData.hasElectronics !== "nao" && (
-                        <div>📱 Proteção especial para seus dispositivos eletrônicos</div>
-                      )}
-                      {formData.hasBike !== "nao" && (
-                        <div>🚲 Assistência completa para ciclistas</div>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                <Button
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white font-bold py-3 disabled:opacity-70"
-                  size="lg"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 mr-2 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
-                      Enviando cotação...
                     </>
                   ) : (
                     <>

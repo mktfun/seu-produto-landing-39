@@ -103,7 +103,7 @@ export function setupFetchWithTimeout() {
 
     window.fetch = function(input: RequestInfo | URL, init?: RequestInit) {
       // Don't wrap Supabase requests to avoid body stream conflicts
-      const url = typeof input === 'string' ? input : input.url;
+      const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
       if (url.includes('supabase.co')) {
         return originalFetch(input, init);
       }

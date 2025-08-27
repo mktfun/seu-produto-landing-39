@@ -23,6 +23,7 @@ export default defineConfig({
     sourcemap: false // Reduz tamanho e problemas de debug
   },
   server: {
+    port: 8080,
     proxy: {
       '/api': {
         target: 'http://localhost:3001',
@@ -30,12 +31,8 @@ export default defineConfig({
         secure: false
       }
     },
-    timeout: 120000, // 2 minutos de timeout
     hmr: {
       timeout: 60000 // 1 minuto para HMR
     }
-  },
-  preview: {
-    timeout: 120000
   }
 })
