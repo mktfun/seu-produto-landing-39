@@ -96,20 +96,26 @@ export function setupGlobalErrorHandling() {
   };
 }
 
-// Configurar fetch com timeouts padrão
+// Configurar fetch com timeouts padrão (sem interferir no Supabase)
 export function setupFetchWithTimeout() {
   if (typeof window !== 'undefined' && window.fetch) {
     const originalFetch = window.fetch;
-    
+
     window.fetch = function(input: RequestInfo | URL, init?: RequestInit) {
+      // Don't wrap Supabase requests to avoid body stream conflicts
+      const url = typeof input === 'string' ? input : input.url;
+      if (url.includes('supabase.co')) {
+        return originalFetch(input, init);
+      }
+
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s timeout
-      
+
       const fetchOptions: RequestInit = {
         ...init,
         signal: controller.signal
       };
-      
+
       return originalFetch(input, fetchOptions)
         .finally(() => clearTimeout(timeoutId))
         .catch(error => {
