@@ -366,7 +366,7 @@ function apiServerPlugin() {
 export default defineConfig({
   plugins: [react(), apiServerPlugin()],
   optimizeDeps: {
-    exclude: ['@supabase/supabase-js']
+    include: ['@supabase/supabase-js']
   },
   resolve: {
     alias: {
