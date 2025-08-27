@@ -177,7 +177,9 @@ const PlansSection = () => {
 
         {/* Tabela de Comparação Simplificada */}
         <div className="mt-16">
-          <PlansComparisonTable />
+          <Suspense fallback={<div className="text-center py-8 text-muted-foreground">Carregando comparação...</div>}>
+            <PlansComparisonTable />
+          </Suspense>
         </div>
 
       </div>
