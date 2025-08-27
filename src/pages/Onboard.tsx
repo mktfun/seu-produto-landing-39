@@ -131,29 +131,48 @@ const Onboard = () => {
     };
 
     try {
-      console.log('💾 Salvando lead no Supabase...');
+      console.log('💾 Iniciando processo de salvamento...');
 
-      // 1. Save to Supabase first (backup)
-      const supabaseResult = await saveLead(leadData);
-      if (supabaseResult.success) {
-        console.log('✅ Lead salvo no Supabase! ID:', supabaseResult.data?.id);
-      } else {
-        console.log('⚠️ Falha ao salvar no Supabase:', supabaseResult.error);
+      // 1. Save to Supabase first (backup) - com timeout
+      const supabasePromise = saveLead(leadData);
+      const supabaseTimeout = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Supabase timeout')), 10000);
+      });
+
+      try {
+        const supabaseResult = await Promise.race([supabasePromise, supabaseTimeout]) as any;
+        if (supabaseResult.success) {
+          console.log('✅ Lead salvo no Supabase! ID:', supabaseResult.data?.id);
+        } else {
+          console.log('⚠️ Falha ao salvar no Supabase:', supabaseResult.error);
+        }
+      } catch (error: any) {
+        console.log('⚠️ Timeout ou erro no Supabase:', error.message);
       }
 
       // 2. Send email via our API (more reliable than DB trigger)
       console.log('📧 Enviando email via API...');
-      const emailResponse = await fetch('/api/send-email', {
+
+      const emailTimeout = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Email timeout')), 15000);
+      });
+
+      const emailPromise = fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ formData: leadData })
       });
 
-      if (emailResponse.ok) {
-        console.log('✅ Email enviado com sucesso!');
-      } else {
-        const errorText = await emailResponse.text();
-        console.log('⚠️ Falha no envio do email:', errorText);
+      try {
+        const emailResponse = await Promise.race([emailPromise, emailTimeout]) as any;
+        if (emailResponse.ok) {
+          console.log('✅ Email enviado com sucesso!');
+        } else {
+          const errorText = await emailResponse.text();
+          console.log('⚠️ Falha no envio do email:', errorText);
+        }
+      } catch (error: any) {
+        console.log('⚠️ Timeout ou erro no email:', error.message);
       }
 
     } catch (error) {
