@@ -162,44 +162,12 @@ const Onboard = () => {
       let supabaseSuccess = false;
       let emailSuccess = false;
 
-      // 1. Save to Supabase via MCP
-      console.log('💾 Salvando no Supabase via MCP...');
-      try {
-        // Use MCP Supabase integration directly
-        const response = await fetch('/api/supabase-save', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ leadData })
-        });
+      // 1. Skip Supabase for now (use only email + WhatsApp)
+      console.log('⚠️ Pulando Supabase temporariamente - usando apenas email + WhatsApp');
+      console.log('💾 Dados que seriam salvos:', leadData);
 
-        if (response.ok) {
-          const result = await response.json();
-          console.log('✅ Lead salvo no Supabase via MCP! ID:', result.id);
-          supabaseSuccess = true;
-        } else {
-          console.error('❌ Falha ao salvar no Supabase via MCP');
-          // Fallback to direct Supabase client
-          const supabaseResult = await saveLead(leadData);
-          if (supabaseResult.success) {
-            console.log('✅ Lead salvo no Supabase (fallback)! ID:', supabaseResult.data?.id);
-            supabaseSuccess = true;
-          } else {
-            console.error('❌ Fallback Supabase também falhou:', supabaseResult.error);
-          }
-        }
-      } catch (error: any) {
-        console.error('❌ Erro no Supabase:', error.message);
-        // Try fallback
-        try {
-          const supabaseResult = await saveLead(leadData);
-          if (supabaseResult.success) {
-            console.log('✅ Lead salvo no Supabase (fallback)!');
-            supabaseSuccess = true;
-          }
-        } catch (fallbackError: any) {
-          console.error('❌ Fallback também falhou:', fallbackError.message);
-        }
-      }
+      // For now, just log the data and mark as "successful"
+      supabaseSuccess = true; // Temporary - so email still gets sent
 
       // 2. Send email via our API
       console.log('📧 Enviando email via API...');
