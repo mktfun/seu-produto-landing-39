@@ -74,9 +74,12 @@ const Header = () => {
             </div>
             <Button
               variant="default"
+              className={`transition-all duration-500 ease-in-out ${
+                isScrolled ? 'h-9 px-4 text-sm' : 'h-12 px-6'
+              }`}
               onClick={() => navigate("/onboard")}
             >
-              Solicitar Cotação
+              {isScrolled ? 'Cotação' : 'Solicitar Cotação'}
             </Button>
           </div>
         </div>
