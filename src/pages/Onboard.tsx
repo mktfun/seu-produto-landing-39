@@ -314,7 +314,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
                 <h3 className="text-lg font-semibold text-secondary mb-4">Tipo de residência:</h3>
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    { id: "apartamento", label: "Apartamento", icon: "����" },
+                    { id: "apartamento", label: "Apartamento", icon: "🏢" },
                     { id: "casa", label: "Casa", icon: "🏠" },
                     { id: "sobrado", label: "Sobrado", icon: "🏘️" },
                     { id: "chacara", label: "Chácara/Sítio", icon: "🌳" }
@@ -504,6 +504,17 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
                   </div>
                 )}
 
+                {/* Auto-email status */}
+                {emailSent && (
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                    <div className="flex items-center justify-center space-x-2 text-green-700">
+                      <CheckCircle className="w-5 h-5" />
+                      <span className="text-sm font-medium">📧 Email enviado automaticamente!</span>
+                    </div>
+                    <p className="text-xs text-green-600 mt-1">Nossa equipe já recebeu seus dados</p>
+                  </div>
+                )}
+
                 <Button
                   onClick={handleSubmit}
                   disabled={isSubmitting}
@@ -513,7 +524,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
                   {isSubmitting ? (
                     <>
                       <div className="w-5 h-5 mr-2 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
-                      Enviando cotação...
+                      Enviando automaticamente...
                     </>
                   ) : (
                     <>
