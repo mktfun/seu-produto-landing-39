@@ -111,68 +111,78 @@ const Onboard = () => {
   const handleSubmit = async () => {
     setIsSubmitting(true);
 
-    const recommendation = calculateRecommendation();
-    setFormData(prev => ({ ...prev, recommendedPlan: recommendation }));
-
-    // Prepare data for both Supabase and email
-    const leadData: Omit<Lead, 'id' | 'created_at'> = {
-      name: formData.name,
-      phone: formData.phone,
-      how_did_you_hear: formData.howDidYouHear,
-      property_type: formData.propertyType,
-      property_value: formData.propertyValue,
-      main_priority: formData.mainPriority,
-      budget_range: formData.budgetRange,
-      recommended_plan: recommendation,
-      utm_source: formData.utm_source || undefined,
-      utm_medium: formData.utm_medium || undefined,
-      utm_campaign: formData.utm_campaign || undefined,
-      status: 'new'
-    };
-
     try {
-      console.log('💾 Iniciando processo de salvamento...');
+      const recommendation = calculateRecommendation();
+      console.log('🎯 Recomendação calculada:', recommendation);
 
-      // 1. Save to Supabase first (backup) - com timeout
-      const supabasePromise = saveLead(leadData);
-      const supabaseTimeout = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('Supabase timeout')), 10000);
-      });
+      // Prepare data for both Supabase and email
+      const leadData: Omit<Lead, 'id' | 'created_at'> = {
+        name: formData.name,
+        phone: formData.phone,
+        how_did_you_hear: formData.howDidYouHear,
+        property_type: formData.propertyType,
+        property_value: formData.propertyValue,
+        main_priority: formData.mainPriority,
+        budget_range: formData.budgetRange,
+        recommended_plan: recommendation,
+        utm_source: formData.utm_source || undefined,
+        utm_medium: formData.utm_medium || undefined,
+        utm_campaign: formData.utm_campaign || undefined,
+        status: 'new'
+      };
 
+      console.log('💾 Dados para salvar:', leadData);
+
+      // Update form data with recommendation
+      setFormData(prev => ({ ...prev, recommendedPlan: recommendation }));
+
+      let supabaseSuccess = false;
+      let emailSuccess = false;
+
+      // 1. Save to Supabase first
+      console.log('💾 Salvando no Supabase...');
       try {
-        const supabaseResult = await Promise.race([supabasePromise, supabaseTimeout]) as any;
+        const supabaseResult = await saveLead(leadData);
         if (supabaseResult.success) {
           console.log('✅ Lead salvo no Supabase! ID:', supabaseResult.data?.id);
+          supabaseSuccess = true;
         } else {
-          console.log('⚠️ Falha ao salvar no Supabase:', supabaseResult.error);
+          console.error('❌ Falha ao salvar no Supabase:', supabaseResult.error);
         }
       } catch (error: any) {
-        console.log('⚠️ Timeout ou erro no Supabase:', error.message);
+        console.error('❌ Erro no Supabase:', error.message);
       }
 
-      // 2. Send email via our API (more reliable than DB trigger)
+      // 2. Send email via our API
       console.log('📧 Enviando email via API...');
-
-      const emailTimeout = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('Email timeout')), 15000);
-      });
-
-      const emailPromise = fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ formData: leadData })
-      });
-
       try {
-        const emailResponse = await Promise.race([emailPromise, emailTimeout]) as any;
+        const emailResponse = await fetch('/api/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ formData: leadData })
+        });
+
         if (emailResponse.ok) {
-          console.log('✅ Email enviado com sucesso!');
+          const result = await emailResponse.json();
+          console.log('✅ Email enviado com sucesso!', result);
+          emailSuccess = true;
         } else {
           const errorText = await emailResponse.text();
-          console.log('⚠️ Falha no envio do email:', errorText);
+          console.error('❌ Falha no envio do email:', errorText);
         }
       } catch (error: any) {
-        console.log('⚠️ Timeout ou erro no email:', error.message);
+        console.error('❌ Erro no email:', error.message);
+      }
+
+      // Show status to user
+      if (supabaseSuccess && emailSuccess) {
+        console.log('🎉 Tudo funcionou! Lead salvo e email enviado.');
+      } else if (supabaseSuccess) {
+        console.log('⚠️ Lead salvo mas email falhou');
+      } else if (emailSuccess) {
+        console.log('⚠️ Email enviado mas Supabase falhou');
+      } else {
+        console.error('❌ Ambos falharam - mas continuando com WhatsApp');
       }
 
     } catch (error) {
