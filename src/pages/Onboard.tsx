@@ -224,28 +224,28 @@ const Onboard = () => {
 
     // Prepare WhatsApp message
     const message = `
-🏠 *NOVA COTAÇÃO - Zurich Residência*
+*NOVA COTACAO - Zurich Residencia*
 
-👤 *DADOS DO CLIENTE:*
+*DADOS DO CLIENTE:*
 • Nome: ${formData.name}
 • WhatsApp: ${formData.phone}
 • Como conheceu: ${formData.howDidYouHear}
 
-🏡 *PERFIL DA RESIDÊNCIA:*
+*PERFIL DA RESIDENCIA:*
 • Tipo: ${formData.propertyType}
 • Valor estimado: ${formData.propertyValue}
 • Prioridade principal: ${formData.mainPriority}
-• Orçamento mensal: ${formData.budgetRange}
+• Orcamento mensal: ${formData.budgetRange}
 
-🎯 *RECOMENDAÇÃO SISTEMA:*
+*RECOMENDACAO SISTEMA:*
 • Plano sugerido: *${finalRecommendation}*
 
-${formData.utm_source ? `📊 *ORIGEM:* ${formData.utm_source} (${formData.utm_medium})` : ''}
+${formData.utm_source ? `*ORIGEM:* ${formData.utm_source} (${formData.utm_medium})` : ''}
 
-✅ Cliente quer receber cotação personalizada!
+Cliente quer receber cotacao personalizada!
 
 ---
-_Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleString('pt-BR')}_
+_Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString('pt-BR')}_
     `.trim();
 
     const whatsappUrl = `https://wa.me/5511979699832?text=${encodeURIComponent(message)}`;
