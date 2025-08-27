@@ -64,7 +64,9 @@ const Header = () => {
           </button>
 
           <div className="hidden md:flex items-center space-x-4">
-            <div className="hidden lg:flex items-center space-x-4 text-sm">
+            <div className={`hidden lg:flex items-center space-x-4 text-sm transition-all duration-500 ease-in-out ${
+              isScrolled ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100'
+            }`}>
               <div className="flex items-center space-x-2 text-muted-foreground">
                 <Phone className="w-4 h-4" />
                 <span>+55 11 97969-9832</span>
