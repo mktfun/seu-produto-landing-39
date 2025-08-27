@@ -135,8 +135,8 @@ export async function getLeads(limit = 50): Promise<{ success: boolean; data?: L
 
 // Função para atualizar status do lead
 export async function updateLeadStatus(
-  leadId: number, 
-  status: Lead['status'], 
+  leadId: number,
+  status: Lead['status'],
   notes?: string
 ): Promise<{ success: boolean; error?: string }> {
   try {
@@ -155,5 +155,34 @@ export async function updateLeadStatus(
     return { success: true }
   } catch (error: any) {
     return { success: false, error: error.message }
+  }
+}
+
+// Função para testar conexão com Supabase
+export async function testSupabaseConnection(): Promise<{ success: boolean; error?: string }> {
+  try {
+    console.log('🔗 Testando conexão com Supabase...');
+
+    const { data, error } = await supabase
+      .from('leads')
+      .select('count')
+      .limit(1);
+
+    if (error) {
+      console.error('❌ Teste de conexão falhou:', error);
+      return {
+        success: false,
+        error: `Conexão falhou: ${error.message}`
+      };
+    }
+
+    console.log('✅ Conexão com Supabase funcionando!');
+    return { success: true };
+  } catch (error: any) {
+    console.error('❌ Erro no teste de conexão:', error);
+    return {
+      success: false,
+      error: error.message
+    };
   }
 }
