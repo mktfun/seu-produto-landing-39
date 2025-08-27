@@ -18,7 +18,7 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-4 py-16 sm:py-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
           <div className="text-white space-y-6 animate-fade-in">
             <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
               <Shield className="w-5 h-5" />
@@ -39,7 +39,7 @@ const Hero = () => {
               pensada com todo cuidado para garantir itens básicos do dia-a-dia.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
               <Button
                 size="lg"
                 className="bg-white text-blue-600 hover:bg-blue-50 font-semibold shadow-lg"
@@ -96,27 +96,29 @@ const Hero = () => {
             <div className="hidden sm:block absolute top-40 -right-4 w-6 h-6 bg-white/30 rounded-full animate-float opacity-70" style={{animationDelay: '0.3s'}}></div>
 
             {/* Zurich logo background - responsive size */}
-            <div className="absolute -top-6 sm:-top-10 -left-6 sm:-left-10 w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full opacity-35 z-0 border-2 border-white/80">
-              <div className="w-full h-full bg-gradient-to-br from-white/80 to-white/60 rounded-full p-4 sm:p-6 lg:p-8 flex items-center justify-center">
+            <div className="absolute -top-4 sm:-top-6 lg:-top-10 -left-4 sm:-left-6 lg:-left-10 w-32 h-32 sm:w-48 sm:h-48 lg:w-80 lg:h-80 rounded-full opacity-20 z-0 border border-white/60">
+              <div className="w-full h-full bg-gradient-to-br from-white/60 to-white/40 rounded-full p-3 sm:p-4 lg:p-8 flex items-center justify-center">
                 <img
                   src="https://cdn.builder.io/api/v1/image/assets%2F341d59d887524a4696fe7d894c9eaabb%2F306ae11207464861be1cb081421d2766?format=webp&width=800"
                   alt="Zurich Logo"
-                  className="w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 object-contain brightness-150 contrast-125"
+                  className="w-20 h-20 sm:w-32 sm:h-32 lg:w-64 lg:h-64 object-contain brightness-150 contrast-125"
                   style={{filter: 'brightness(1.5) contrast(1.2) saturate(0.3)'}}
                 />
               </div>
             </div>
 
-            {/* Main family image - responsive size and positioning */}
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl border-4 border-white/20 z-10 ml-8 sm:ml-12 lg:ml-20">
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/10"></div>
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F8db09fcbd19243afa37a84aaf6b10caf%2F648ae6f7d2264f4985ef246a9db8f10b?format=webp&width=800"
-                alt="Família feliz em casa - Zurich Residência"
-                className="w-full h-full object-cover drop-shadow-2xl"
-              />
-              {/* Additional shadow overlay */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-transparent opacity-30"></div>
+            {/* Main family image - improved responsive design */}
+            <div className="relative w-full max-w-xs sm:max-w-sm lg:max-w-md xl:max-w-lg mx-auto">
+              <div className="aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 sm:border-4 border-white/30 z-10 relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/10"></div>
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets%2F8db09fcbd19243afa37a84aaf6b10caf%2F648ae6f7d2264f4985ef246a9db8f10b?format=webp&width=800"
+                  alt="Família feliz em casa - Zurich Residência"
+                  className="w-full h-full object-cover drop-shadow-2xl"
+                />
+                {/* Additional shadow overlay */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-black/15 via-transparent to-transparent opacity-40"></div>
+              </div>
             </div>
           </div>
         </div>
