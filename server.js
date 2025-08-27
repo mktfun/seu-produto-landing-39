@@ -301,20 +301,26 @@ const createEmailHTML = (data) => {
           <div class="contact-item">👤 Nome: ${data.name}</div>
 
           <div style="margin-top: 20px; text-align: center;">
-            <a href="https://wa.me/55${data.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Oi ${data.name}! 👋
+            <a href="https://wa.me/55${(data.phone || '').replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Oi ${data.name || 'Cliente'}! 👋
 
 Aqui é da J.J. Amorim Seguros - Zurich. Recebi sua solicitação de cotação para seguro residencial.
 
-🏠 Vi que você tem interesse no plano *${data.recommended_plan || 'personalizado'}* para sua ${formatPropertyType(data.property_type || '').toLowerCase()}.
+🏠 Vi que você tem interesse no plano *${data.recommended_plan || 'personalizado'}* para sua ${formatPropertyType(data.property_type || '').toLowerCase() || 'residência'}.
 
 Vou preparar uma proposta exclusiva para você!
 
 Quando podemos conversar? Tenho algumas perguntas rápidas para personalizar ainda mais sua cotação.
 
 *Zurich - A segurança que você confia* 🛡️`)}"
-               style="display: inline-block; background: #25D366; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; margin: 10px 0;">
-              💬 Enviar WhatsApp para ${data.name}
+               style="display: inline-block; background: #25D366; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; margin: 10px 0; box-shadow: 0 4px 8px rgba(37, 211, 102, 0.3);">
+              💬 Enviar WhatsApp para ${data.name || 'Cliente'}
             </a>
+          </div>
+
+          <div style="margin-top: 15px; padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px;">
+            <p style="margin: 0; font-size: 14px; color: #856404;">
+              📧 <strong>IMPORTANTE:</strong> Use o botão acima para contato direto via WhatsApp!
+            </p>
           </div>
         </div>
 
