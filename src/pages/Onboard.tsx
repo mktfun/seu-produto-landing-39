@@ -539,12 +539,12 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
 
             <Card className="border-4 border-primary bg-gradient-to-br from-primary/10 via-white to-primary/5 max-w-md mx-auto">
               <CardContent className="p-8 text-center">
-                <div className="text-6xl mb-4">{plan.icon}</div>
-                <h3 className="text-3xl font-bold text-primary mb-2">Plano {recommendation}</h3>
-                <p className="text-lg text-muted-foreground mb-6">{plan.description}</p>
-                
+                <div className="text-6xl mb-4">{finalPlan.icon}</div>
+                <h3 className="text-3xl font-bold text-primary mb-2">Plano {finalRecommendation}</h3>
+                <p className="text-lg text-muted-foreground mb-6">{finalPlan.description}</p>
+
                 <div className="space-y-2 mb-6">
-                  {plan.features.map((feature, index) => (
+                  {finalPlan.features.map((feature, index) => (
                     <div key={index} className="flex items-center justify-center space-x-2">
                       <CheckCircle className="w-4 h-4 text-green-500" />
                       <span className="text-sm">{feature}</span>
