@@ -22,6 +22,7 @@ app.use(express.json());
 
 // Email formatting functions
 const formatPropertyType = (type) => {
+  if (!type || type === 'undefined') return 'Não informado';
   const types = {
     'apartamento': 'Apartamento',
     'casa': 'Casa',
@@ -32,6 +33,7 @@ const formatPropertyType = (type) => {
 };
 
 const formatPropertyValue = (value) => {
+  if (!value || value === 'undefined') return 'Não informado';
   const values = {
     'ate-300k': 'Até R$ 300mil',
     '300-600k': 'R$ 300k - 600k',
@@ -42,6 +44,7 @@ const formatPropertyValue = (value) => {
 };
 
 const formatMainPriority = (priority) => {
+  if (!priority || priority === 'undefined') return 'Não informado';
   const priorities = {
     'preco': 'Menor preço',
     'emergencias': 'Cobertura emergencial',
@@ -54,6 +57,7 @@ const formatMainPriority = (priority) => {
 };
 
 const formatBudgetRange = (budget) => {
+  if (!budget || budget === 'undefined') return 'Não informado';
   const budgets = {
     'economico': 'Até R$ 100/mês (Econômico)',
     'medio': 'R$ 100 - R$ 200/mês (Médio)',
@@ -63,6 +67,7 @@ const formatBudgetRange = (budget) => {
 };
 
 const formatHowDidYouHear = (source) => {
+  if (!source || source === 'undefined') return 'Não informado';
   const sources = {
     'uber': 'QR Code no Uber',
     'google': 'Google/Busca',
