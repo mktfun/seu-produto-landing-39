@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowLeft, CheckCircle, Phone, Star, Crown, Shield, Home, Zap, Users, Heart, Wrench, DollarSign, Smartphone, Bike } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { sendEmailViaResend } from "@/services/resendEmailService";
+import { saveLead, type Lead } from "@/lib/supabase";
 
 const Onboard = () => {
   const navigate = useNavigate();
@@ -197,7 +197,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
                 {[
                   { id: "uber", label: "QR Code no Uber", icon: "🚗" },
                   { id: "google", label: "Google/Busca", icon: "🔍" },
-                  { id: "indicacao", label: "Indicação", icon: "����" },
+                  { id: "indicacao", label: "Indicação", icon: "👥" },
                   { id: "social", label: "Redes Sociais", icon: "📱" },
                   { id: "outros", label: "Outros", icon: "💬" }
                 ].map((option) => (
@@ -469,7 +469,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
               {[
-                { id: "sim-valiosa", label: "Sim, de valor", icon: "🚴‍♂️⚡", description: "Bike elétrica ou esportiva" },
+                { id: "sim-valiosa", label: "Sim, de valor", icon: "🚴��♂️⚡", description: "Bike elétrica ou esportiva" },
                 { id: "sim-normal", label: "Sim, comum", icon: "🚲", description: "Bike tradicional" },
                 { id: "nao", label: "Não tenho", icon: "🚶‍♀️", description: "Não uso bicicleta" }
               ].map((option) => (
