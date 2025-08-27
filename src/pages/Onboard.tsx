@@ -200,31 +200,66 @@ Gostaria de receber uma cotação personalizada!
           <div className="space-y-6 text-center">
             <div className="mb-8">
               <Home className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-secondary mb-2">Que tipo de residência você tem?</h2>
-              <p className="text-muted-foreground">Clique na opção que melhor descreve seu imóvel</p>
+              <h2 className="text-3xl font-bold text-secondary mb-2">Sobre sua residência</h2>
+              <p className="text-muted-foreground">Tipo e valor estimado do seu imóvel</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
-              {[
-                { id: "apartamento", label: "Apartamento", icon: "🏢", description: "Condomínio residencial" },
-                { id: "casa", label: "Casa", icon: "🏠", description: "Casa térrea ou assobradada" },
-                { id: "sobrado", label: "Sobrado", icon: "🏘️", description: "Casa de múltiplos andares" },
-                { id: "chacara", label: "Chácara/Sítio", icon: "🌳", description: "Propriedade rural" }
-              ].map((option) => (
-                <Card 
-                  key={option.id}
-                  className={`cursor-pointer transition-all hover:scale-105 border-2 hover:border-primary ${
-                    formData.propertyType === option.id ? 'border-primary bg-primary/5' : 'border-border'
-                  }`}
-                  onClick={() => selectOption('propertyType', option.id)}
-                >
-                  <CardContent className="p-6 text-center">
-                    <div className="text-4xl mb-3">{option.icon}</div>
-                    <h3 className="font-semibold text-lg mb-2">{option.label}</h3>
-                    <p className="text-sm text-muted-foreground">{option.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
+            <div className="space-y-8 max-w-2xl mx-auto">
+              {/* Tipo de propriedade */}
+              <div>
+                <h3 className="text-lg font-semibold text-secondary mb-4">Tipo de residência:</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { id: "apartamento", label: "Apartamento", icon: "🏢" },
+                    { id: "casa", label: "Casa", icon: "🏠" },
+                    { id: "sobrado", label: "Sobrado", icon: "🏘️" },
+                    { id: "chacara", label: "Chácara/Sítio", icon: "🌳" }
+                  ].map((option) => (
+                    <button
+                      key={option.id}
+                      onClick={() => setFormData(prev => ({ ...prev, propertyType: option.id }))}
+                      className={`p-4 rounded-lg border-2 transition-all ${
+                        formData.propertyType === option.id ? 'border-primary bg-primary/5' : 'border-border'
+                      }`}
+                    >
+                      <div className="text-2xl mb-2">{option.icon}</div>
+                      <div className="text-sm font-medium">{option.label}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Valor da propriedade */}
+              {formData.propertyType && (
+                <div>
+                  <h3 className="text-lg font-semibold text-secondary mb-4">Valor estimado:</h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { id: "ate-300k", label: "Até R$ 300mil", icon: "💰" },
+                      { id: "300-600k", label: "R$ 300k - 600k", icon: "💎" },
+                      { id: "600k-1m", label: "R$ 600k - 1M", icon: "👑" },
+                      { id: "acima-1m", label: "Acima R$ 1M", icon: "🏆" }
+                    ].map((option) => (
+                      <button
+                        key={option.id}
+                        onClick={() => setFormData(prev => ({ ...prev, propertyValue: option.id }))}
+                        className={`p-4 rounded-lg border-2 transition-all ${
+                          formData.propertyValue === option.id ? 'border-primary bg-primary/5' : 'border-border'
+                        }`}
+                      >
+                        <div className="text-2xl mb-2">{option.icon}</div>
+                        <div className="text-sm font-medium">{option.label}</div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {formData.propertyType && formData.propertyValue && (
+                <Button onClick={handleNext} className="w-full">
+                  Continuar
+                </Button>
+              )}
             </div>
           </div>
         );
@@ -268,7 +303,7 @@ Gostaria de receber uma cotação personalizada!
           <div className="space-y-6 text-center">
             <div className="mb-8">
               <Users className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-secondary mb-2">Voc�� trabalha em casa?</h2>
+              <h2 className="text-3xl font-bold text-secondary mb-2">Você trabalha em casa?</h2>
               <p className="text-muted-foreground">Isso influencia no tipo de cobertura que você precisa</p>
             </div>
 
