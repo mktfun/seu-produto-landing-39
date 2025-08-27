@@ -50,37 +50,53 @@ export interface Lead {
 export async function saveLead(leadData: Omit<Lead, 'id' | 'created_at'>): Promise<{ success: boolean; data?: Lead; error?: string }> {
   try {
     console.log('💾 Salvando lead no Supabase:', leadData.name)
-    
-    const { data, error } = await supabase
+
+    // Adicionar timeout manual para operação Supabase
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('Timeout: Operação Supabase demorou mais que 15 segundos')), 15000);
+    });
+
+    const supabasePromise = supabase
       .from('leads')
       .insert([{
         ...leadData,
-        user_agent: navigator.userAgent,
+        user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : 'Unknown',
         // IP será capturado pelo servidor se possível
       }])
       .select()
-      .single()
+      .single();
+
+    const { data, error } = await Promise.race([supabasePromise, timeoutPromise]) as any;
 
     if (error) {
       console.error('❌ Erro ao salvar lead:', error)
-      return { 
-        success: false, 
-        error: `Erro ao salvar: ${error.message}` 
+      return {
+        success: false,
+        error: `Erro ao salvar: ${error.message}`
       }
     }
 
     console.log('✅ Lead salvo com sucesso no Supabase! ID:', data.id)
     console.log('📧 Email será enviado automaticamente pelo trigger do banco')
-    
-    return { 
-      success: true, 
-      data 
+
+    return {
+      success: true,
+      data
     }
   } catch (error: any) {
     console.error('❌ Erro inesperado ao salvar lead:', error)
-    return { 
-      success: false, 
-      error: `Erro inesperado: ${error.message}` 
+
+    // Se for timeout, retorna erro específico
+    if (error.message.includes('Timeout')) {
+      return {
+        success: false,
+        error: 'Timeout: Conexão lenta com banco de dados'
+      }
+    }
+
+    return {
+      success: false,
+      error: `Erro inesperado: ${error.message}`
     }
   }
 }
