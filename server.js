@@ -292,10 +292,10 @@ const createEmailHTML = (data) => {
 
         <div class="contact-info">
           <h3>Proximos Passos</h3>
-          <p><strong>Cliente quer receber cotação personalizada!</strong></p>
-          <p style="margin: 15px 0;">Entre em contato o mais rápido possível:</p>
-          <div class="contact-item">📱 WhatsApp: ${data.phone}</div>
-          <div class="contact-item">👤 Nome: ${data.name}</div>
+          <p><strong>Cliente quer receber cotacao personalizada!</strong></p>
+          <p style="margin: 15px 0;">Entre em contato o mais rapido possivel:</p>
+          <div class="contact-item">WhatsApp: ${data.phone}</div>
+          <div class="contact-item">Nome: ${data.name}</div>
 
           <div style="margin-top: 20px; text-align: center;">
             <a href="https://wa.me/55${(data.phone || '').replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Oi ${data.name || 'Cliente'}!
