@@ -162,18 +162,43 @@ const Onboard = () => {
       let supabaseSuccess = false;
       let emailSuccess = false;
 
-      // 1. Save to Supabase
-      console.log('💾 Salvando no Supabase...');
+      // 1. Save to Supabase via MCP
+      console.log('💾 Salvando no Supabase via MCP...');
       try {
-        const supabaseResult = await saveLead(leadData);
-        if (supabaseResult.success) {
-          console.log('✅ Lead salvo no Supabase! ID:', supabaseResult.data?.id);
+        // Use MCP Supabase integration directly
+        const response = await fetch('/api/supabase-save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ leadData })
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log('✅ Lead salvo no Supabase via MCP! ID:', result.id);
           supabaseSuccess = true;
         } else {
-          console.error('❌ Falha ao salvar no Supabase:', supabaseResult.error);
+          console.error('❌ Falha ao salvar no Supabase via MCP');
+          // Fallback to direct Supabase client
+          const supabaseResult = await saveLead(leadData);
+          if (supabaseResult.success) {
+            console.log('✅ Lead salvo no Supabase (fallback)! ID:', supabaseResult.data?.id);
+            supabaseSuccess = true;
+          } else {
+            console.error('❌ Fallback Supabase também falhou:', supabaseResult.error);
+          }
         }
       } catch (error: any) {
         console.error('❌ Erro no Supabase:', error.message);
+        // Try fallback
+        try {
+          const supabaseResult = await saveLead(leadData);
+          if (supabaseResult.success) {
+            console.log('✅ Lead salvo no Supabase (fallback)!');
+            supabaseSuccess = true;
+          }
+        } catch (fallbackError: any) {
+          console.error('❌ Fallback também falhou:', fallbackError.message);
+        }
       }
 
       // 2. Send email via our API
@@ -305,7 +330,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
                   { id: "uber", label: "QR Code no Uber", icon: "🚗" },
                   { id: "google", label: "Google/Busca", icon: "🔍" },
                   { id: "indicacao", label: "Indicação", icon: "👥" },
-                  { id: "social", label: "Redes Sociais", icon: "���" },
+                  { id: "social", label: "Redes Sociais", icon: "📱" },
                   { id: "outros", label: "Outros", icon: "💬" }
                 ].map((option) => (
                   <button
