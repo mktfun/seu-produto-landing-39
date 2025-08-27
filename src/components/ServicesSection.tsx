@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Wrench, Zap, Shield, Phone, Leaf, Smartphone, Bike } from "lucide-react";
+import { memo } from "react";
 
 const services = [
   {
