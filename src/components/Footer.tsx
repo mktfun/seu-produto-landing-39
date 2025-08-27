@@ -1,5 +1,7 @@
 import { Separator } from "@/components/ui/separator";
-const Footer = () => {
+import { memo } from "react";
+
+const Footer = memo(() => {
   return <footer className="bg-secondary text-white py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
@@ -62,5 +64,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>;
-};
+});
+
+Footer.displayName = 'Footer';
 export default Footer;
