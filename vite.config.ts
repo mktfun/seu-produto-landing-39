@@ -332,9 +332,19 @@ function apiServerPlugin() {
           console.log('📧 Sending email for:', formData.name);
           console.log('📋 Form data received:', formData);
 
-          // Prepare email data with timestamp
+          // Prepare email data with safe defaults
           const emailData = {
-            ...formData,
+            name: formData.name || 'Não informado',
+            phone: formData.phone || 'Não informado',
+            howDidYouHear: formData.how_did_you_hear || formData.howDidYouHear || 'Não informado',
+            propertyType: formData.property_type || formData.propertyType || 'Não informado',
+            propertyValue: formData.property_value || formData.propertyValue || 'Não informado',
+            mainPriority: formData.main_priority || formData.mainPriority || 'Não informado',
+            budgetRange: formData.budget_range || formData.budgetRange || 'Não informado',
+            recommendedPlan: formData.recommended_plan || formData.recommendedPlan || 'Não informado',
+            utm_source: formData.utm_source || '',
+            utm_medium: formData.utm_medium || '',
+            utm_campaign: formData.utm_campaign || '',
             timestamp: new Date().toISOString(),
             userAgent: req.headers['user-agent'] || 'Unknown'
           };
