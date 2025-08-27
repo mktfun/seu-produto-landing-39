@@ -26,12 +26,12 @@ const Hero = () => {
             </div>
             
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight text-white">
-              Zurich<br />
-              <span className="text-white/90">Residência</span>
+              Seguro residencial<br />
+              <span className="text-white/90">em 3 minutos</span>
             </h1>
-            
+
             <p className="text-lg sm:text-xl lg:text-2xl text-white/90 max-w-lg">
-              Serviços de Assistência 24h e Sustentáveis
+              Proteção completa a partir de R$ 2,90/dia
             </p>
             
             <p className="text-base sm:text-lg text-white/80 max-w-xl">
