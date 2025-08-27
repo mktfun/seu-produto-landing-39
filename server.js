@@ -316,7 +316,7 @@ Quando podemos conversar? Tenho algumas perguntas rapidas para personalizar aind
 
           <div style="margin-top: 15px; padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px;">
             <p style="margin: 0; font-size: 14px; color: #856404;">
-              📧 <strong>IMPORTANTE:</strong> Use o botão acima para contato direto via WhatsApp!
+              <strong>IMPORTANTE:</strong> Use o botao acima para contato direto via WhatsApp!
             </p>
           </div>
         </div>
@@ -352,7 +352,7 @@ app.post('/api/send-email', async (req, res) => {
       userAgent: req.headers['user-agent'] || 'Unknown'
     };
 
-    console.log('📧 Email data prepared:', JSON.stringify(emailData, null, 2));
+    console.log('�� Email data prepared:', JSON.stringify(emailData, null, 2));
 
     // Send email via Resend
     const { data, error } = await resend.emails.send({
