@@ -126,20 +126,28 @@ const Onboard = () => {
     return true;
   };
 
-  const handleSubmit = async () => {
+  // Auto-send email when reaching step 5
+  useEffect(() => {
+    if (currentStep === 5 && !emailSent && !isSubmitting) {
+      sendEmailAutomatically();
+    }
+  }, [currentStep, emailSent, isSubmitting]);
+
+  const sendEmailAutomatically = async () => {
     // Validate form before submission
     if (!validateForm()) {
       return;
     }
 
     setIsSubmitting(true);
-    console.log('🚀 Iniciando submissão com dados:', formData);
+    setEmailSent(true);
+    console.log('🚀 Enviando email automaticamente com dados:', formData);
 
     try {
       const recommendation = calculateRecommendation();
       console.log('🎯 Recomendação calculada:', recommendation);
 
-      // Prepare data for both Supabase and email
+      // Prepare data for email
       const leadData: Omit<Lead, 'id' | 'created_at'> = {
         name: formData.name,
         phone: formData.phone,
@@ -155,23 +163,11 @@ const Onboard = () => {
         status: 'new'
       };
 
-      console.log('💾 Dados para salvar:', leadData);
-
       // Update form data with recommendation
       setFormData(prev => ({ ...prev, recommendedPlan: recommendation }));
 
-      let supabaseSuccess = false;
-      let emailSuccess = false;
-
-      // 1. Skip Supabase for now (use only email + WhatsApp)
-      console.log('⚠️ Pulando Supabase temporariamente - usando apenas email + WhatsApp');
-      console.log('💾 Dados que seriam salvos:', leadData);
-
-      // For now, just log the data and mark as "successful"
-      supabaseSuccess = true; // Temporary - so email still gets sent
-
-      // 2. Send email via our API
-      console.log('📧 Enviando email via API...');
+      // Send email via our API
+      console.log('📧 Enviando email automaticamente...');
       try {
         const emailResponse = await fetch('/api/send-email', {
           method: 'POST',
@@ -180,60 +176,36 @@ const Onboard = () => {
         });
 
         if (emailResponse.ok) {
-          console.log('✅ Email enviado com sucesso!');
-          emailSuccess = true;
+          console.log('✅ Email enviado automaticamente com sucesso!');
+          toast({
+            title: "✅ Cotação enviada!",
+            description: "Email enviado para nossa equipe automaticamente.",
+          });
         } else {
-          console.error('❌ Falha no envio do email - Status:', emailResponse.status);
-          console.error('❌ Response status text:', emailResponse.statusText);
+          console.error('❌ Falha no envio automático do email - Status:', emailResponse.status);
+          toast({
+            title: "⚠️ Problema no envio",
+            description: "Houve um problema no envio automático do email.",
+            variant: "destructive",
+          });
         }
       } catch (error: any) {
-        console.error('❌ Erro no email:', error.message);
-      }
-
-      // Show status to user with toast notifications
-      if (supabaseSuccess && emailSuccess) {
-        console.log('🎉 Tudo funcionou! Lead salvo e email enviado.');
+        console.error('❌ Erro no envio automático:', error.message);
         toast({
-          title: "✅ Cotação enviada com sucesso!",
-          description: "Dados salvos e email enviado para nossa equipe.",
-        });
-      } else if (supabaseSuccess) {
-        console.log('⚠️ Lead salvo mas email falhou');
-        toast({
-          title: "⚠️ Parcialmente enviado",
-          description: "Dados salvos, mas houve problema no envio do email.",
-          variant: "destructive",
-        });
-      } else if (emailSuccess) {
-        console.log('⚠️ Email enviado mas Supabase falhou');
-        toast({
-          title: "⚠️ Parcialmente enviado",
-          description: "Email enviado, mas erro ao salvar dados.",
-          variant: "destructive",
-        });
-      } else {
-        console.error('❌ Ambos falharam - mas continuando com WhatsApp');
-        toast({
-          title: "❌ Erro no envio",
-          description: "Problemas técnicos detectados. Continuando via WhatsApp...",
+          title: "❌ Erro no envio automático",
+          description: "Problemas técnicos no envio automático.",
           variant: "destructive",
         });
       }
 
     } catch (error) {
-      console.error('❌ Erro geral:', error);
-      toast({
-        title: "❌ Erro inesperado",
-        description: "Algo deu errado. Tentando via WhatsApp...",
-        variant: "destructive",
-      });
+      console.error('❌ Erro geral no envio automático:', error);
+    } finally {
+      setIsSubmitting(false);
     }
+  };
 
-    // Small delay to show toast message
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
-    setIsSubmitting(false);
-
+  const handleSubmit = async () => {
     // Get the final recommendation (use updated form data if available)
     const finalRecommendation = formData.recommendedPlan || calculateRecommendation();
 
@@ -342,7 +314,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
                 <h3 className="text-lg font-semibold text-secondary mb-4">Tipo de residência:</h3>
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    { id: "apartamento", label: "Apartamento", icon: "🏢" },
+                    { id: "apartamento", label: "Apartamento", icon: "����" },
                     { id: "casa", label: "Casa", icon: "🏠" },
                     { id: "sobrado", label: "Sobrado", icon: "🏘️" },
                     { id: "chacara", label: "Chácara/Sítio", icon: "🌳" }
