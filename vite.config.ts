@@ -329,7 +329,7 @@ function apiServerPlugin() {
           // Send email via Resend
           const { data, error } = await resend.emails.send({
             from: 'Sistema Cotação <noreply@resend.dev>',
-            to: ['mktfunil1@gmail.com'], // Temporário - Resend em modo teste
+            to: ['contato@jjamorimseguros.com.br'],
             subject: `🏠 Nova Cotação - ${emailData.name} - Plano ${emailData.recommendedPlan}`,
             html: createEmailHTML(emailData),
             text: `Nova cotação de ${emailData.name} para o plano ${emailData.recommendedPlan}. WhatsApp: ${emailData.phone}`
