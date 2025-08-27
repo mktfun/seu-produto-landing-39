@@ -2,7 +2,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, Star, Shield, Home, Crown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import PlansComparisonTable from "./PlansComparisonTable";
+import { lazy, Suspense } from "react";
+
+const PlansComparisonTable = lazy(() => import("./PlansComparisonTable"));
 
 const plans = [
   {
