@@ -352,38 +352,79 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
         );
 
       case 5:
+        const recommendation = calculateRecommendation();
+        const planDetails = {
+          "Essencial": {
+            icon: "💚",
+            color: "green",
+            description: "Proteção básica com excelente custo-benefício",
+            features: ["Emergências essenciais", "Atendimento 24h", "Serviços básicos", "Proteção básica"]
+          },
+          "Completo": {
+            icon: "💙",
+            color: "blue",
+            description: "Cobertura completa para o dia a dia",
+            features: ["Todas as emergências", "📱 Proteção para eletrônicos", "🚲 Assistência para bikes", "Hospedagem", "Assistência para pets"]
+          },
+          "Completo+": {
+            icon: "💜",
+            color: "purple",
+            description: "Máxima proteção com manutenção preventiva",
+            features: ["Tudo do Completo", "📱 Eletrônicos premium", "🚲 Assistência completa bikes", "Manutenção preventiva", "Atendimento VIP"]
+          }
+        };
+
+        const plan = planDetails[recommendation as keyof typeof planDetails];
+
         return (
           <div className="space-y-6 text-center">
             <div className="mb-8">
-              <Smartphone className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-secondary mb-2">Você tem eletrônicos de valor?</h2>
-              <p className="text-muted-foreground">📱 Smartphones, notebooks, TVs, tablets, etc.</p>
-              <div className="bg-gradient-to-r from-slate-50 to-gray-50 rounded-lg p-4 mt-4 border border-gray-200">
-                <p className="text-sm font-medium text-secondary">✨ Proteção especial disponível para dispositivos eletrônicos</p>
+              <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <CheckCircle className="w-12 h-12 text-white" />
               </div>
+              <h2 className="text-3xl font-bold text-secondary mb-2">Perfeito, {formData.name}!</h2>
+              <p className="text-muted-foreground">Baseado no seu perfil, encontramos o plano ideal</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
-              {[
-                { id: "sim-muito", label: "Sim, muitos", icon: "📱💻📺", description: "iPhone, notebook, smart TV..." },
-                { id: "sim-normal", label: "Alguns", icon: "📱💻", description: "Smartphone e um notebook" },
-                { id: "nao", label: "Poucos/Antigos", icon: "📺", description: "Apenas TV e básicos" }
-              ].map((option) => (
-                <Card 
-                  key={option.id}
-                  className={`cursor-pointer transition-all hover:scale-105 border-2 hover:border-primary ${
-                    formData.hasElectronics === option.id ? 'border-primary bg-primary/5' : 'border-border'
-                  }`}
-                  onClick={() => selectOption('hasElectronics', option.id)}
+            <Card className="border-4 border-primary bg-gradient-to-br from-primary/10 via-white to-primary/5 max-w-md mx-auto">
+              <CardContent className="p-8 text-center">
+                <div className="text-6xl mb-4">{plan.icon}</div>
+                <h3 className="text-3xl font-bold text-primary mb-2">Plano {recommendation}</h3>
+                <p className="text-lg text-muted-foreground mb-6">{plan.description}</p>
+
+                <div className="space-y-2 mb-6">
+                  {plan.features.map((feature, index) => (
+                    <div key={index} className="flex items-center justify-center space-x-2">
+                      <CheckCircle className="w-4 h-4 text-green-500" />
+                      <span className="text-sm">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {(formData.mainPriority === "eletronicos" || formData.mainPriority === "bikes") && (
+                  <div className="bg-gradient-to-r from-slate-50 to-gray-50 rounded-lg p-4 mb-6 border border-gray-200">
+                    <p className="text-sm font-semibold text-secondary mb-2">🎯 Perfeito para seu perfil:</p>
+                    <div className="space-y-1 text-xs text-muted-foreground">
+                      {formData.mainPriority === "eletronicos" && (
+                        <div>📱 Proteção especial para seus dispositivos eletrônicos</div>
+                      )}
+                      {formData.mainPriority === "bikes" && (
+                        <div>🚲 Assistência completa para ciclistas</div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                <Button
+                  onClick={handleSubmit}
+                  className="w-full bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white font-bold py-3"
+                  size="lg"
                 >
-                  <CardContent className="p-6 text-center">
-                    <div className="text-3xl mb-3">{option.icon}</div>
-                    <h3 className="font-semibold text-lg mb-2">{option.label}</h3>
-                    <p className="text-sm text-muted-foreground">{option.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                  <Phone className="w-5 h-5 mr-2" />
+                  Solicitar Cotação no WhatsApp
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         );
 
