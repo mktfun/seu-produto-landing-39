@@ -1,8 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 
-// Configuração do Supabase
-const supabaseUrl = 'https://nmmthliwtdcnsqfpjceu.supabase.co'
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5tbXRobGl3dGRjbnNxZnBqY2V1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ3NDUyNTQsImV4cCI6MjA0MDMyMTI1NH0.Tr6yZF2EYGqHDNltwwC_fDrJgmf49iYhJYshqTI7EjI'
+// Configuração do Supabase (será substituída quando conectar via MCP)
+const supabaseUrl = process.env.SUPABASE_URL || 'https://placeholder.supabase.co'
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || 'placeholder-key'
 
 // Criar cliente Supabase
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
