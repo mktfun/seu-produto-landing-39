@@ -11,17 +11,30 @@ const Onboard = () => {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
+    howDidYouHear: "",
     propertyType: "",
     propertyValue: "",
-    workFromHome: "",
-    hasElectronics: "",
-    hasBike: "",
     mainPriority: "",
     budgetRange: "",
-    recommendedPlan: ""
+    recommendedPlan: "",
+    utm_source: "",
+    utm_medium: "",
+    utm_campaign: ""
   });
 
-  const totalSteps = 8;
+  const totalSteps = 5;
+
+  // Capture UTM parameters on component mount
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const utmData = {
+      utm_source: urlParams.get('utm_source') || '',
+      utm_medium: urlParams.get('utm_medium') || '',
+      utm_campaign: urlParams.get('utm_campaign') || ''
+    };
+
+    setFormData(prev => ({ ...prev, ...utmData }));
+  }, []);
 
   const handleNext = () => {
     if (currentStep < totalSteps) {
