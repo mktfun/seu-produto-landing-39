@@ -11,6 +11,7 @@ const Onboard = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -605,7 +606,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
                 { id: "emergencias", label: "Cobertura emergencial", icon: "🚨", description: "Atendimento 24h para emergências" },
                 { id: "eletronicos", label: "Proteção eletr��nicos", icon: "📱", description: "Smartphones, notebooks, TVs" },
                 { id: "manutencao", label: "Manutenção preventiva", icon: "🔧", description: "Cuidado contínuo da casa" },
-                { id: "completo", label: "Proteção completa", icon: "��️", description: "Máxima tranquilidade" }
+                { id: "completo", label: "Proteção completa", icon: "🛡️", description: "Máxima tranquilidade" }
               ].map((option) => (
                 <Card 
                   key={option.id}
