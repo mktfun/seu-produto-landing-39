@@ -244,3 +244,21 @@ header * {
 header {
   z-index: 9999;
 }
+
+/* Remove any unwanted spacing on specific pages */
+.no-header-page {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+@media (max-width: 640px) {
+  /* Ensure no top spacing on mobile for pages without header */
+  .no-header-page {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .no-header-page .container {
+    padding-top: 0.5rem !important;
+  }
+}
