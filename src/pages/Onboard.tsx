@@ -143,7 +143,7 @@ Gostaria de receber uma cotação personalizada!
             <div className="mb-8">
               <Home className="w-16 h-16 text-primary mx-auto mb-4" />
               <h2 className="text-3xl font-bold text-secondary mb-2">Vamos começar!</h2>
-              <p className="text-muted-foreground">Primeiro, como podemos te chamar?</p>
+              <p className="text-muted-foreground">Seus dados para contato e como nos conheceu</p>
             </div>
 
             <div className="space-y-4 max-w-md mx-auto">
@@ -159,10 +159,35 @@ Gostaria de receber uma cotação personalizada!
                 placeholder="Seu WhatsApp"
                 className="text-center"
               />
-              <Button 
+
+              <div className="grid grid-cols-1 gap-3 mt-6">
+                <p className="text-sm font-medium text-secondary mb-2">Como nos conheceu?</p>
+                {[
+                  { id: "uber", label: "QR Code no Uber", icon: "🚗" },
+                  { id: "google", label: "Google/Busca", icon: "🔍" },
+                  { id: "indicacao", label: "Indicação", icon: "👥" },
+                  { id: "social", label: "Redes Sociais", icon: "📱" },
+                  { id: "outros", label: "Outros", icon: "💬" }
+                ].map((option) => (
+                  <button
+                    key={option.id}
+                    onClick={() => setFormData(prev => ({ ...prev, howDidYouHear: option.id }))}
+                    className={`p-3 rounded-lg border-2 transition-all text-left ${
+                      formData.howDidYouHear === option.id
+                        ? 'border-primary bg-primary/5'
+                        : 'border-border hover:border-primary/50'
+                    }`}
+                  >
+                    <span className="text-lg mr-2">{option.icon}</span>
+                    <span className="text-sm font-medium">{option.label}</span>
+                  </button>
+                ))}
+              </div>
+
+              <Button
                 onClick={handleNext}
-                disabled={!formData.name || !formData.phone}
-                className="w-full"
+                disabled={!formData.name || !formData.phone || !formData.howDidYouHear}
+                className="w-full mt-6"
               >
                 Continuar
               </Button>
@@ -243,7 +268,7 @@ Gostaria de receber uma cotação personalizada!
           <div className="space-y-6 text-center">
             <div className="mb-8">
               <Users className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-secondary mb-2">Você trabalha em casa?</h2>
+              <h2 className="text-3xl font-bold text-secondary mb-2">Voc�� trabalha em casa?</h2>
               <p className="text-muted-foreground">Isso influencia no tipo de cobertura que você precisa</p>
             </div>
 
