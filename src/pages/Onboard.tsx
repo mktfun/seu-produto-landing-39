@@ -503,8 +503,8 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
         );
 
       case 8:
-        const recommendation = calculateRecommendation();
-        const planDetails = {
+        const finalRecommendation = calculateRecommendation();
+        const finalPlanDetails = {
           "Essencial": {
             icon: "💚",
             color: "green",
@@ -525,7 +525,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
           }
         };
 
-        const plan = planDetails[recommendation as keyof typeof planDetails];
+        const finalPlan = finalPlanDetails[finalRecommendation as keyof typeof finalPlanDetails];
 
         return (
           <div className="space-y-6 text-center">
