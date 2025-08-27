@@ -257,7 +257,7 @@ const createEmailHTML = (data) => {
 
         <div class="recommendation">
           <h3>🎯 Recomendação do Sistema</h3>
-          <div class="plan-name">PLANO ${data.recommendedPlan.toUpperCase()}</div>
+          <div class="plan-name">PLANO ${(data.recommendedPlan || 'NÃO INFORMADO').toUpperCase()}</div>
           <p>Plano sugerido baseado no perfil do cliente</p>
         </div>
 
