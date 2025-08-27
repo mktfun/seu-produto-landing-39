@@ -57,6 +57,8 @@ export async function saveLead(leadData: Omit<Lead, 'id' | 'created_at'>): Promi
 
     console.log('📤 Enviando para Supabase:', insertData);
 
+    console.log('📤 Enviando dados para Supabase...');
+
     const { data, error } = await supabase
       .from('leads')
       .insert([insertData])
@@ -74,12 +76,12 @@ export async function saveLead(leadData: Omit<Lead, 'id' | 'created_at'>): Promi
 
       return {
         success: false,
-        error: `Erro ao salvar: ${error.message} (Código: ${error.code})`
+        error: `Erro ao salvar: ${error.message} ${error.code ? `(Código: ${error.code})` : ''}`
       };
     }
 
     console.log('✅ Lead salvo com sucesso no Supabase! ID:', data.id);
-    console.log('📧 Email será enviado automaticamente pelo trigger do banco');
+    console.log('📧 Dados salvos na tabela leads');
 
     return {
       success: true,
