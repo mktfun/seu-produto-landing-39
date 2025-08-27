@@ -114,25 +114,37 @@ const Onboard = () => {
     const recommendation = calculateRecommendation();
     setFormData(prev => ({ ...prev, recommendedPlan: recommendation }));
 
-    // Prepare data for email
-    const emailFormData = {
-      ...formData,
-      recommendedPlan: recommendation
+    // Prepare data for Supabase
+    const leadData: Omit<Lead, 'id' | 'created_at'> = {
+      name: formData.name,
+      phone: formData.phone,
+      how_did_you_hear: formData.howDidYouHear,
+      property_type: formData.propertyType,
+      property_value: formData.propertyValue,
+      main_priority: formData.mainPriority,
+      budget_range: formData.budgetRange,
+      recommended_plan: recommendation,
+      utm_source: formData.utm_source || undefined,
+      utm_medium: formData.utm_medium || undefined,
+      utm_campaign: formData.utm_campaign || undefined,
+      status: 'new'
     };
 
-    // Send email notification
+    // Save to Supabase (email will be sent automatically by database trigger)
     try {
-      console.log('📧 Enviando email para contato@jjamorimseguros.com.br...');
-      const emailSent = await sendEmailViaResend(emailFormData);
+      console.log('💾 Salvando lead no Supabase...');
+      const result = await saveLead(leadData);
 
-      if (emailSent) {
-        console.log('✅ Email enviado com sucesso!');
-        // Você pode adicionar uma notificação de sucesso aqui
+      if (result.success) {
+        console.log('✅ Lead salvo com sucesso! ID:', result.data?.id);
+        console.log('📧 Email sendo enviado automaticamente pelo banco de dados...');
       } else {
-        console.log('⚠️ Falha no envio do email, mas continuando...');
+        console.log('⚠️ Falha ao salvar lead:', result.error);
+        // Continua mesmo com erro para não bloquear o usuário
       }
     } catch (error) {
-      console.error('❌ Erro no envio do email:', error);
+      console.error('❌ Erro ao salvar lead:', error);
+      // Continua mesmo com erro para não bloquear o usuário
     } finally {
       setIsSubmitting(false);
     }
@@ -469,7 +481,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
               {[
-                { id: "sim-valiosa", label: "Sim, de valor", icon: "🚴��♂️⚡", description: "Bike elétrica ou esportiva" },
+                { id: "sim-valiosa", label: "Sim, de valor", icon: "🚴‍♂️⚡", description: "Bike elétrica ou esportiva" },
                 { id: "sim-normal", label: "Sim, comum", icon: "🚲", description: "Bike tradicional" },
                 { id: "nao", label: "Não tenho", icon: "🚶‍♀️", description: "Não uso bicicleta" }
               ].map((option) => (
