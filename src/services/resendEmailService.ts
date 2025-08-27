@@ -306,45 +306,41 @@ const createEmailHTML = (data: EmailData): string => {
 };
 
 export const sendEmailViaResend = async (formData: FormData): Promise<boolean> => {
-  const emailData: EmailData = {
-    ...formData,
-    timestamp: new Date().toISOString(),
-    userAgent: navigator.userAgent
-  };
-
   try {
-    // Usar fetch direto para enviar via Resend API
-    const response = await fetch('https://api.resend.com/emails', {
+    // Determinar a URL base da API
+    const apiBaseUrl = import.meta.env.DEV
+      ? 'http://localhost:3001'
+      : window.location.origin;
+
+    console.log('📧 Usando API em:', `${apiBaseUrl}/api/send-email`);
+
+    // Enviar para nossa API local
+    const response = await fetch(`${apiBaseUrl}/api/send-email`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${import.meta.env.VITE_RESEND_API_KEY || 're_WFnSBZYn_FqZgRdF32rtcg3ZzuNN3Vo3W'}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Sistema Cotação <noreply@resend.dev>',
-        to: ['contato@jjamorimseguros.com.br'],
-        subject: `🏠 Nova Cotação - ${emailData.name} - Plano ${emailData.recommendedPlan}`,
-        html: createEmailHTML(emailData),
-        text: `Nova cotação de ${emailData.name} para o plano ${emailData.recommendedPlan}. WhatsApp: ${emailData.phone}`
+        formData
       })
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`Resend API error: ${response.status} - ${errorText}`);
+      throw new Error(`API error: ${response.status} - ${errorText}`);
     }
 
     const result = await response.json();
-    console.log('✅ Email sent successfully via Resend:', result);
+    console.log('✅ Email sent successfully via API:', result);
     return true;
   } catch (error) {
-    console.error('❌ Error sending email via Resend:', error);
-    
+    console.error('❌ Error sending email via API:', error);
+
     // Log the email content for debugging
     console.log('📧 Email content that would be sent:');
-    console.log('Subject:', `🏠 Nova Cotação - ${emailData.name} - Plano ${emailData.recommendedPlan}`);
+    console.log('Form data:', formData);
     console.log('To:', 'contato@jjamorimseguros.com.br');
-    
+
     return false;
   }
 };
