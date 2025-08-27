@@ -298,19 +298,19 @@ const createEmailHTML = (data) => {
           <div class="contact-item">👤 Nome: ${data.name}</div>
 
           <div style="margin-top: 20px; text-align: center;">
-            <a href="https://wa.me/55${(data.phone || '').replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Oi ${data.name || 'Cliente'}! 👋
+            <a href="https://wa.me/55${(data.phone || '').replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Oi ${data.name || 'Cliente'}!
 
-Aqui é da J.J. Amorim Seguros - Zurich. Recebi sua solicitação de cotação para seguro residencial.
+Aqui e da J.J. Amorim Seguros - Zurich. Recebi sua solicitacao de cotacao para seguro residencial.
 
-🏠 Vi que você tem interesse no plano *${data.recommended_plan || 'personalizado'}* para sua ${formatPropertyType(data.property_type || '') ? formatPropertyType(data.property_type).toLowerCase() : 'residência'}.
+Vi que voce tem interesse no plano *${data.recommended_plan || 'personalizado'}* para sua ${formatPropertyType(data.property_type || '') ? formatPropertyType(data.property_type).toLowerCase() : 'residencia'}.
 
-Vou preparar uma proposta exclusiva para você!
+Vou preparar uma proposta exclusiva para voce!
 
-Quando podemos conversar? Tenho algumas perguntas rápidas para personalizar ainda mais sua cotação.
+Quando podemos conversar? Tenho algumas perguntas rapidas para personalizar ainda mais sua cotacao.
 
-*Zurich - A segurança que você confia* 🛡️`)}"
+*Zurich - A seguranca que voce confia*`)}"
                style="display: inline-block; background: #25D366; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; margin: 10px 0; box-shadow: 0 4px 8px rgba(37, 211, 102, 0.3);">
-              💬 Enviar WhatsApp para ${data.name || 'Cliente'}
+              Enviar WhatsApp para ${data.name || 'Cliente'}
             </a>
           </div>
 
