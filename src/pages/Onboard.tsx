@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowLeft, CheckCircle, Phone, Star, Crown, Shield, Home, Zap, Users, Heart, Wrench, DollarSign, Smartphone, Bike, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { saveLead, type Lead } from "@/lib/supabase";
+import { saveLead, testSupabaseConnection, type Lead } from "@/lib/supabase";
 import { toast } from "@/hooks/use-toast";
 
 const Onboard = () => {
@@ -482,7 +482,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
             icon: "💚",
             color: "green",
             description: "Proteção básica com excelente custo-benefício",
-            features: ["Emergências essenciais", "Atendimento 24h", "Serviços básicos", "Proteç��o básica"]
+            features: ["Emergências essenciais", "Atendimento 24h", "Serviços básicos", "Proteção básica"]
           },
           "Completo": {
             icon: "💙",
