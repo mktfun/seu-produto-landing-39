@@ -166,6 +166,19 @@ const Onboard = () => {
       // Update form data with recommendation
       setFormData(prev => ({ ...prev, recommendedPlan: recommendation }));
 
+      // Save to Supabase first
+      console.log('💾 Salvando lead no Supabase...');
+      try {
+        const supabaseResult = await saveLead(leadData);
+        if (supabaseResult.success) {
+          console.log('✅ Lead salvo no Supabase com ID:', supabaseResult.data?.id);
+        } else {
+          console.error('❌ Erro ao salvar no Supabase:', supabaseResult.error);
+        }
+      } catch (error: any) {
+        console.error('❌ Erro inesperado no Supabase:', error.message);
+      }
+
       // Send email via our API
       console.log('📧 Enviando email automaticamente...');
       try {
@@ -179,13 +192,13 @@ const Onboard = () => {
           console.log('✅ Email enviado automaticamente com sucesso!');
           toast({
             title: "✅ Cotação enviada!",
-            description: "Email enviado para nossa equipe automaticamente.",
+            description: "Dados salvos e email enviado automaticamente.",
           });
         } else {
           console.error('❌ Falha no envio automático do email - Status:', emailResponse.status);
           toast({
             title: "⚠️ Problema no envio",
-            description: "Houve um problema no envio automático do email.",
+            description: "Dados salvos, mas houve problema no envio do email.",
             variant: "destructive",
           });
         }
@@ -193,7 +206,7 @@ const Onboard = () => {
         console.error('❌ Erro no envio automático:', error.message);
         toast({
           title: "❌ Erro no envio automático",
-          description: "Problemas técnicos no envio automático.",
+          description: "Dados salvos, mas problemas técnicos no email.",
           variant: "destructive",
         });
       }
@@ -544,7 +557,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
             <div className="mb-8">
               <Bike className="w-16 h-16 text-primary mx-auto mb-4" />
               <h2 className="text-3xl font-bold text-secondary mb-2">Você tem bicicleta?</h2>
-              <p className="text-muted-foreground">🚴‍♀️ Bike comum, elétrica ou de alto valor</p>
+              <p className="text-muted-foreground">���‍♀️ Bike comum, elétrica ou de alto valor</p>
               <div className="bg-gradient-to-r from-slate-50 to-gray-50 rounded-lg p-4 mt-4 border border-gray-200">
                 <p className="text-sm font-medium text-secondary">🚲 Assistência completa e proteção para ciclistas</p>
               </div>
