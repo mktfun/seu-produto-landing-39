@@ -162,7 +162,14 @@ const Onboard = () => {
       let supabaseSuccess = false;
       let emailSuccess = false;
 
-      // 1. Save to Supabase first
+      // 1. Test Supabase connection first
+      console.log('🔗 Testando conexão com Supabase...');
+      const connectionTest = await testSupabaseConnection();
+      if (!connectionTest.success) {
+        console.error('❌ Falha na conexão com Supabase:', connectionTest.error);
+      }
+
+      // 2. Save to Supabase
       console.log('💾 Salvando no Supabase...');
       try {
         const supabaseResult = await saveLead(leadData);
