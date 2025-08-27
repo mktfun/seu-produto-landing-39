@@ -314,14 +314,63 @@
   }
 }
 
-/* Smooth transitions for all header elements */
+/* Smooth transitions for all header elements - GPU accelerated */
 header * {
   transition: all 0.5s ease-in-out;
+  will-change: transform, opacity;
 }
 
 /* Ensure proper z-index for floating header */
 header {
   z-index: 9999;
+}
+
+/* Performance optimizations */
+.animate-float,
+.animate-float-delay-05,
+.animate-float-delay-08,
+.animate-float-delay-12,
+.animate-float-delay-15,
+.animate-float-delay-21,
+.animate-float-delay-25,
+.animate-float-delay-28,
+.animate-float-delay-03,
+.animate-float-delay-1s,
+.animate-float-delay-2s {
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+.hover-lift {
+  will-change: transform;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-float-delay-05,
+  .animate-float-delay-08,
+  .animate-float-delay-12,
+  .animate-float-delay-15,
+  .animate-float-delay-21,
+  .animate-float-delay-25,
+  .animate-float-delay-28,
+  .animate-float-delay-03,
+  .animate-float-delay-1s,
+  .animate-float-delay-2s,
+  .animate-fade-in,
+  .animate-fade-in-delay-0,
+  .animate-fade-in-delay-1,
+  .animate-fade-in-delay-2,
+  .animate-fade-in-delay-3,
+  .animate-scale-in {
+    animation: none;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }
 
 /* Remove any unwanted spacing on specific pages */
