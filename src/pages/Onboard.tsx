@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowLeft, CheckCircle, Phone, Star, Crown, Shield, Home, Zap, Users, Heart, Wrench, DollarSign, Smartphone, Bike } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { sendEmailViaResend } from "@/services/resendEmailService";
 
 const Onboard = () => {
   const navigate = useNavigate();
