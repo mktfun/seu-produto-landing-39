@@ -86,14 +86,14 @@ const Hero = () => {
 
           <div className="relative animate-scale-in flex items-center justify-center mt-8 lg:mt-0">
             {/* Floating bubbles around the image - reduced for mobile */}
-            <div className="hidden sm:block absolute -top-8 -left-8 w-6 h-6 bg-white/40 rounded-full animate-float opacity-60" style={{animationDelay: '0.5s'}}></div>
-            <div className="hidden lg:block absolute -top-12 left-20 w-4 h-4 bg-white/30 rounded-full animate-float opacity-70" style={{animationDelay: '1.2s'}}></div>
-            <div className="hidden sm:block absolute top-8 -left-12 w-8 h-8 bg-white/35 rounded-full animate-float opacity-50" style={{animationDelay: '2.1s'}}></div>
-            <div className="hidden lg:block absolute top-32 -left-6 w-5 h-5 bg-white/45 rounded-full animate-float opacity-65" style={{animationDelay: '0.8s'}}></div>
+            <div className="hidden sm:block absolute -top-8 -left-8 w-6 h-6 bg-white/40 rounded-full animate-float-delay-05 opacity-60"></div>
+            <div className="hidden lg:block absolute -top-12 left-20 w-4 h-4 bg-white/30 rounded-full animate-float-delay-12 opacity-70"></div>
+            <div className="hidden sm:block absolute top-8 -left-12 w-8 h-8 bg-white/35 rounded-full animate-float-delay-21 opacity-50"></div>
+            <div className="hidden lg:block absolute top-32 -left-6 w-5 h-5 bg-white/45 rounded-full animate-float-delay-08 opacity-65"></div>
 
-            <div className="hidden sm:block absolute -top-6 -right-10 w-7 h-7 bg-white/40 rounded-full animate-float opacity-55" style={{animationDelay: '1.5s'}}></div>
-            <div className="hidden lg:block absolute top-12 -right-8 w-4 h-4 bg-white/35 rounded-full animate-float opacity-60" style={{animationDelay: '2.8s'}}></div>
-            <div className="hidden sm:block absolute top-40 -right-4 w-6 h-6 bg-white/30 rounded-full animate-float opacity-70" style={{animationDelay: '0.3s'}}></div>
+            <div className="hidden sm:block absolute -top-6 -right-10 w-7 h-7 bg-white/40 rounded-full animate-float-delay-15 opacity-55"></div>
+            <div className="hidden lg:block absolute top-12 -right-8 w-4 h-4 bg-white/35 rounded-full animate-float-delay-28 opacity-60"></div>
+            <div className="hidden sm:block absolute top-40 -right-4 w-6 h-6 bg-white/30 rounded-full animate-float-delay-03 opacity-70"></div>
 
             {/* Zurich logo background - responsive size */}
             <div className="absolute -top-4 sm:-top-6 lg:-top-10 -left-4 sm:-left-6 lg:-left-10 w-32 h-32 sm:w-48 sm:h-48 lg:w-80 lg:h-80 rounded-full opacity-20 z-0 border border-white/60">
