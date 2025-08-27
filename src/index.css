@@ -226,4 +226,21 @@
   .hero-gradient {
     min-height: 100svh; /* Use svh for better mobile viewport handling */
   }
+
+  /* Header island adjustments for mobile */
+  header.island-mobile {
+    left: 0.5rem !important;
+    right: 0.5rem !important;
+    top: 0.5rem !important;
+  }
+}
+
+/* Smooth transitions for all header elements */
+header * {
+  transition: all 0.5s ease-in-out;
+}
+
+/* Ensure proper z-index for floating header */
+header {
+  z-index: 9999;
 }
