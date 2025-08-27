@@ -4,19 +4,28 @@ export function setupGlobalErrorHandling() {
   window.addEventListener('error', (event) => {
     console.warn('Global error captured:', event.error);
     
-    // Ignorar erros específicos conhecidos
+    // Enhanced error filtering for FullStory and other known issues
     const ignoredErrors = [
       'IFrame evaluation timeout',
       'LaunchDarkly',
       'FullStory',
+      '_fs_namespace',
+      'FullStory namespace conflict',
       'Script error',
-      'Non-Error promise rejection captured'
+      'Non-Error promise rejection captured',
+      'chunk loading',
+      'ERR_BLOCKED_BY_CLIENT'
     ];
-    
-    const shouldIgnore = ignoredErrors.some(ignored => 
-      event.error?.message?.includes(ignored) || 
-      event.filename?.includes(ignored)
-    );
+
+    const shouldIgnore = ignoredErrors.some(ignored => {
+      const errorMessage = event.error?.message?.toLowerCase() || '';
+      const fileName = event.filename?.toLowerCase() || '';
+      const ignoredLower = ignored.toLowerCase();
+
+      return errorMessage.includes(ignoredLower) ||
+             fileName.includes(ignoredLower) ||
+             event.error?.stack?.toLowerCase().includes(ignoredLower);
+    });
     
     if (shouldIgnore) {
       event.preventDefault();
