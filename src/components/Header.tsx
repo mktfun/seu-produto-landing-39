@@ -36,7 +36,9 @@ const Header = () => {
                 isScrolled ? 'h-6' : 'h-8'
               }`}
             />
-            <div>
+            <div className={`transition-all duration-500 ease-in-out ${
+              isScrolled ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100'
+            }`}>
               <p className="text-sm font-medium text-secondary">Residência</p>
             </div>
           </div>
