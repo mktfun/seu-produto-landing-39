@@ -315,6 +315,7 @@ app.post('/api/send-email', async (req, res) => {
     }
 
     console.log('📧 Sending email for:', formData.name);
+    console.log('📋 Full formData received:', JSON.stringify(formData, null, 2));
 
     // Prepare email data with timestamp
     const emailData = {
@@ -322,6 +323,8 @@ app.post('/api/send-email', async (req, res) => {
       timestamp: new Date().toISOString(),
       userAgent: req.headers['user-agent'] || 'Unknown'
     };
+
+    console.log('📧 Email data prepared:', JSON.stringify(emailData, null, 2));
 
     // Send email via Resend
     const { data, error } = await resend.emails.send({
