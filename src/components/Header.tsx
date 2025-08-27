@@ -29,10 +29,12 @@ const Header = () => {
       }`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <img 
-              src="/lovable-uploads/286307c9-2b48-4465-8943-9d890a8bfd04.png" 
-              alt="Zurich Logo" 
-              className="h-8 w-auto"
+            <img
+              src="/lovable-uploads/286307c9-2b48-4465-8943-9d890a8bfd04.png"
+              alt="Zurich Logo"
+              className={`w-auto transition-all duration-500 ease-in-out ${
+                isScrolled ? 'h-6' : 'h-8'
+              }`}
             />
             <div>
               <p className="text-sm font-medium text-secondary">Residência</p>
