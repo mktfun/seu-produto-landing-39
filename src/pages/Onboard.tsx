@@ -471,7 +471,7 @@ Gostaria de receber uma cotação personalizada!
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 py-4 sm:py-8">
+    <div className="no-header-page min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 py-4 sm:py-8">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-8">
           <Button 
