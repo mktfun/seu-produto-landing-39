@@ -363,7 +363,7 @@ Gostaria de receber uma cotação personalizada!
               {[
                 { id: "preco", label: "Menor preço", icon: "💰", description: "Economia em primeiro lugar" },
                 { id: "emergencias", label: "Cobertura emergencial", icon: "🚨", description: "Atendimento 24h para emergências" },
-                { id: "eletronicos", label: "Proteção eletrônicos", icon: "📱", description: "Smartphones, notebooks, TVs" },
+                { id: "eletronicos", label: "Proteção eletr��nicos", icon: "📱", description: "Smartphones, notebooks, TVs" },
                 { id: "manutencao", label: "Manutenção preventiva", icon: "🔧", description: "Cuidado contínuo da casa" },
                 { id: "completo", label: "Proteção completa", icon: "🛡️", description: "Máxima tranquilidade" }
               ].map((option) => (
@@ -471,8 +471,8 @@ Gostaria de receber uma cotação personalizada!
   };
 
   return (
-    <div className="no-header-page min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 py-4 sm:py-8">
-      <div className="container mx-auto px-4 max-w-4xl">
+    <div className="no-header-page min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 pt-0 pb-4 sm:py-8">
+      <div className="container mx-auto px-4 max-w-4xl pt-4 sm:pt-0">
         <div className="mb-8">
           <Button 
             variant="ghost" 
