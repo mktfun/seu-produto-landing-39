@@ -86,7 +86,11 @@ const Header = () => {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t bg-white/95 backdrop-blur-sm">
+          <div className={`md:hidden border-t transition-all duration-300 ease-in-out ${
+            isScrolled
+              ? 'bg-white/98 backdrop-blur-lg mt-2 rounded-xl border border-gray-200/50'
+              : 'bg-white/95 backdrop-blur-sm'
+          }`}>
             <nav className="px-4 py-4 space-y-4">
               <a
                 href="#servicos"
