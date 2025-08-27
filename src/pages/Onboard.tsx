@@ -229,9 +229,17 @@ const Onboard = () => {
 
     } catch (error) {
       console.error('❌ Erro geral:', error);
-    } finally {
-      setIsSubmitting(false);
+      toast({
+        title: "❌ Erro inesperado",
+        description: "Algo deu errado. Tentando via WhatsApp...",
+        variant: "destructive",
+      });
     }
+
+    // Small delay to show toast message
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    setIsSubmitting(false);
 
     // Prepare WhatsApp message
     const message = `
@@ -246,7 +254,7 @@ const Onboard = () => {
 • Tipo: ${formData.propertyType}
 • Valor estimado: ${formData.propertyValue}
 • Prioridade principal: ${formData.mainPriority}
-• Or��amento mensal: ${formData.budgetRange}
+• Orçamento mensal: ${formData.budgetRange}
 
 🎯 *RECOMENDAÇÃO SISTEMA:*
 • Plano sugerido: *${recommendation}*
