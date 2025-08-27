@@ -216,12 +216,12 @@ const createEmailHTML = (data) => {
     <body>
       <div class="container">
         <div class="header">
-          <h1>🏠 NOVA COTAÇÃO RECEBIDA</h1>
-          <p class="subtitle">Zurich Seguro Residência</p>
+          <h1>NOVA COTACAO RECEBIDA</h1>
+          <p class="subtitle">Zurich Seguro Residencia</p>
         </div>
 
         <div class="section" style="background: #f8fafc;">
-          <h2 style="color: #059669;">👤 Dados do Cliente</h2>
+          <h2 style="color: #059669;">Dados do Cliente</h2>
           <div class="info-grid">
             <div class="info-item">
               <span class="info-label">Nome:</span>
@@ -239,7 +239,7 @@ const createEmailHTML = (data) => {
         </div>
 
         <div class="section" style="background: #fefbf3;">
-          <h2 style="color: #d97706;">🏡 Perfil da Residência</h2>
+          <h2 style="color: #d97706;">Perfil da Residencia</h2>
           <div class="info-grid">
             <div class="info-item">
               <span class="info-label">Tipo:</span>
@@ -254,21 +254,21 @@ const createEmailHTML = (data) => {
               <span class="info-value">${formatMainPriority(data.main_priority)}</span>
             </div>
             <div class="info-item">
-              <span class="info-label">Orçamento:</span>
+              <span class="info-label">Orcamento:</span>
               <span class="info-value">${formatBudgetRange(data.budget_range)}</span>
             </div>
           </div>
         </div>
 
         <div class="recommendation">
-          <h3>🎯 Recomendação do Sistema</h3>
-          <div class="plan-name">PLANO ${(data.recommended_plan || 'NÃO INFORMADO').toUpperCase()}</div>
+          <h3>Recomendacao do Sistema</h3>
+          <div class="plan-name">PLANO ${(data.recommended_plan || 'NAO INFORMADO').toUpperCase()}</div>
           <p>Plano sugerido baseado no perfil do cliente</p>
         </div>
 
         ${data.utm_source ? `
         <div class="utm-info">
-          <h4>📊 Origem do Lead</h4>
+          <h4>Origem do Lead</h4>
           <div class="info-grid">
             <div class="info-item">
               <span class="info-label">Fonte:</span>
@@ -291,7 +291,7 @@ const createEmailHTML = (data) => {
         ` : ''}
 
         <div class="contact-info">
-          <h3>🚀 Próximos Passos</h3>
+          <h3>Proximos Passos</h3>
           <p><strong>Cliente quer receber cotação personalizada!</strong></p>
           <p style="margin: 15px 0;">Entre em contato o mais rápido possível:</p>
           <div class="contact-item">📱 WhatsApp: ${data.phone}</div>
