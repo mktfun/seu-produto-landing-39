@@ -36,21 +36,41 @@ export function setupGlobalErrorHandling() {
     }
   });
 
-  // Configurar console personalizado para reduzir spam
+  // Enhanced console filtering for FullStory and other known issues
   const originalConsoleError = console.error;
+  const originalConsoleWarn = console.warn;
+
   console.error = (...args) => {
     const message = args.join(' ');
-    
-    // Filtrar mensagens específicas
+
+    // More comprehensive filtering
     const shouldSilence = [
       'FullStory namespace conflict',
+      'FullStory',
+      '_fs_namespace',
       'LaunchDarkly',
       'chunk loading',
-      'ERR_BLOCKED_BY_CLIENT'
-    ].some(pattern => message.includes(pattern));
-    
+      'ERR_BLOCKED_BY_CLIENT',
+      'IFrame evaluation timeout',
+      'Script error'
+    ].some(pattern => message.toLowerCase().includes(pattern.toLowerCase()));
+
     if (!shouldSilence) {
       originalConsoleError.apply(console, args);
+    }
+  };
+
+  console.warn = (...args) => {
+    const message = args.join(' ');
+
+    const shouldSilence = [
+      'FullStory namespace conflict',
+      'FullStory',
+      '_fs_namespace'
+    ].some(pattern => message.toLowerCase().includes(pattern.toLowerCase()));
+
+    if (!shouldSilence) {
+      originalConsoleWarn.apply(console, args);
     }
   };
 }
