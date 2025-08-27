@@ -41,6 +41,15 @@ export async function saveLead(leadData: Omit<Lead, 'id' | 'created_at'>): Promi
     console.log('💾 Salvando lead no Supabase:', leadData.name);
     console.log('📋 Dados completos:', leadData);
 
+    // Check if Supabase is properly configured
+    if (supabaseUrl === 'https://placeholder.supabase.co' || supabaseAnonKey === 'placeholder-key') {
+      console.warn('⚠️ Supabase não configurado. Por favor, conecte via MCP.');
+      return {
+        success: false,
+        error: 'Supabase não está configurado. Conecte via MCP primeiro.'
+      };
+    }
+
     // Verificar se os dados estão válidos
     if (!leadData.name || !leadData.phone) {
       return {
