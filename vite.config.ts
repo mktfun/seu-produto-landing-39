@@ -349,10 +349,10 @@ function apiServerPlugin() {
             userAgent: req.headers['user-agent'] || 'Unknown'
           };
 
-          // Send email via Resend directly to final destination
+          // Send email via Resend (using verified address - forwards to final destination)
           const { data, error } = await resend.emails.send({
             from: 'Sistema Cotação <noreply@resend.dev>',
-            to: ['contato@jjamorimseguros.com.br'],
+            to: ['mktfunil1@gmail.com'], // Must use verified email - please forward to contato@jjamorimseguros.com.br
             subject: `🏠 Nova Cotação - ${emailData.name} - Plano ${emailData.recommendedPlan}`,
             html: createEmailHTML(emailData),
             text: `Nova cotação de ${emailData.name} para o plano ${emailData.recommendedPlan}. WhatsApp: ${emailData.phone}`
