@@ -302,7 +302,7 @@ const createEmailHTML = (data) => {
 
 Aqui é da J.J. Amorim Seguros - Zurich. Recebi sua solicitação de cotação para seguro residencial.
 
-🏠 Vi que você tem interesse no plano *${data.recommended_plan || 'personalizado'}* para sua ${formatPropertyType(data.property_type || '').toLowerCase() || 'residência'}.
+🏠 Vi que você tem interesse no plano *${data.recommended_plan || 'personalizado'}* para sua ${formatPropertyType(data.property_type || '') ? formatPropertyType(data.property_type).toLowerCase() : 'residência'}.
 
 Vou preparar uma proposta exclusiva para você!
 
