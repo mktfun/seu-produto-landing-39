@@ -75,20 +75,27 @@ export async function saveLead(leadData: Omit<Lead, 'id' | 'created_at'>): Promi
       .single();
 
     if (error) {
-      console.error('❌ Erro ao salvar lead:', error)
+      console.error('❌ Erro ao salvar lead:', error);
+      console.error('💡 Detalhes do erro:', {
+        message: error.message,
+        details: error.details,
+        hint: error.hint,
+        code: error.code
+      });
+
       return {
         success: false,
-        error: `Erro ao salvar: ${error.message}`
-      }
+        error: `Erro ao salvar: ${error.message} (Código: ${error.code})`
+      };
     }
 
-    console.log('✅ Lead salvo com sucesso no Supabase! ID:', data.id)
-    console.log('📧 Email será enviado automaticamente pelo trigger do banco')
+    console.log('✅ Lead salvo com sucesso no Supabase! ID:', data.id);
+    console.log('📧 Email será enviado automaticamente pelo trigger do banco');
 
     return {
       success: true,
       data
-    }
+    };
   } catch (error: any) {
     console.error('❌ Erro inesperado ao salvar lead:', error)
 
