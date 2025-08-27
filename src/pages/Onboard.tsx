@@ -162,14 +162,7 @@ const Onboard = () => {
       let supabaseSuccess = false;
       let emailSuccess = false;
 
-      // 1. Test Supabase connection first
-      console.log('🔗 Testando conexão com Supabase...');
-      const connectionTest = await testSupabaseConnection();
-      if (!connectionTest.success) {
-        console.error('❌ Falha na conexão com Supabase:', connectionTest.error);
-      }
-
-      // 2. Save to Supabase
+      // 1. Save to Supabase
       console.log('💾 Salvando no Supabase...');
       try {
         const supabaseResult = await saveLead(leadData);
@@ -560,7 +553,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
                   ) : (
                     <>
                       <Phone className="w-5 h-5 mr-2" />
-                      Solicitar Cotação no WhatsApp
+                      Solicitar Cota��ão no WhatsApp
                     </>
                   )}
                 </Button>
@@ -659,7 +652,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
             features: ["Todas as emergências", "📱 Proteção para eletrônicos", "🚲 Assistência para bikes", "Hospedagem", "Assistência para pets"]
           },
           "Completo+": {
-            icon: "💜",
+            icon: "���",
             color: "purple",
             description: "Máxima proteção com manutenção preventiva",
             features: ["Tudo do Completo", "📱 Eletrônicos premium", "🚲 Assistência completa bikes", "Manutenção preventiva", "Atendimento VIP"]
