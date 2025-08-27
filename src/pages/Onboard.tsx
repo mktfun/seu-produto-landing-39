@@ -107,21 +107,31 @@ const Onboard = () => {
     return "Completo+";
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const recommendation = calculateRecommendation();
     setFormData(prev => ({ ...prev, recommendedPlan: recommendation }));
 
-    // Prepare data for email (to be sent via API)
-    const emailData = {
+    // Prepare data for email
+    const emailFormData = {
       ...formData,
-      recommendedPlan: recommendation,
-      timestamp: new Date().toISOString(),
-      userAgent: navigator.userAgent
+      recommendedPlan: recommendation
     };
 
-    // Send data to email API (you'll need to implement this)
-    // fetch('/api/send-lead-email', { method: 'POST', body: JSON.stringify(emailData) })
+    // Send email notification
+    try {
+      console.log('📧 Enviando email para contato@jjamorimseguros.com.br...');
+      const emailSent = await sendEmailViaResend(emailFormData);
 
+      if (emailSent) {
+        console.log('✅ Email enviado com sucesso!');
+      } else {
+        console.log('⚠️ Falha no envio do email, mas continuando...');
+      }
+    } catch (error) {
+      console.error('❌ Erro no envio do email:', error);
+    }
+
+    // Prepare WhatsApp message
     const message = `
 🏠 *NOVA COTAÇÃO - Zurich Residência*
 
