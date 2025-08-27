@@ -29,7 +29,7 @@ const services = [
   }
 ];
 
-const ServicesSection = () => {
+const ServicesSection = memo(() => {
   return (
     <section id="servicos" className="py-16 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -147,6 +147,8 @@ const ServicesSection = () => {
       </div>
     </section>
   );
-};
+});
+
+ServicesSection.displayName = 'ServicesSection';
 
 export default ServicesSection;
