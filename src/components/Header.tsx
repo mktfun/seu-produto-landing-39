@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Shield, Phone, Mail, Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Header = () => {
   const navigate = useNavigate();
