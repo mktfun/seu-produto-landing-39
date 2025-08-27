@@ -107,18 +107,16 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* Main family image - improved responsive design */}
-            <div className="relative w-full max-w-xs sm:max-w-sm lg:max-w-md xl:max-w-lg mx-auto">
-              <div className="aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 sm:border-4 border-white/30 z-10 relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/10"></div>
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets%2F8db09fcbd19243afa37a84aaf6b10caf%2F648ae6f7d2264f4985ef246a9db8f10b?format=webp&width=800"
-                  alt="Família feliz em casa - Zurich Residência"
-                  className="w-full h-full object-cover drop-shadow-2xl"
-                />
-                {/* Additional shadow overlay */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-black/15 via-transparent to-transparent opacity-40"></div>
-              </div>
+            {/* Main family image - circular design */}
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl border-4 border-white/20 z-10 ml-8 sm:ml-12 lg:ml-20">
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/10"></div>
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F8db09fcbd19243afa37a84aaf6b10caf%2F648ae6f7d2264f4985ef246a9db8f10b?format=webp&width=800"
+                alt="Família feliz em casa - Zurich Residência"
+                className="w-full h-full object-cover drop-shadow-2xl"
+              />
+              {/* Additional shadow overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-transparent opacity-30"></div>
             </div>
           </div>
         </div>
