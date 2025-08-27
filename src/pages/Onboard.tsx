@@ -179,12 +179,11 @@ const Onboard = () => {
         });
 
         if (emailResponse.ok) {
-          const result = await emailResponse.json();
-          console.log('✅ Email enviado com sucesso!', result);
+          console.log('✅ Email enviado com sucesso!');
           emailSuccess = true;
         } else {
-          const errorText = await emailResponse.text();
-          console.error('❌ Falha no envio do email:', errorText);
+          console.error('❌ Falha no envio do email - Status:', emailResponse.status);
+          console.error('❌ Response status text:', emailResponse.statusText);
         }
       } catch (error: any) {
         console.error('❌ Erro no email:', error.message);
@@ -606,7 +605,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
                 { id: "emergencias", label: "Cobertura emergencial", icon: "🚨", description: "Atendimento 24h para emergências" },
                 { id: "eletronicos", label: "Proteção eletr��nicos", icon: "📱", description: "Smartphones, notebooks, TVs" },
                 { id: "manutencao", label: "Manutenção preventiva", icon: "🔧", description: "Cuidado contínuo da casa" },
-                { id: "completo", label: "Proteção completa", icon: "🛡️", description: "Máxima tranquilidade" }
+                { id: "completo", label: "Proteção completa", icon: "��️", description: "Máxima tranquilidade" }
               ].map((option) => (
                 <Card 
                   key={option.id}
