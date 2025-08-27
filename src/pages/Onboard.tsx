@@ -175,15 +175,34 @@ const Onboard = () => {
         console.error('❌ Erro no email:', error.message);
       }
 
-      // Show status to user
+      // Show status to user with toast notifications
       if (supabaseSuccess && emailSuccess) {
         console.log('🎉 Tudo funcionou! Lead salvo e email enviado.');
+        toast({
+          title: "✅ Cotação enviada com sucesso!",
+          description: "Dados salvos e email enviado para nossa equipe.",
+        });
       } else if (supabaseSuccess) {
         console.log('⚠️ Lead salvo mas email falhou');
+        toast({
+          title: "⚠️ Parcialmente enviado",
+          description: "Dados salvos, mas houve problema no envio do email.",
+          variant: "destructive",
+        });
       } else if (emailSuccess) {
         console.log('⚠️ Email enviado mas Supabase falhou');
+        toast({
+          title: "⚠️ Parcialmente enviado",
+          description: "Email enviado, mas erro ao salvar dados.",
+          variant: "destructive",
+        });
       } else {
         console.error('❌ Ambos falharam - mas continuando com WhatsApp');
+        toast({
+          title: "❌ Erro no envio",
+          description: "Problemas técnicos detectados. Continuando via WhatsApp...",
+          variant: "destructive",
+        });
       }
 
     } catch (error) {
@@ -557,7 +576,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
               {[
-                { id: "preco", label: "Menor preço", icon: "💰", description: "Economia em primeiro lugar" },
+                { id: "preco", label: "Menor preço", icon: "���", description: "Economia em primeiro lugar" },
                 { id: "emergencias", label: "Cobertura emergencial", icon: "🚨", description: "Atendimento 24h para emergências" },
                 { id: "eletronicos", label: "Proteção eletr��nicos", icon: "📱", description: "Smartphones, notebooks, TVs" },
                 { id: "manutencao", label: "Manutenção preventiva", icon: "🔧", description: "Cuidado contínuo da casa" },
@@ -597,7 +616,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
             icon: "💙",
             color: "blue",
             description: "Cobertura completa para o dia a dia",
-            features: ["Todas as emergências", "📱 Proteção para eletrônicos", "�� Assistência para bikes", "Hospedagem", "Assistência para pets"]
+            features: ["Todas as emergências", "📱 Proteção para eletrônicos", "🚲 Assistência para bikes", "Hospedagem", "Assistência para pets"]
           },
           "Completo+": {
             icon: "💜",
