@@ -114,7 +114,7 @@ const Onboard = () => {
     const recommendation = calculateRecommendation();
     setFormData(prev => ({ ...prev, recommendedPlan: recommendation }));
 
-    // Prepare data for Supabase
+    // Prepare data for both Supabase and email
     const leadData: Omit<Lead, 'id' | 'created_at'> = {
       name: formData.name,
       phone: formData.phone,
@@ -130,21 +130,34 @@ const Onboard = () => {
       status: 'new'
     };
 
-    // Save to Supabase (email will be sent automatically by database trigger)
     try {
       console.log('💾 Salvando lead no Supabase...');
-      const result = await saveLead(leadData);
 
-      if (result.success) {
-        console.log('✅ Lead salvo com sucesso! ID:', result.data?.id);
-        console.log('📧 Email sendo enviado automaticamente pelo banco de dados...');
+      // 1. Save to Supabase first (backup)
+      const supabaseResult = await saveLead(leadData);
+      if (supabaseResult.success) {
+        console.log('✅ Lead salvo no Supabase! ID:', supabaseResult.data?.id);
       } else {
-        console.log('⚠️ Falha ao salvar lead:', result.error);
-        // Continua mesmo com erro para não bloquear o usuário
+        console.log('⚠️ Falha ao salvar no Supabase:', supabaseResult.error);
       }
+
+      // 2. Send email via our API (more reliable than DB trigger)
+      console.log('📧 Enviando email via API...');
+      const emailResponse = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ formData: leadData })
+      });
+
+      if (emailResponse.ok) {
+        console.log('✅ Email enviado com sucesso!');
+      } else {
+        const errorText = await emailResponse.text();
+        console.log('⚠️ Falha no envio do email:', errorText);
+      }
+
     } catch (error) {
-      console.error('❌ Erro ao salvar lead:', error);
-      // Continua mesmo com erro para não bloquear o usuário
+      console.error('❌ Erro geral:', error);
     } finally {
       setIsSubmitting(false);
     }
