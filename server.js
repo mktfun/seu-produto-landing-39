@@ -343,7 +343,6 @@ app.post('/api/send-email', async (req, res) => {
     }
 
     console.log('📧 Sending email for:', formData.name);
-    console.log('📋 Full formData received:', JSON.stringify(formData, null, 2));
 
     // Prepare email data with timestamp
     const emailData = {
