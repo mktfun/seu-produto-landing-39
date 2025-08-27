@@ -365,6 +365,9 @@ function apiServerPlugin() {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), apiServerPlugin()],
+  optimizeDeps: {
+    exclude: ['@supabase/supabase-js']
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
