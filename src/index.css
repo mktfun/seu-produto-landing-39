@@ -130,6 +130,47 @@
   66% { transform: translateY(-12px) rotate(-1deg); }
 }
 
+/* Predefined animation delays for better performance */
+.animate-float-delay-05 {
+  animation: float 3s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.animate-float-delay-08 {
+  animation: float 3s ease-in-out infinite;
+  animation-delay: 0.8s;
+}
+
+.animate-float-delay-12 {
+  animation: float 3s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+
+.animate-float-delay-15 {
+  animation: float 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.animate-float-delay-21 {
+  animation: float 3s ease-in-out infinite;
+  animation-delay: 2.1s;
+}
+
+.animate-float-delay-25 {
+  animation: float 3s ease-in-out infinite;
+  animation-delay: 2.5s;
+}
+
+.animate-float-delay-28 {
+  animation: float 3s ease-in-out infinite;
+  animation-delay: 2.8s;
+}
+
+.animate-float-delay-03 {
+  animation: float 3s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
