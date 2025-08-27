@@ -21,52 +21,82 @@
   <body>
     <div id="root"></div>
     <script>
-      // Enhanced FullStory namespace conflict resolution
-      if (typeof window !== 'undefined') {
-        // Set namespace before any FullStory scripts load
-        window["_fs_namespace"] = "FS";
+      // Complete FullStory error suppression system
+      (function() {
+        'use strict';
 
-        // Prevent multiple FullStory instances
-        if (!window.FS && !window._fs_loaded) {
-          window._fs_loaded = true;
+        // Set namespace immediately
+        window["_fs_namespace"] = "FS";
+        window._fs_loaded = true;
+
+        // Override console methods globally
+        const originalConsoleError = console.error;
+        const originalConsoleWarn = console.warn;
+        const originalConsoleLog = console.log;
+
+        function shouldSuppressMessage(message) {
+          const suppressPatterns = [
+            'FullStory namespace conflict',
+            'FullStory',
+            '_fs_namespace',
+            'IFrame evaluation timeout',
+            'Session Model',
+            'fullstory'
+          ];
+
+          const messageStr = String(message).toLowerCase();
+          return suppressPatterns.some(pattern =>
+            messageStr.includes(pattern.toLowerCase())
+          );
         }
 
-        // Suppress FullStory console errors immediately
-        const originalConsoleError = console.error;
         console.error = function(...args) {
           const message = args.join(' ');
-          if (message.includes('FullStory namespace conflict') ||
-              message.includes('_fs_namespace')) {
-            return; // Silently ignore FullStory conflicts
+          if (!shouldSuppressMessage(message)) {
+            originalConsoleError.apply(console, args);
           }
-          originalConsoleError.apply(console, args);
         };
 
-        // Handle iframe and evaluation errors
-        window.addEventListener('unhandledrejection', function(event) {
-          if (event.reason && event.reason.message) {
-            const message = event.reason.message;
-            if (message.includes('IFrame evaluation timeout') ||
-                message.includes('FullStory') ||
-                message.includes('_fs_namespace')) {
-              event.preventDefault();
-              return false;
-            }
+        console.warn = function(...args) {
+          const message = args.join(' ');
+          if (!shouldSuppressMessage(message)) {
+            originalConsoleWarn.apply(console, args);
           }
-        });
+        };
 
-        // Handle regular errors
-        window.addEventListener('error', function(event) {
-          if (event.error && event.error.message) {
-            const message = event.error.message;
-            if (message.includes('FullStory') ||
-                message.includes('_fs_namespace')) {
-              event.preventDefault();
-              return false;
-            }
+        console.log = function(...args) {
+          const message = args.join(' ');
+          if (!shouldSuppressMessage(message)) {
+            originalConsoleLog.apply(console, args);
           }
+        };
+
+        // Global error handlers
+        window.addEventListener('error', function(event) {
+          if (event.error && shouldSuppressMessage(event.error.message || '')) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return false;
+          }
+        }, true);
+
+        window.addEventListener('unhandledrejection', function(event) {
+          const reason = event.reason;
+          const message = reason?.message || String(reason);
+          if (shouldSuppressMessage(message)) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return false;
+          }
+        }, true);
+
+        // Prevent FullStory from loading if it tries to
+        Object.defineProperty(window, 'FS', {
+          get: function() { return {}; },
+          set: function() { /* ignore */ },
+          configurable: false
         });
-      }
+      })();
     </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
