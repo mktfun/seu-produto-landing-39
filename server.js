@@ -291,6 +291,23 @@ const createEmailHTML = (data) => {
           <p style="margin: 15px 0;">Entre em contato o mais rápido possível:</p>
           <div class="contact-item">📱 WhatsApp: ${data.phone}</div>
           <div class="contact-item">👤 Nome: ${data.name}</div>
+
+          <div style="margin-top: 20px; text-align: center;">
+            <a href="https://wa.me/55${data.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Oi ${data.name}! 👋
+
+Aqui é da J.J. Amorim Seguros - Zurich. Recebi sua solicitação de cotação para seguro residencial.
+
+🏠 Vi que você tem interesse no plano *${data.recommended_plan || 'personalizado'}* para sua ${formatPropertyType(data.property_type || '').toLowerCase()}.
+
+Vou preparar uma proposta exclusiva para você!
+
+Quando podemos conversar? Tenho algumas perguntas rápidas para personalizar ainda mais sua cotação.
+
+*Zurich - A segurança que você confia* 🛡️`)}"
+               style="display: inline-block; background: #25D366; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; margin: 10px 0;">
+              💬 Enviar WhatsApp para ${data.name}
+            </a>
+          </div>
         </div>
 
         <div class="timestamp">
@@ -342,7 +359,7 @@ app.post('/api/send-email', async (req, res) => {
       console.log('📧 Email content (would be sent):');
       console.log('From: Sistema Cotação <noreply@resend.dev>');
       console.log('To: mktfunil1@gmail.com');
-      console.log('Subject:', `🏠 Nova Cota��ão - ${emailData.name} - Plano ${emailData.recommendedPlan}`);
+      console.log('Subject:', `🏠 Nova Cotação - ${emailData.name} - Plano ${emailData.recommendedPlan}`);
       console.log('📝 Email would contain full HTML template with lead data');
 
       // Return success to allow app to continue working
