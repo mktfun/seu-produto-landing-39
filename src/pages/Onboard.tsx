@@ -197,7 +197,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
                 {[
                   { id: "uber", label: "QR Code no Uber", icon: "🚗" },
                   { id: "google", label: "Google/Busca", icon: "🔍" },
-                  { id: "indicacao", label: "Indicação", icon: "👥" },
+                  { id: "indicacao", label: "Indicação", icon: "����" },
                   { id: "social", label: "Redes Sociais", icon: "📱" },
                   { id: "outros", label: "Outros", icon: "💬" }
                 ].map((option) => (
@@ -426,7 +426,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
                         <div>📱 Proteção especial para seus dispositivos eletrônicos</div>
                       )}
                       {formData.mainPriority === "bikes" && (
-                        <div>�� Assistência completa para ciclistas</div>
+                        <div>🚲 Assistência completa para ciclistas</div>
                       )}
                     </div>
                   </div>
@@ -593,13 +593,23 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
                   </div>
                 )}
 
-                <Button 
+                <Button
                   onClick={handleSubmit}
-                  className="w-full bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white font-bold py-3"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white font-bold py-3 disabled:opacity-70"
                   size="lg"
                 >
-                  <Phone className="w-5 h-5 mr-2" />
-                  Solicitar Cotação no WhatsApp
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 mr-2 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                      Enviando cotação...
+                    </>
+                  ) : (
+                    <>
+                      <Phone className="w-5 h-5 mr-2" />
+                      Solicitar Cotação no WhatsApp
+                    </>
+                  )}
                 </Button>
               </CardContent>
             </Card>
