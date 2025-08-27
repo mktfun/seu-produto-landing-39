@@ -322,7 +322,7 @@ Quando podemos conversar? Tenho algumas perguntas rapidas para personalizar aind
         </div>
 
         <div class="timestamp">
-          <p>📅 Cotação solicitada em: <strong>${timestamp}</strong></p>
+          <p>Cotacao solicitada em: <strong>${timestamp}</strong></p>
           <p style="font-size: 12px; color: #6b7280; margin-top: 10px;">
             Sistema automatizado - J.J. Amorim Seguros
           </p>
