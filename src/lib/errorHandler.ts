@@ -33,16 +33,28 @@ export function setupGlobalErrorHandling() {
     }
   });
 
-  // Capturar promises rejeitadas
+  // Enhanced promise rejection handling
   window.addEventListener('unhandledrejection', (event) => {
-    console.warn('Unhandled promise rejection:', event.reason);
-    
-    // Ignorar timeouts conhecidos
-    if (event.reason?.message?.includes('timeout') || 
-        event.reason?.message?.includes('IFrame evaluation')) {
+    const reasonMessage = event.reason?.message?.toLowerCase() || '';
+    const reasonString = String(event.reason).toLowerCase();
+
+    // Comprehensive filtering for known issues
+    const shouldIgnore = [
+      'timeout',
+      'iframe evaluation',
+      'fullstory',
+      '_fs_namespace',
+      'fullstory namespace conflict',
+      'script error',
+      'chunk loading'
+    ].some(pattern => reasonMessage.includes(pattern) || reasonString.includes(pattern));
+
+    if (shouldIgnore) {
       event.preventDefault();
       return false;
     }
+
+    console.warn('Unhandled promise rejection:', event.reason);
   });
 
   // Enhanced console filtering for FullStory and other known issues
