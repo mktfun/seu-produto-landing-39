@@ -281,13 +281,6 @@ const createEmailHTML = (data: any): string => {
           <p style="margin: 15px 0;">Entre em contato o mais rápido possível:</p>
           <div class="contact-item">📱 WhatsApp: ${data.phone}</div>
           <div class="contact-item">👤 Nome: ${data.name}</div>
-
-          <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px;">
-            <p style="margin: 0; font-size: 14px; color: #856404;">
-              📧 <strong>IMPORTANTE:</strong> Por favor, encaminhe este email para:
-              <strong>contato@jjamorimseguros.com.br</strong>
-            </p>
-          </div>
         </div>
 
         <div class="timestamp">
