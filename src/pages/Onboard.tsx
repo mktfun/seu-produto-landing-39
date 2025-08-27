@@ -109,6 +109,8 @@ const Onboard = () => {
   };
 
   const handleSubmit = async () => {
+    setIsSubmitting(true);
+
     const recommendation = calculateRecommendation();
     setFormData(prev => ({ ...prev, recommendedPlan: recommendation }));
 
@@ -125,11 +127,14 @@ const Onboard = () => {
 
       if (emailSent) {
         console.log('✅ Email enviado com sucesso!');
+        // Você pode adicionar uma notificação de sucesso aqui
       } else {
         console.log('⚠️ Falha no envio do email, mas continuando...');
       }
     } catch (error) {
       console.error('❌ Erro no envio do email:', error);
+    } finally {
+      setIsSubmitting(false);
     }
 
     // Prepare WhatsApp message
