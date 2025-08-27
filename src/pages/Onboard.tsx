@@ -124,7 +124,7 @@ Trabalha em casa: ${formData.workFromHome}
 Eletrônicos: ${formData.hasElectronics}
 Bike: ${formData.hasBike}
 Prioridade: ${formData.mainPriority}
-Or��amento: ${formData.budgetRange}
+Orçamento: ${formData.budgetRange}
 
 *Plano Recomendado:* ${recommendation}
 
@@ -307,23 +307,23 @@ Gostaria de receber uma cotação personalizada!
         return (
           <div className="space-y-6 text-center">
             <div className="mb-8">
-              <Users className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-secondary mb-2">Você trabalha em casa?</h2>
-              <p className="text-muted-foreground">Isso influencia no tipo de cobertura que você precisa</p>
+              <DollarSign className="w-16 h-16 text-primary mx-auto mb-4" />
+              <h2 className="text-3xl font-bold text-secondary mb-2">Qual seu orçamento mensal?</h2>
+              <p className="text-muted-foreground">Vamos encontrar a melhor opção para seu bolso</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
               {[
-                { id: "sim", label: "Sim, sempre", icon: "💻", description: "Home office fixo" },
-                { id: "as-vezes", label: "Às vezes", icon: "🔄", description: "Trabalho híbrido" },
-                { id: "nao", label: "Não", icon: "🏢", description: "Trabalho externo" }
+                { id: "economico", label: "Até R$ 100/mês", icon: "💚", description: "Proteção essencial" },
+                { id: "medio", label: "R$ 100 - R$ 200/mês", icon: "💙", description: "Cobertura completa" },
+                { id: "premium", label: "Acima R$ 200/mês", icon: "💜", description: "Máxima proteção" }
               ].map((option) => (
-                <Card 
+                <Card
                   key={option.id}
                   className={`cursor-pointer transition-all hover:scale-105 border-2 hover:border-primary ${
-                    formData.workFromHome === option.id ? 'border-primary bg-primary/5' : 'border-border'
+                    formData.budgetRange === option.id ? 'border-primary bg-primary/5' : 'border-border'
                   }`}
-                  onClick={() => selectOption('workFromHome', option.id)}
+                  onClick={() => selectOption('budgetRange', option.id)}
                 >
                   <CardContent className="p-6 text-center">
                     <div className="text-4xl mb-3">{option.icon}</div>
