@@ -72,42 +72,22 @@ const Onboard = () => {
       scores.completoPlus += 3;
     }
 
-    // Trabalha em casa
-    if (formData.workFromHome === "sim") {
-      scores.completo += 2;
-      scores.completoPlus += 2;
-    } else if (formData.workFromHome === "nao") {
-      scores.essencial += 1;
-    }
-
-    // Eletrônicos - NOVO DESTAQUE
-    if (formData.hasElectronics === "sim-muito") {
-      scores.completo += 3;
-      scores.completoPlus += 2;
-    } else if (formData.hasElectronics === "sim-normal") {
-      scores.completo += 2;
-      scores.completoPlus += 1;
-    }
-
-    // Bike - NOVO DESTAQUE
-    if (formData.hasBike === "sim-valiosa" || formData.hasBike === "sim-normal") {
-      scores.completo += 2;
-      scores.completoPlus += 2;
-    }
-
-    // Prioridade principal
+    // Prioridade principal (agora engloba eletrônicos, bikes, etc)
     if (formData.mainPriority === "preco") {
-      scores.essencial += 3;
+      scores.essencial += 4;
     } else if (formData.mainPriority === "emergencias") {
-      scores.completo += 3;
-    } else if (formData.mainPriority === "manutencao") {
-      scores.completoPlus += 3;
-    } else if (formData.mainPriority === "completo") {
-      scores.completo += 2;
-      scores.completoPlus += 2;
+      scores.completo += 4;
     } else if (formData.mainPriority === "eletronicos") {
-      scores.completo += 3;
+      scores.completo += 4;
       scores.completoPlus += 2;
+    } else if (formData.mainPriority === "bikes") {
+      scores.completo += 3;
+      scores.completoPlus += 3;
+    } else if (formData.mainPriority === "manutencao") {
+      scores.completoPlus += 4;
+    } else if (formData.mainPriority === "completo") {
+      scores.completo += 3;
+      scores.completoPlus += 3;
     }
 
     // Orçamento
