@@ -18,16 +18,18 @@ const formatPropertyType = (type: string): string => {
 };
 
 const formatPropertyValue = (value: string): string => {
+  if (!value || typeof value !== 'string') return 'Não informado';
   const values: Record<string, string> = {
     'ate-300k': 'Até R$ 300mil',
     '300-600k': 'R$ 300k - 600k',
     '600k-1m': 'R$ 600k - 1M',
     'acima-1m': 'Acima R$ 1M'
   };
-  return values[value] || value;
+  return values[value.toLowerCase()] || value;
 };
 
 const formatMainPriority = (priority: string): string => {
+  if (!priority || typeof priority !== 'string') return 'Não informado';
   const priorities: Record<string, string> = {
     'preco': 'Menor preço',
     'emergencias': 'Cobertura emergencial',
@@ -36,19 +38,21 @@ const formatMainPriority = (priority: string): string => {
     'manutencao': 'Manutenção preventiva',
     'completo': 'Proteção completa'
   };
-  return priorities[priority] || priority;
+  return priorities[priority.toLowerCase()] || priority;
 };
 
 const formatBudgetRange = (budget: string): string => {
+  if (!budget || typeof budget !== 'string') return 'Não informado';
   const budgets: Record<string, string> = {
     'economico': 'Até R$ 100/mês (Econômico)',
     'medio': 'R$ 100 - R$ 200/mês (Médio)',
     'premium': 'Acima R$ 200/mês (Premium)'
   };
-  return budgets[budget] || budget;
+  return budgets[budget.toLowerCase()] || budget;
 };
 
 const formatHowDidYouHear = (source: string): string => {
+  if (!source || typeof source !== 'string') return 'Não informado';
   const sources: Record<string, string> = {
     'uber': 'QR Code no Uber',
     'google': 'Google/Busca',
@@ -56,7 +60,7 @@ const formatHowDidYouHear = (source: string): string => {
     'social': 'Redes Sociais',
     'outros': 'Outros'
   };
-  return sources[source] || source;
+  return sources[source.toLowerCase()] || source;
 };
 
 const createEmailHTML = (data: any): string => {
