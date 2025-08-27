@@ -7,13 +7,14 @@ import { Resend } from 'resend'
 
 // Email formatting functions
 const formatPropertyType = (type: string): string => {
+  if (!type || typeof type !== 'string') return 'Não informado';
   const types: Record<string, string> = {
     'apartamento': 'Apartamento',
     'casa': 'Casa',
     'sobrado': 'Sobrado',
     'chacara': 'Chácara/Sítio'
   };
-  return types[type] || type;
+  return types[type.toLowerCase()] || type;
 };
 
 const formatPropertyValue = (value: string): string => {
