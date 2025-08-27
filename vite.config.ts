@@ -73,7 +73,7 @@ const createEmailHTML = (data: any): string => {
     <html>
     <head>
       <meta charset="utf-8">
-      <title>Nova Cotação - Zurich Residência</title>
+      <title>Nova Cotação - Zurich Resid��ncia</title>
       <style>
         body { 
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -373,4 +373,22 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: undefined, // Evita problemas de chunk loading
+      }
+    },
+    chunkSizeWarningLimit: 1000,
+    sourcemap: false // Reduz tamanho e problemas de debug
+  },
+  server: {
+    timeout: 120000, // 2 minutos de timeout
+    hmr: {
+      timeout: 60000 // 1 minuto para HMR
+    }
+  },
+  preview: {
+    timeout: 120000
+  }
 })
