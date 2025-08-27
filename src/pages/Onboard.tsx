@@ -109,8 +109,30 @@ const Onboard = () => {
     return "Completo+";
   };
 
+  const validateForm = () => {
+    const required = ['name', 'phone', 'howDidYouHear', 'propertyType', 'propertyValue', 'mainPriority', 'budgetRange'];
+    const missing = required.filter(field => !formData[field as keyof typeof formData]);
+
+    if (missing.length > 0) {
+      console.error('❌ Campos obrigatórios faltando:', missing);
+      toast({
+        title: "❌ Formulário incompleto",
+        description: `Campos obrigatórios: ${missing.join(', ')}`,
+        variant: "destructive",
+      });
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async () => {
+    // Validate form before submission
+    if (!validateForm()) {
+      return;
+    }
+
     setIsSubmitting(true);
+    console.log('🚀 Iniciando submissão com dados:', formData);
 
     try {
       const recommendation = calculateRecommendation();
@@ -224,7 +246,7 @@ const Onboard = () => {
 • Tipo: ${formData.propertyType}
 • Valor estimado: ${formData.propertyValue}
 • Prioridade principal: ${formData.mainPriority}
-• Orçamento mensal: ${formData.budgetRange}
+• Or��amento mensal: ${formData.budgetRange}
 
 🎯 *RECOMENDAÇÃO SISTEMA:*
 • Plano sugerido: *${recommendation}*
@@ -576,7 +598,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
               {[
-                { id: "preco", label: "Menor preço", icon: "���", description: "Economia em primeiro lugar" },
+                { id: "preco", label: "Menor preço", icon: "💰", description: "Economia em primeiro lugar" },
                 { id: "emergencias", label: "Cobertura emergencial", icon: "🚨", description: "Atendimento 24h para emergências" },
                 { id: "eletronicos", label: "Proteção eletr��nicos", icon: "📱", description: "Smartphones, notebooks, TVs" },
                 { id: "manutencao", label: "Manutenção preventiva", icon: "🔧", description: "Cuidado contínuo da casa" },
