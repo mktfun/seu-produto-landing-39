@@ -49,24 +49,30 @@ export interface Lead {
 // Função para salvar lead
 export async function saveLead(leadData: Omit<Lead, 'id' | 'created_at'>): Promise<{ success: boolean; data?: Lead; error?: string }> {
   try {
-    console.log('💾 Salvando lead no Supabase:', leadData.name)
+    console.log('💾 Salvando lead no Supabase:', leadData.name);
+    console.log('📋 Dados completos:', leadData);
 
-    // Adicionar timeout manual para operação Supabase
-    const timeoutPromise = new Promise((_, reject) => {
-      setTimeout(() => reject(new Error('Timeout: Operação Supabase demorou mais que 15 segundos')), 15000);
-    });
+    // Verificar se os dados estão válidos
+    if (!leadData.name || !leadData.phone) {
+      return {
+        success: false,
+        error: 'Nome e telefone são obrigatórios'
+      };
+    }
 
-    const supabasePromise = supabase
+    const insertData = {
+      ...leadData,
+      user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : 'Unknown',
+      // IP será capturado pelo servidor se possível
+    };
+
+    console.log('📤 Enviando para Supabase:', insertData);
+
+    const { data, error } = await supabase
       .from('leads')
-      .insert([{
-        ...leadData,
-        user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : 'Unknown',
-        // IP será capturado pelo servidor se possível
-      }])
+      .insert([insertData])
       .select()
       .single();
-
-    const { data, error } = await Promise.race([supabasePromise, timeoutPromise]) as any;
 
     if (error) {
       console.error('❌ Erro ao salvar lead:', error)
