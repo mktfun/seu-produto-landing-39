@@ -241,6 +241,9 @@ const Onboard = () => {
 
     setIsSubmitting(false);
 
+    // Get the final recommendation (use updated form data if available)
+    const finalRecommendation = formData.recommendedPlan || calculateRecommendation();
+
     // Prepare WhatsApp message
     const message = `
 🏠 *NOVA COTAÇÃO - Zurich Residência*
@@ -257,7 +260,7 @@ const Onboard = () => {
 • Orçamento mensal: ${formData.budgetRange}
 
 🎯 *RECOMENDAÇÃO SISTEMA:*
-• Plano sugerido: *${recommendation}*
+• Plano sugerido: *${finalRecommendation}*
 
 ${formData.utm_source ? `📊 *ORIGEM:* ${formData.utm_source} (${formData.utm_medium})` : ''}
 
@@ -479,7 +482,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
             icon: "💚",
             color: "green",
             description: "Proteção básica com excelente custo-benefício",
-            features: ["Emergências essenciais", "Atendimento 24h", "Serviços básicos", "Proteção básica"]
+            features: ["Emergências essenciais", "Atendimento 24h", "Serviços básicos", "Proteç��o básica"]
           },
           "Completo": {
             icon: "💙",
