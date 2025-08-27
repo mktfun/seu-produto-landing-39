@@ -257,7 +257,7 @@ const createEmailHTML = (data) => {
 
         <div class="recommendation">
           <h3>🎯 Recomendação do Sistema</h3>
-          <div class="plan-name">PLANO ${(data.recommendedPlan || 'NÃO INFORMADO').toUpperCase()}</div>
+          <div class="plan-name">PLANO ${(data.recommended_plan || 'NÃO INFORMADO').toUpperCase()}</div>
           <p>Plano sugerido baseado no perfil do cliente</p>
         </div>
 
@@ -342,7 +342,7 @@ app.post('/api/send-email', async (req, res) => {
       console.log('📧 Email content (would be sent):');
       console.log('From: Sistema Cotação <noreply@resend.dev>');
       console.log('To: mktfunil1@gmail.com');
-      console.log('Subject:', `🏠 Nova Cotação - ${emailData.name} - Plano ${emailData.recommendedPlan}`);
+      console.log('Subject:', `🏠 Nova Cota��ão - ${emailData.name} - Plano ${emailData.recommendedPlan}`);
       console.log('📝 Email would contain full HTML template with lead data');
 
       // Return success to allow app to continue working
