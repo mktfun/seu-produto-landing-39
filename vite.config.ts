@@ -315,14 +315,22 @@ function apiServerPlugin() {
 
         try {
           const { formData } = req.body;
-          
+
           if (!formData) {
             res.writeHead(400, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ error: 'Form data is required' }));
             return;
           }
 
+          // Validate required fields
+          if (!formData.name || !formData.phone) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Name and phone are required' }));
+            return;
+          }
+
           console.log('📧 Sending email for:', formData.name);
+          console.log('📋 Form data received:', formData);
 
           // Prepare email data with timestamp
           const emailData = {
