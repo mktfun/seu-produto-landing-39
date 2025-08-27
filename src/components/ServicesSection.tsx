@@ -43,9 +43,10 @@ const ServicesSection = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mb-16">
           {services.map((service, index) => (
-            <Card key={index} className="hover-lift card-gradient border-0 shadow-lg animate-fade-in" style={{
-              animationDelay: `${index * 0.1}s`
-            }}>
+            <Card
+              key={index}
+              className={`hover-lift card-gradient border-0 shadow-lg animate-fade-in-delay-${index}`}
+            >
               <CardContent className="p-6 text-center">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <service.icon className="w-8 h-8 text-primary" />
