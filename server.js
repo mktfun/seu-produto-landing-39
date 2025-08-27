@@ -79,9 +79,6 @@ const formatHowDidYouHear = (source) => {
 };
 
 const createEmailHTML = (data) => {
-  // Debug logging
-  console.log('🐛 DEBUG Email template - data received:', JSON.stringify(data, null, 2));
-
   const timestamp = new Date(data.timestamp).toLocaleString('pt-BR', {
     timeZone: 'America/Sao_Paulo',
     day: '2-digit',
