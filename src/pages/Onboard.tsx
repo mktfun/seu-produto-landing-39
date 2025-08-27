@@ -124,7 +124,7 @@ Trabalha em casa: ${formData.workFromHome}
 Eletrônicos: ${formData.hasElectronics}
 Bike: ${formData.hasBike}
 Prioridade: ${formData.mainPriority}
-Orçamento: ${formData.budgetRange}
+Or��amento: ${formData.budgetRange}
 
 *Plano Recomendado:* ${recommendation}
 
@@ -268,29 +268,34 @@ Gostaria de receber uma cotação personalizada!
         return (
           <div className="space-y-6 text-center">
             <div className="mb-8">
-              <DollarSign className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-secondary mb-2">Qual o valor estimado da sua residência?</h2>
-              <p className="text-muted-foreground">Isso nos ajuda a entender o nível de proteção ideal</p>
+              <Star className="w-16 h-16 text-primary mx-auto mb-4" />
+              <h2 className="text-3xl font-bold text-secondary mb-2">O que é MAIS importante para você?</h2>
+              <p className="text-muted-foreground">Escolha sua principal prioridade em um seguro residencial</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
               {[
-                { id: "ate-300k", label: "Até R$ 300.000", icon: "💰", description: "Imóvel mais simples" },
-                { id: "300-600k", label: "R$ 300k - R$ 600k", icon: "💎", description: "Imóvel de valor médio" },
-                { id: "600k-1m", label: "R$ 600k - R$ 1M", icon: "👑", description: "Imóvel de alto valor" },
-                { id: "acima-1m", label: "Acima de R$ 1M", icon: "🏆", description: "Imóvel premium" }
+                { id: "preco", label: "Menor preço", icon: "💰", description: "Economia em primeiro lugar" },
+                { id: "emergencias", label: "Cobertura emergencial", icon: "🚨", description: "Atendimento 24h para emergências" },
+                { id: "eletronicos", label: "Proteção eletrônicos", icon: "📱", description: "Smartphones, notebooks, TVs", highlight: true },
+                { id: "bikes", label: "Assistência para bikes", icon: "🚲", description: "Ciclismo e bicicletas", highlight: true },
+                { id: "manutencao", label: "Manutenção preventiva", icon: "🔧", description: "Cuidado contínuo da casa" },
+                { id: "completo", label: "Proteção completa", icon: "🛡️", description: "Máxima tranquilidade" }
               ].map((option) => (
-                <Card 
+                <Card
                   key={option.id}
                   className={`cursor-pointer transition-all hover:scale-105 border-2 hover:border-primary ${
-                    formData.propertyValue === option.id ? 'border-primary bg-primary/5' : 'border-border'
-                  }`}
-                  onClick={() => selectOption('propertyValue', option.id)}
+                    formData.mainPriority === option.id ? 'border-primary bg-primary/5' : 'border-border'
+                  } ${option.highlight ? 'ring-2 ring-blue-200' : ''}`}
+                  onClick={() => selectOption('mainPriority', option.id)}
                 >
                   <CardContent className="p-6 text-center">
                     <div className="text-4xl mb-3">{option.icon}</div>
                     <h3 className="font-semibold text-lg mb-2">{option.label}</h3>
                     <p className="text-sm text-muted-foreground">{option.description}</p>
+                    {option.highlight && (
+                      <div className="mt-2 text-xs text-blue-600 font-medium">⭐ DESTAQUE</div>
+                    )}
                   </CardContent>
                 </Card>
               ))}
