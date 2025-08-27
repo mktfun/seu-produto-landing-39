@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowLeft, CheckCircle, Phone, Star, Crown, Shield, Home, Zap, Users, Heart, Wrench, DollarSign, Smartphone, Bike, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { saveLead, testSupabaseConnection, type Lead } from "@/lib/supabase";
+import { saveLead, type Lead } from "@/lib/supabase";
 import { toast } from "@/hooks/use-toast";
 
 const Onboard = () => {
@@ -305,7 +305,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
                   { id: "uber", label: "QR Code no Uber", icon: "🚗" },
                   { id: "google", label: "Google/Busca", icon: "🔍" },
                   { id: "indicacao", label: "Indicação", icon: "👥" },
-                  { id: "social", label: "Redes Sociais", icon: "📱" },
+                  { id: "social", label: "Redes Sociais", icon: "���" },
                   { id: "outros", label: "Outros", icon: "💬" }
                 ].map((option) => (
                   <button
@@ -553,7 +553,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
                   ) : (
                     <>
                       <Phone className="w-5 h-5 mr-2" />
-                      Solicitar Cota��ão no WhatsApp
+                      Solicitar Cotação no WhatsApp
                     </>
                   )}
                 </Button>
@@ -652,7 +652,7 @@ _Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleStrin
             features: ["Todas as emergências", "📱 Proteção para eletrônicos", "🚲 Assistência para bikes", "Hospedagem", "Assistência para pets"]
           },
           "Completo+": {
-            icon: "���",
+            icon: "💜",
             color: "purple",
             description: "Máxima proteção com manutenção preventiva",
             features: ["Tudo do Completo", "📱 Eletrônicos premium", "🚲 Assistência completa bikes", "Manutenção preventiva", "Atendimento VIP"]
