@@ -1,0 +1,116 @@
+import { createClient } from '@supabase/supabase-js'
+
+// Configuração do Supabase
+const supabaseUrl = 'https://nmmthliwtdcnsqfpjceu.supabase.co'
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5tbXRobGl3dGRjbnNxZnBqY2V1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ3NDUyNTQsImV4cCI6MjA0MDMyMTI1NH0.Tr6yZF2EYGqHDNltwwC_fDrJgmf49iYhJYshqTI7EjI'
+
+// Criar cliente Supabase
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: false // Para formulário público, não precisa de sessão
+  }
+})
+
+// Tipos para TypeScript
+export interface Lead {
+  id?: number
+  created_at?: string
+  name: string
+  phone: string
+  how_did_you_hear: string
+  property_type: string
+  property_value: string
+  main_priority: string
+  budget_range: string
+  recommended_plan: string
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  user_agent?: string
+  ip_address?: string
+  status?: 'new' | 'contacted' | 'qualified' | 'converted' | 'lost'
+  notes?: string
+}
+
+// Função para salvar lead
+export async function saveLead(leadData: Omit<Lead, 'id' | 'created_at'>): Promise<{ success: boolean; data?: Lead; error?: string }> {
+  try {
+    console.log('💾 Salvando lead no Supabase:', leadData.name)
+    
+    const { data, error } = await supabase
+      .from('leads')
+      .insert([{
+        ...leadData,
+        user_agent: navigator.userAgent,
+        // IP será capturado pelo servidor se possível
+      }])
+      .select()
+      .single()
+
+    if (error) {
+      console.error('❌ Erro ao salvar lead:', error)
+      return { 
+        success: false, 
+        error: `Erro ao salvar: ${error.message}` 
+      }
+    }
+
+    console.log('✅ Lead salvo com sucesso no Supabase! ID:', data.id)
+    console.log('📧 Email será enviado automaticamente pelo trigger do banco')
+    
+    return { 
+      success: true, 
+      data 
+    }
+  } catch (error: any) {
+    console.error('❌ Erro inesperado ao salvar lead:', error)
+    return { 
+      success: false, 
+      error: `Erro inesperado: ${error.message}` 
+    }
+  }
+}
+
+// Função para listar leads (para dashboard futuro)
+export async function getLeads(limit = 50): Promise<{ success: boolean; data?: Lead[]; error?: string }> {
+  try {
+    const { data, error } = await supabase
+      .from('leads')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(limit)
+
+    if (error) {
+      return { success: false, error: error.message }
+    }
+
+    return { success: true, data }
+  } catch (error: any) {
+    return { success: false, error: error.message }
+  }
+}
+
+// Função para atualizar status do lead
+export async function updateLeadStatus(
+  leadId: number, 
+  status: Lead['status'], 
+  notes?: string
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const updateData: Partial<Lead> = { status }
+    if (notes) updateData.notes = notes
+
+    const { error } = await supabase
+      .from('leads')
+      .update(updateData)
+      .eq('id', leadId)
+
+    if (error) {
+      return { success: false, error: error.message }
+    }
+
+    return { success: true }
+  } catch (error: any) {
+    return { success: false, error: error.message }
+  }
+}
