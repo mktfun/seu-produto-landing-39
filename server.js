@@ -228,7 +228,7 @@ const createEmailHTML = (data) => {
             </div>
             <div class="info-item">
               <span class="info-label">Como conheceu:</span>
-              <span class="info-value">${formatHowDidYouHear(data.howDidYouHear)}</span>
+              <span class="info-value">${formatHowDidYouHear(data.how_did_you_hear)}</span>
             </div>
           </div>
         </div>
@@ -238,19 +238,19 @@ const createEmailHTML = (data) => {
           <div class="info-grid">
             <div class="info-item">
               <span class="info-label">Tipo:</span>
-              <span class="info-value">${formatPropertyType(data.propertyType)}</span>
+              <span class="info-value">${formatPropertyType(data.property_type)}</span>
             </div>
             <div class="info-item">
               <span class="info-label">Valor estimado:</span>
-              <span class="info-value">${formatPropertyValue(data.propertyValue)}</span>
+              <span class="info-value">${formatPropertyValue(data.property_value)}</span>
             </div>
             <div class="info-item">
               <span class="info-label">Prioridade:</span>
-              <span class="info-value">${formatMainPriority(data.mainPriority)}</span>
+              <span class="info-value">${formatMainPriority(data.main_priority)}</span>
             </div>
             <div class="info-item">
               <span class="info-label">Orçamento:</span>
-              <span class="info-value">${formatBudgetRange(data.budgetRange)}</span>
+              <span class="info-value">${formatBudgetRange(data.budget_range)}</span>
             </div>
           </div>
         </div>
