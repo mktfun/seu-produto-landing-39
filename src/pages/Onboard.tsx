@@ -110,25 +110,40 @@ const Onboard = () => {
     const recommendation = calculateRecommendation();
     setFormData(prev => ({ ...prev, recommendedPlan: recommendation }));
 
+    // Prepare data for email (to be sent via API)
+    const emailData = {
+      ...formData,
+      recommendedPlan: recommendation,
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent
+    };
+
+    // Send data to email API (you'll need to implement this)
+    // fetch('/api/send-lead-email', { method: 'POST', body: JSON.stringify(emailData) })
+
     const message = `
-*Solicitação de Cotação - Zurich Residência*
+🏠 *NOVA COTAÇÃO - Zurich Residência*
 
-*Contato:*
-Nome: ${formData.name}
-Telefone: ${formData.phone}
+👤 *DADOS DO CLIENTE:*
+• Nome: ${formData.name}
+• WhatsApp: ${formData.phone}
+• Como conheceu: ${formData.howDidYouHear}
 
-*Perfil:*
-Tipo: ${formData.propertyType}
-Valor: ${formData.propertyValue}
-Trabalha em casa: ${formData.workFromHome}
-Eletrônicos: ${formData.hasElectronics}
-Bike: ${formData.hasBike}
-Prioridade: ${formData.mainPriority}
-Orçamento: ${formData.budgetRange}
+🏡 *PERFIL DA RESIDÊNCIA:*
+• Tipo: ${formData.propertyType}
+• Valor estimado: ${formData.propertyValue}
+• Prioridade principal: ${formData.mainPriority}
+• Orçamento mensal: ${formData.budgetRange}
 
-*Plano Recomendado:* ${recommendation}
+🎯 *RECOMENDAÇÃO SISTEMA:*
+• Plano sugerido: *${recommendation}*
 
-Gostaria de receber uma cotação personalizada!
+${formData.utm_source ? `📊 *ORIGEM:* ${formData.utm_source} (${formData.utm_medium})` : ''}
+
+✅ Cliente quer receber cotação personalizada!
+
+---
+_Enviado automaticamente pelo sistema de cotação em ${new Date().toLocaleString('pt-BR')}_
     `.trim();
 
     const whatsappUrl = `https://wa.me/5511979699832?text=${encodeURIComponent(message)}`;
