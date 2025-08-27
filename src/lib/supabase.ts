@@ -8,6 +8,20 @@ const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     persistSession: false // Para formulário público, não precisa de sessão
+  },
+  global: {
+    fetch: (url, options = {}) => {
+      return fetch(url, {
+        ...options,
+        signal: AbortSignal.timeout(30000) // 30 segundos timeout
+      }).catch(error => {
+        console.warn('Supabase request failed:', error.message);
+        throw error;
+      });
+    }
+  },
+  db: {
+    schema: 'public'
   }
 })
 
