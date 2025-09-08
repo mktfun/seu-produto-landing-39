@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import Index from "./pages/Index";
 import Onboard from "./pages/Onboard";
+import ThankYou from "./pages/ThankYou";
 import NotFound from "./pages/NotFound";
 import { setupGlobalErrorHandling, setupFetchWithTimeout } from "@/lib/errorHandler";
 
@@ -27,6 +28,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/onboard" element={<Onboard />} />
+            <Route path="/obrigado" element={<ThankYou />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

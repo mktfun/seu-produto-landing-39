@@ -194,6 +194,20 @@ const Onboard = () => {
             title: "✅ Cotação enviada!",
             description: "Dados salvos e email enviado automaticamente.",
           });
+          
+          // Redirect to thank you page with form data
+          setTimeout(() => {
+            navigate('/obrigado', { 
+              state: { 
+                formData: {
+                  name: formData.name,
+                  recommendedPlan: recommendation,
+                  propertyType: formData.propertyType,
+                  propertyValue: formData.propertyValue
+                }
+              }
+            });
+          }, 1500);
         } else {
           console.error('❌ Falha no envio automático do email - Status:', emailResponse.status);
           toast({
