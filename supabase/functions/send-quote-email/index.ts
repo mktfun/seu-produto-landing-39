@@ -211,7 +211,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     const emailResponse = await resend.emails.send({
       from: "Sistema Cotação <noreply@resend.dev>",
-      to: ["contato@jjamorimseguros.com.br"],
+      to: ["mktfunil1@gmail.com"],
       subject: `🏠 Nova Cotação - ${data.name} - Plano ${data.recommendedPlan}`,
       html: emailHTML,
     });
