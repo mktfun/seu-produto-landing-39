@@ -15,6 +15,11 @@ const ThankYou = () => {
   const formData = location.state?.formData || {};
 
   useEffect(() => {
+    // Execute Google Ads conversion tracking
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'conversion', {'send_to': 'AW-16801136452/jz06CPCKy5cbEMT-s8s-'});
+    }
+    
     // Start countdown timer
     const timer = setInterval(() => {
       setCountdown((prev) => {
