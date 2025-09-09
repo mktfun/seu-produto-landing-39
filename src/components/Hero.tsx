@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Shield, CheckCircle, Clock, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { trackEvent } from "@/lib/utils";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -43,7 +44,14 @@ const Hero = () => {
               <Button
                 size="lg"
                 className="bg-white text-blue-600 hover:bg-blue-50 font-semibold shadow-lg"
-                onClick={() => navigate("/onboard")}
+                onClick={() => {
+                  trackEvent('formulario_iniciado', {
+                    source: 'hero_button',
+                    event_category: 'engagement',
+                    event_label: 'cotacao_iniciada'
+                  });
+                  navigate("/onboard");
+                }}
               >
                 Solicitar Cotação Gratuita
               </Button>

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { saveLead, type Lead } from "@/lib/supabase";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { trackConversion, trackEvent } from "@/lib/utils";
 
 const Onboard = () => {
   const navigate = useNavigate();
@@ -209,6 +210,25 @@ const Onboard = () => {
 
         if (emailResult?.success) {
           console.log('✅ Email enviado automaticamente com sucesso!');
+          
+          // Track main conversion - cotacao_completa
+          const planValues = {
+            'Essencial': 150,
+            'Completo': 300, 
+            'Completo+': 500
+          };
+          
+          trackConversion('cotacao_completa', planValues[recommendation] || 300, {
+            event_category: 'lead_generation',
+            event_label: 'quote_completed',
+            plan: recommendation,
+            property_type: formData.propertyType,
+            property_value: formData.propertyValue,
+            budget_range: formData.budgetRange,
+            utm_source: formData.utm_source,
+            utm_medium: formData.utm_medium
+          });
+          
           toast({
             title: "✅ Cotação enviada!",
             description: "Dados salvos e email enviado automaticamente.",
@@ -222,7 +242,8 @@ const Onboard = () => {
                   name: formData.name,
                   recommendedPlan: recommendation,
                   propertyType: formData.propertyType,
-                  propertyValue: formData.propertyValue
+                  propertyValue: formData.propertyValue,
+                  phone: formData.phone
                 }
               }
             });

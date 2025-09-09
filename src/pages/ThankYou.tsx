@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, ExternalLink, Timer } from "lucide-react";
+import { trackConversion, trackEvent } from "@/lib/utils";
 
 const ThankYou = () => {
   const location = useLocation();
@@ -31,6 +32,15 @@ const ThankYou = () => {
 
   const handleRedirect = () => {
     setIsRedirecting(true);
+    
+    // Track WhatsApp conversion
+    trackConversion('whatsapp_contact', 50, {
+      event_category: 'contact',
+      event_label: 'whatsapp_redirect',
+      plan: formData.recommendedPlan,
+      property_type: formData.propertyType,
+      property_value: formData.propertyValue
+    });
     
     // Gerar mensagem do WhatsApp
     const message = encodeURIComponent(
