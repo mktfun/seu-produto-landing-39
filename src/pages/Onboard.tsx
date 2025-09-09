@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { ArrowLeft, CheckCircle, Phone, Star, Crown, Shield, Home, Zap, Users, Heart, Wrench, DollarSign, Smartphone, Bike, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { saveLead, type Lead } from "@/lib/supabase";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
 const Onboard = () => {
@@ -168,8 +169,9 @@ const Onboard = () => {
 
       // Save to Supabase first
       console.log('💾 Salvando lead no Supabase...');
+      let supabaseResult: any = null;
       try {
-        const supabaseResult = await saveLead(leadData);
+        supabaseResult = await saveLead(leadData);
         if (supabaseResult.success) {
           console.log('✅ Lead salvo no Supabase com ID:', supabaseResult.data?.id);
         } else {
@@ -179,16 +181,33 @@ const Onboard = () => {
         console.error('❌ Erro inesperado no Supabase:', error.message);
       }
 
-      // Send email via our API
+      // Send email via Supabase Edge Function
       console.log('📧 Enviando email automaticamente...');
       try {
-        const emailResponse = await fetch('/api/send-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ formData: leadData })
+        const emailData = {
+          name: formData.name,
+          phone: formData.phone,
+          propertyType: formData.propertyType,
+          propertyValue: formData.propertyValue,
+          mainPriority: formData.mainPriority,
+          budgetRange: formData.budgetRange,
+          howDidYouHear: formData.howDidYouHear,
+          recommendedPlan: recommendation,
+          utmSource: formData.utm_source,
+          utmMedium: formData.utm_medium,
+          leadId: supabaseResult?.data?.id,
+          timestamp: new Date().toLocaleString('pt-BR')
+        };
+
+        const { data: emailResult, error: emailError } = await supabase.functions.invoke('send-quote-email', {
+          body: emailData
         });
 
-        if (emailResponse.ok) {
+        if (emailError) {
+          throw emailError;
+        }
+
+        if (emailResult?.success) {
           console.log('✅ Email enviado automaticamente com sucesso!');
           toast({
             title: "✅ Cotação enviada!",
@@ -209,12 +228,7 @@ const Onboard = () => {
             });
           }, 1500);
         } else {
-          console.error('❌ Falha no envio automático do email - Status:', emailResponse.status);
-          toast({
-            title: "⚠️ Problema no envio",
-            description: "Dados salvos, mas houve problema no envio do email.",
-            variant: "destructive",
-          });
+          throw new Error(emailResult?.error || 'Erro desconhecido no envio do email');
         }
       } catch (error: any) {
         console.error('❌ Erro no envio automático:', error.message);
