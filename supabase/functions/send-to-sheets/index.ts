@@ -1,5 +1,4 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { GoogleAuth } from "https://esm.sh/google-auth-library@9.11.0";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -19,6 +18,63 @@ interface LeadData {
   utm_source?: string;
   utm_medium?: string;
   timestamp?: string;
+}
+
+// FUNÇÃO MANUAL DE JWT - AGORA FUNCIONAL
+async function createJWT(serviceAccount: any) {
+  const header = { alg: "RS256", typ: "JWT" };
+  const now = Math.floor(Date.now() / 1000);
+  const payload = {
+    iss: serviceAccount.client_email,
+    scope: "https://www.googleapis.com/auth/spreadsheets",
+    aud: "https://oauth2.googleapis.com/token",
+    exp: now + 3600,
+    iat: now
+  };
+
+  const encoder = new TextEncoder();
+  const headerB64 = btoa(JSON.stringify(header)).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+  const payloadB64 = btoa(JSON.stringify(payload)).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+  const message = `${headerB64}.${payloadB64}`;
+
+  // Importar a chave privada
+  const privateKeyPEM = serviceAccount.private_key
+    .replace('-----BEGIN PRIVATE KEY-----', '')
+    .replace('-----END PRIVATE KEY-----', '')
+    .replace(/\s/g, ''); // Remove todos os espaços e quebras de linha
+
+  const privateKeyDer = atob(privateKeyPEM);
+  const keyBuffer = new Uint8Array(privateKeyDer.length).map((_, i) => privateKeyDer.charCodeAt(i));
+
+  const cryptoKey = await crypto.subtle.importKey(
+    'pkcs8',
+    keyBuffer,
+    { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+
+  const signature = await crypto.subtle.sign('RSASSA-PKCS1-v1_5', cryptoKey, encoder.encode(message));
+  const signatureB64 = btoa(String.fromCharCode(...new Uint8Array(signature))).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+
+  return `${message}.${signatureB64}`;
+}
+
+async function getAccessToken(serviceAccount: any) {
+  const jwt = await createJWT(serviceAccount);
+  const response = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion=${jwt}`
+  });
+  
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(`Erro ao obter access token: ${response.status} - ${errorBody}`);
+  }
+  
+  const data = await response.json();
+  return data.access_token;
 }
 
 // Função para mapear os dados para o formato da planilha
@@ -83,39 +139,36 @@ serve(async (req) => {
   }
 
   try {
-    console.log('📊 Iniciando envio para Google Sheets (versão com biblioteca oficial)...');
+    console.log('📊 Iniciando envio para Google Sheets (versão manual com regex)...');
     
-    // 1. Pegar e decodificar a credencial
     const serviceAccountB64 = Deno.env.get('GOOGLE_SERVICE_ACCOUNT_BASE64');
     if (!serviceAccountB64) {
-      throw new Error('GOOGLE_SERVICE_ACCOUNT_BASE64 não encontrado nos secrets');
+      throw new Error('GOOGLE_SERVICE_ACCOUNT_BASE64 não encontrado.');
     }
-
-    console.log('🔑 Decodificando credenciais da service account...');
+    
     const serviceAccountJson = atob(serviceAccountB64.trim());
-    const serviceAccount = JSON.parse(serviceAccountJson);
 
-    if (!serviceAccount.client_email || !serviceAccount.private_key) {
-      throw new Error('Credenciais inválidas: client_email ou private_key ausentes');
+    // A MÁGICA ESTÁ AQUI. REGEX PARA EXTRAIR SÓ O QUE PRECISAMOS
+    const client_email_match = serviceAccountJson.match(/"client_email":\s*"([^"]+)"/);
+    const private_key_match = serviceAccountJson.match(/"private_key":\s*"([^"]+)"/);
+
+    if (!client_email_match || !private_key_match) {
+        throw new Error("Não foi possível extrair client_email ou private_key do JSON.");
     }
 
-    // 2. Autenticação com a biblioteca oficial do Google
-    console.log('🔐 Autenticando com GoogleAuth...');
-    const auth = new GoogleAuth({
-      credentials: {
-        client_email: serviceAccount.client_email,
-        private_key: serviceAccount.private_key,
-      },
-      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-    });
+    const serviceAccount = {
+        client_email: client_email_match[1],
+        private_key: private_key_match[1].replace(/\\n/g, '\n') // Troca o texto '\\n' pela quebra de linha real
+    };
 
-    const authToken = await auth.getAccessToken();
-    console.log('✅ Token de acesso obtido com sucesso!');
+    console.log("✅ Credenciais extraídas com sucesso!");
+    
+    const accessToken = await getAccessToken(serviceAccount);
+    console.log("✅ Token de acesso obtido com sucesso!");
 
-    // 3. Preparar e enviar os dados
     const leadData: LeadData = await req.json();
     console.log('📋 Dados do lead recebidos:', leadData.name);
-
+    
     const formattedData = formatLeadData(leadData);
     console.log('📝 Dados formatados para planilha');
 
@@ -123,19 +176,14 @@ serve(async (req) => {
     const range = 'Folha1!A1';
 
     console.log('📤 Enviando dados para Google Sheets...');
-    const sheetsResponse = await fetch(
-      `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${authToken}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          values: [formattedData],
-        }),
-      }
-    );
+    const sheetsResponse = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ values: [formattedData] }),
+    });
 
     if (!sheetsResponse.ok) {
       const errorText = await sheetsResponse.text();
@@ -146,30 +194,23 @@ serve(async (req) => {
     const responseData = await sheetsResponse.json();
     console.log('✅ Sucesso! Dados adicionados à planilha:', responseData.updates?.updatedCells || 'N/A', 'células');
 
-    return new Response(
-      JSON.stringify({ 
-        success: true, 
-        message: 'Lead adicionado com sucesso ao Google Sheets!',
-        updatedCells: responseData.updates?.updatedCells 
-      }),
-      {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 200,
-      }
-    );
+    return new Response(JSON.stringify({ 
+      success: true, 
+      message: 'Lead adicionado com sucesso ao Google Sheets!',
+      response: responseData 
+    }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      status: 200,
+    });
 
   } catch (error) {
-    console.error('❌ Erro na função send-to-sheets:', error);
-    return new Response(
-      JSON.stringify({ 
-        success: false,
-        error: error.message,
-        details: 'Verifique os logs da função para mais detalhes' 
-      }),
-      {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 500,
-      }
-    );
+    console.error('❌ Erro final na função:', error);
+    return new Response(JSON.stringify({ 
+      success: false,
+      error: error.message 
+    }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      status: 500,
+    });
   }
 });
