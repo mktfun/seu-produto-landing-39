@@ -184,7 +184,7 @@ const Onboard = () => {
               id: supabaseResult.data?.id,
               name: formData.name,
               phone: formData.phone,
-              how_did_you_hear: formData.utm_source || 'direct',
+              how_did_you_hear: formData.howDidYouHear,
               property_type: formData.propertyType,
               property_value: formData.propertyValue,
               main_priority: formData.mainPriority,

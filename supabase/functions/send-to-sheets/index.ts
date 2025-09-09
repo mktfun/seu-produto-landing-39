@@ -142,9 +142,31 @@ serve(async (req) => {
       throw new Error('GOOGLE_SERVICE_ACCOUNT_BASE64 não encontrado nas variáveis de ambiente');
     }
 
+    console.log('🔑 Decodificando credenciais da service account...');
     // Decode the base64 service account
-    const serviceAccountJson = atob(serviceAccountB64);
-    const serviceAccount = JSON.parse(serviceAccountJson);
+    let serviceAccountJson: string;
+    let serviceAccount: any;
+    
+    try {
+      serviceAccountJson = atob(serviceAccountB64);
+      console.log('✅ Base64 decodificado com sucesso');
+    } catch (error) {
+      console.error('❌ Erro ao decodificar Base64:', error);
+      throw new Error(`Erro na decodificação Base64: ${error.message}`);
+    }
+
+    try {
+      serviceAccount = JSON.parse(serviceAccountJson);
+      console.log('✅ JSON da service account parseado com sucesso');
+      
+      // Validate required fields
+      if (!serviceAccount.client_email || !serviceAccount.private_key) {
+        throw new Error('Service account inválida: falta client_email ou private_key');
+      }
+    } catch (error) {
+      console.error('❌ Erro ao parsear JSON da service account:', error);
+      throw new Error(`Erro no JSON da service account: ${error.message}`);
+    }
 
     // Get lead data from request
     const leadData: LeadData = await req.json();
