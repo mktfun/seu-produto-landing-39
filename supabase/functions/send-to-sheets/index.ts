@@ -30,13 +30,25 @@ serve(async (req) => {
       console.log(`📏 Tamanho: ${secret.length} caracteres`);
       console.log(`🔤 Primeiros 50 chars: ${secret.substring(0, 50)}...`);
       
-      // Tentar fazer parse do JSON para validar
+      // Tentar fazer parse do JSON - primeiro JSON direto, depois base64
+      let parsed;
       try {
-        const decoded = atob(secret);
-        const parsed = JSON.parse(decoded);
-        console.log("✅ Secret é um JSON válido!");
-        console.log("🔑 Tipo de chave:", parsed.type);
-        console.log("📧 Client email:", parsed.client_email);
+        // Primeiro tenta como JSON direto
+        parsed = JSON.parse(secret);
+        console.log("✅ Secret lido como JSON direto!");
+      } catch (jsonError) {
+        try {
+          // Se falhar, tenta decodificar base64 primeiro
+          const decoded = atob(secret);
+          parsed = JSON.parse(decoded);
+          console.log("✅ Secret lido como base64 + JSON!");
+        } catch (base64Error) {
+          throw new Error(`Falha ao fazer parse do secret: JSON direto: ${jsonError.message}, Base64: ${base64Error.message}`);
+        }
+      }
+      
+      console.log("🔑 Tipo de chave:", parsed.type);
+      console.log("📧 Client email:", parsed.client_email);
         
         return new Response(JSON.stringify({
           success: true,
