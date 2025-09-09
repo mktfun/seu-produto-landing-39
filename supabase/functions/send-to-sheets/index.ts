@@ -50,28 +50,16 @@ serve(async (req) => {
       console.log("🔑 Tipo de chave:", parsed.type);
       console.log("📧 Client email:", parsed.client_email);
         
-        return new Response(JSON.stringify({
-          success: true,
-          message: "Secret funcionando perfeitamente!",
-          secretLength: secret.length,
-          keyType: parsed.type,
-          clientEmail: parsed.client_email
-        }), {
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          status: 200,
-        });
-        
-      } catch (parseError) {
-        console.error("❌ Erro ao fazer parse do secret:", parseError);
-        return new Response(JSON.stringify({
-          success: false,
-          message: "Secret existe mas não é um JSON válido",
-          error: parseError.message
-        }), {
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          status: 400,
-        });
-      }
+      return new Response(JSON.stringify({
+        success: true,
+        message: "Secret funcionando perfeitamente!",
+        secretLength: secret.length,
+        keyType: parsed.type,
+        clientEmail: parsed.client_email
+      }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200,
+      });
       
     } else {
       console.error("❌ SECRET NÃO ENCONTRADO!");
