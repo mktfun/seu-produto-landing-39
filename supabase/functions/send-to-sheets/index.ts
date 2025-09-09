@@ -143,16 +143,38 @@ serve(async (req) => {
     }
 
     console.log('🔑 Decodificando credenciais da service account...');
+    
+    // Clean and validate Base64 string
+    const cleanedBase64 = serviceAccountB64
+      .trim()                    // Remove leading/trailing whitespace
+      .replace(/\s+/g, '')       // Remove all whitespace characters
+      .replace(/\n|\r/g, '');    // Remove newlines
+    
+    console.log(`📏 Comprimento da string Base64: ${cleanedBase64.length}`);
+    console.log(`🔤 Primeiros 20 caracteres: ${cleanedBase64.substring(0, 20)}...`);
+    
+    // Validate Base64 format
+    const base64Regex = /^[A-Za-z0-9+/]*={0,2}$/;
+    if (!base64Regex.test(cleanedBase64)) {
+      throw new Error('Formato Base64 inválido: contém caracteres não permitidos');
+    }
+    
+    if (cleanedBase64.length === 0) {
+      throw new Error('String Base64 está vazia após limpeza');
+    }
+
     // Decode the base64 service account
     let serviceAccountJson: string;
     let serviceAccount: any;
     
     try {
-      serviceAccountJson = atob(serviceAccountB64);
+      serviceAccountJson = atob(cleanedBase64);
       console.log('✅ Base64 decodificado com sucesso');
+      console.log(`📄 Tamanho do JSON decodificado: ${serviceAccountJson.length} caracteres`);
     } catch (error) {
       console.error('❌ Erro ao decodificar Base64:', error);
-      throw new Error(`Erro na decodificação Base64: ${error.message}`);
+      console.error(`🔍 String Base64 problemática (primeiros 50 chars): ${cleanedBase64.substring(0, 50)}`);
+      throw new Error(`Erro na decodificação Base64: ${error.message}. Verifique se o secret está correto.`);
     }
 
     try {
