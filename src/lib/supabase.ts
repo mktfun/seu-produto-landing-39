@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 
 // Configuração do Supabase conectado via MCP
 const supabaseUrl = 'https://nmmthliwtdcnsqfpjceu.supabase.co'
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5tbXRobGl3dGRjbnNxZnBqY2V1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ3NDUyNTQsImV4cCI6MjA0MDMyMTI1NH0.Tr6yZF2EYGqHDNltwwC_fDrJgmf49iYhJYshqTI7EjI'
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5tbXRobGl3dGRjbnNxZnBqY2V1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYxNDIwMzYsImV4cCI6MjA3MTcxODAzNn0.rdl5hIyJ0j4HSjo8mDxgn_jjeUnPUEIjg-_7c8AK5YA'
 
 // Criar cliente Supabase
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
