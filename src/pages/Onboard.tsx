@@ -175,6 +175,23 @@ const Onboard = () => {
         supabaseResult = await saveLead(leadData);
         if (supabaseResult.success) {
           console.log('✅ Lead salvo no Supabase com ID:', supabaseResult.data?.id);
+          
+          // Send to Google Sheets in background (fire-and-forget)
+          fetch('https://nmmthliwtdcnsqfpjceu.supabase.co/functions/v1/send-to-sheets', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id: supabaseResult.data?.id,
+              name: formData.name,
+              phone: formData.phone,
+              how_did_you_hear: formData.utm_source || 'direct',
+              property_type: formData.propertyType,
+              property_value: formData.propertyValue,
+              main_priority: formData.mainPriority,
+              budget_range: formData.budgetRange,
+              recommended_plan: recommendation
+            })
+          }).catch(error => console.log('📊 Sheets error (non-blocking):', error));
         } else {
           console.error('❌ Erro ao salvar no Supabase:', supabaseResult.error);
         }
