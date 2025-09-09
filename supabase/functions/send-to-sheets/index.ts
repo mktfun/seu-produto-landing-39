@@ -30,10 +30,24 @@ async function createJWT(serviceAccount: any) {
   
   const signatureInput = `${encodedHeader}.${encodedPayload}`;
   
+  // Process private key - remove PEM headers and convert to binary
+  let privateKeyPem = serviceAccount.private_key;
+  
+  // Remove PEM headers and whitespace
+  privateKeyPem = privateKeyPem
+    .replace(/-----BEGIN PRIVATE KEY-----/g, '')
+    .replace(/-----END PRIVATE KEY-----/g, '')
+    .replace(/\s/g, '');
+  
+  // Convert base64 to binary
+  const privateKeyBinary = Uint8Array.from(atob(privateKeyPem), c => c.charCodeAt(0));
+  
+  console.log("🔑 Processando chave privada...");
+  
   // Import private key
   const privateKey = await crypto.subtle.importKey(
     'pkcs8',
-    new TextEncoder().encode(serviceAccount.private_key),
+    privateKeyBinary,
     { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
     false,
     ['sign']
