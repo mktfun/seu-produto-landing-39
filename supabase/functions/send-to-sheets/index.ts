@@ -1,5 +1,5 @@
-// supabase/functions/send-to-sheets/index.ts
-// CÓDIGO DE TESTE DE SANIDADE - VERSÃO EXORCISMO
+// RESET TOTAL - NOVA FUNÇÃO COMPLETAMENTE DIFERENTE
+// Esta é uma versão totalmente nova para forçar o Supabase a recriar o ambiente
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
@@ -9,36 +9,76 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
   }
 
-  console.log("--- INICIANDO TESTE DE SANIDADE DO SEGREDO v2 ---");
+  console.log("🚀 RESET TOTAL - AMBIENTE COMPLETAMENTE NOVO 🚀");
+  console.log("🔄 Verificando status dos secrets após reset...");
 
-  // A única coisa que este código faz é tentar ler o segredo.
-  const secret = Deno.env.get('GOOGLE_SERVICE_ACCOUNT_BASE64');
+  try {
+    // Listar todos os env vars disponíveis (sem mostrar valores)
+    const envVars = Object.keys(Deno.env.toObject());
+    console.log("📋 Environment vars disponíveis:", envVars);
 
-  if (secret && secret.length > 200) {
-    // Se o segredo existir e tiver um tamanho razoável...
-    console.log("✅ SUCESSO! O segredo foi encontrado.");
-    console.log(`Tamanho do segredo: ${secret.length} caracteres.`);
+    // Verificar se o secret específico existe
+    const secret = Deno.env.get('GOOGLE_SERVICE_ACCOUNT_BASE64');
     
-    return new Response(JSON.stringify({
-      status: "SUCESSO",
-      message: "O segredo GOOGLE_SERVICE_ACCOUNT_BASE64 foi lido com sucesso pela função.",
-      length: secret.length,
-    }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      status: 200,
-    });
-
-  } else {
-    // Se o segredo não for encontrado ou estiver vazio...
-    console.error("❌ FALHA CRÍTICA! O segredo GOOGLE_SERVICE_ACCOUNT_BASE64 não foi encontrado ou está vazio.");
+    if (secret) {
+      console.log("✅ SECRET ENCONTRADO!");
+      console.log(`📏 Tamanho: ${secret.length} caracteres`);
+      console.log(`🔤 Primeiros 50 chars: ${secret.substring(0, 50)}...`);
+      
+      // Tentar fazer parse do JSON para validar
+      try {
+        const decoded = atob(secret);
+        const parsed = JSON.parse(decoded);
+        console.log("✅ Secret é um JSON válido!");
+        console.log("🔑 Tipo de chave:", parsed.type);
+        console.log("📧 Client email:", parsed.client_email);
+        
+        return new Response(JSON.stringify({
+          success: true,
+          message: "Secret funcionando perfeitamente!",
+          secretLength: secret.length,
+          keyType: parsed.type,
+          clientEmail: parsed.client_email
+        }), {
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 200,
+        });
+        
+      } catch (parseError) {
+        console.error("❌ Erro ao fazer parse do secret:", parseError);
+        return new Response(JSON.stringify({
+          success: false,
+          message: "Secret existe mas não é um JSON válido",
+          error: parseError.message
+        }), {
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 400,
+        });
+      }
+      
+    } else {
+      console.error("❌ SECRET NÃO ENCONTRADO!");
+      return new Response(JSON.stringify({
+        success: false,
+        message: "GOOGLE_SERVICE_ACCOUNT_BASE64 não foi encontrado",
+        availableVars: envVars
+      }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 404,
+      });
+    }
     
+  } catch (error) {
+    console.error("💥 Erro geral:", error);
     return new Response(JSON.stringify({
-      status: "FALHA",
-      message: "O segredo GOOGLE_SERVICE_ACCOUNT_BASE64 não foi encontrado ou está vazio. Verifique o nome e o valor no painel do Supabase. O nome tem que ser EXATAMENTE esse.",
+      success: false,
+      message: "Erro interno da função",
+      error: error.message
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 500,
