@@ -535,33 +535,15 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
 
                 {/* Auto-email status */}
                 {emailSent && (
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4">
                     <div className="flex items-center justify-center space-x-2 text-green-700">
                       <CheckCircle className="w-5 h-5" />
-                      <span className="text-sm font-medium">📧 Email enviado automaticamente!</span>
+                      <span className="text-sm font-medium">✅ Dados salvos com sucesso!</span>
                     </div>
-                    <p className="text-xs text-green-600 mt-1">Nossa equipe já recebeu seus dados</p>
+                    <p className="text-xs text-green-600 mt-2">📧 Email enviado automaticamente para nossa equipe</p>
+                    <p className="text-xs text-green-600">📱 Você será direcionado para WhatsApp para finalizar</p>
                   </div>
                 )}
-
-                <Button
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white font-bold py-3 disabled:opacity-70"
-                  size="lg"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 mr-2 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
-                      Enviando automaticamente...
-                    </>
-                  ) : (
-                    <>
-                      <Phone className="w-5 h-5 mr-2" />
-                      Solicitar Cotação no WhatsApp
-                    </>
-                  )}
-                </Button>
               </CardContent>
             </Card>
           </div>

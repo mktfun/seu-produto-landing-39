@@ -31,7 +31,20 @@ const ThankYou = () => {
 
   const handleRedirect = () => {
     setIsRedirecting(true);
-    window.location.href = "https://jjamorimseguros.com.br";
+    
+    // Gerar mensagem do WhatsApp
+    const message = encodeURIComponent(
+      `Olá! Acabei de solicitar uma cotação pelo site.\n\n` +
+      `📋 Meus dados:\n` +
+      `• Nome: ${formData.name}\n` +
+      `• Telefone: ${formData.phone}\n` +
+      `• Tipo de imóvel: ${formData.propertyType}\n` +
+      `• Valor estimado: ${formData.propertyValue}\n` +
+      `• Plano recomendado: ${formData.recommendedPlan}\n\n` +
+      `Gostaria de receber uma cotação personalizada! 😊`
+    );
+    
+    window.location.href = `https://wa.me/5511996242812?text=${message}`;
   };
 
   const handleManualRedirect = () => {
@@ -91,9 +104,12 @@ const ThankYou = () => {
                 <div className="flex items-center justify-center space-x-2 text-blue-700">
                   <Timer className="w-5 h-5" />
                   <span className="font-medium">
-                    Redirecionando em {countdown} segundos...
+                    Abrindo WhatsApp em {countdown} segundos...
                   </span>
                 </div>
+                <p className="text-xs text-blue-600 mt-2">
+                  💬 Você será direcionado para nosso WhatsApp para finalizar sua cotação
+                </p>
                 <div className="w-full bg-blue-200 rounded-full h-2 mt-3">
                   <div 
                     className="bg-blue-600 h-2 rounded-full transition-all duration-1000"
@@ -106,7 +122,7 @@ const ThankYou = () => {
                 <div className="flex items-center justify-center space-x-2 text-green-700">
                   <ExternalLink className="w-5 h-5" />
                   <span className="font-medium">
-                    {isRedirecting ? "Redirecionando..." : "Redirecionamento em andamento..."}
+                    {isRedirecting ? "Abrindo WhatsApp..." : "Direcionando para WhatsApp..."}
                   </span>
                 </div>
               </div>
@@ -120,7 +136,7 @@ const ThankYou = () => {
               className="bg-primary hover:bg-primary/90"
             >
               <ExternalLink className="w-4 h-4 mr-2" />
-              Ir para JJ Amorim Seguros
+              Abrir WhatsApp Agora
             </Button>
             <Button 
               variant="outline" 
@@ -134,7 +150,7 @@ const ThankYou = () => {
           <div className="text-xs text-muted-foreground space-y-1">
             <p>✅ Seus dados foram salvos com segurança</p>
             <p>📧 Um email com sua cotação foi enviado</p>
-            <p>📞 Nossa equipe entrará em contato em breve</p>
+            <p>📱 Continue no WhatsApp para finalizar</p>
           </div>
         </CardContent>
       </Card>
