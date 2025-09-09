@@ -1,5 +1,5 @@
 // supabase/functions/send-to-sheets/index.ts
-// CÓDIGO DE TESTE DE SANIDADE. APAGUE TUDO E COLE ISSO.
+// CÓDIGO DE TESTE DE SANIDADE - VERSÃO EXORCISMO
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
@@ -13,7 +13,7 @@ serve(async (req) => {
     return new Response('ok', { headers: corsHeaders });
   }
 
-  console.log("--- INICIANDO TESTE DE SANIDADE DO SEGREDO ---");
+  console.log("--- INICIANDO TESTE DE SANIDADE DO SEGREDO v2 ---");
 
   // A única coisa que este código faz é tentar ler o segredo.
   const secret = Deno.env.get('GOOGLE_SERVICE_ACCOUNT_BASE64');
