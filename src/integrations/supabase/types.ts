@@ -17,6 +17,7 @@ export type Database = {
       leads: {
         Row: {
           budget_range: string
+          conversao: string
           created_at: string | null
           email: string
           how_did_you_hear: string
@@ -37,6 +38,7 @@ export type Database = {
         }
         Insert: {
           budget_range: string
+          conversao?: string
           created_at?: string | null
           email: string
           how_did_you_hear: string
@@ -57,6 +59,7 @@ export type Database = {
         }
         Update: {
           budget_range?: string
+          conversao?: string
           created_at?: string | null
           email?: string
           how_did_you_hear?: string
