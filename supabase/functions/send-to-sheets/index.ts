@@ -7,7 +7,7 @@ const corsHeaders = {
 
 // Google Sheets configuration
 const SHEET_ID = '1SYAMD8C-D7zxiucTh49GmkEK33UHnEBp4aPp-dh_qZU';
-const SHEET_RANGE = 'Folha1!A:J';
+const SHEET_RANGE = 'Folha1!A:L';
 
 // Create JWT token for Google API authentication
 async function createJWT(serviceAccount: any) {
@@ -180,6 +180,7 @@ serve(async (req) => {
       leadData.main_priority || '',
       leadData.budget_range || '',
       leadData.recommended_plan || '',
+      leadData.conversao || 'simulador_residencial',
       currentDate
     ];
 

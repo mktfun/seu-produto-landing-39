@@ -189,7 +189,8 @@ const Onboard = () => {
               property_value: formData.propertyValue,
               main_priority: formData.mainPriority,
               budget_range: formData.budgetRange,
-              recommended_plan: recommendation
+              recommended_plan: recommendation,
+              conversao: 'simulador_residencial'
             })
           }).catch(error => console.log('📊 Sheets error (non-blocking):', error));
         } else {
