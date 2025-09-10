@@ -15,7 +15,7 @@ const plans = [
     icon: Shield,
     badge: "Econômico",
     badgeColor: "bg-green-100 text-green-700",
-    cta: "Começar Agora",
+    cta: "Simular Cotação Grátis Agora",
     features: [
       "Serviços emergenciais básicos",
       "Chaveiro e vidraceiro",
@@ -41,7 +41,7 @@ const plans = [
     icon: Home,
     badge: "Mais Escolhido",
     badgeColor: "bg-blue-100 text-blue-700",
-    cta: "Quero Este Plano",
+    cta: "Simular Cotação Grátis Agora",
     features: [
       "Todos os serviços do Essencial",
       "📱 Proteção completa eletrônicos",
@@ -66,7 +66,7 @@ const plans = [
     icon: Crown,
     badge: "Premium",
     badgeColor: "bg-purple-100 text-purple-700",
-    cta: "Cobertura Total",
+    cta: "Simular Cotação Grátis Agora",
     features: [
       "Todos os serviços do Completo",
       "📱 Eletrônicos premium + resgate",
@@ -89,7 +89,7 @@ const PlansSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-4">
-            Escolha Seu Plano
+            Compare os Planos do Seguro Residencial
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-6">
             Planos oficiais Zurich com diferentes níveis de proteção. 

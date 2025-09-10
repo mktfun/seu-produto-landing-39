@@ -6,7 +6,7 @@ const services = [
   {
     icon: Wrench,
     title: "Reparos Essenciais",
-    description: "Emergências domésticas 24h",
+    description: "Nosso seguro residencial inclui emergências domésticas 24h",
     items: ["Encanamento", "Elétrica", "Chaveiro", "Vidraceiro"]
   },
   {
@@ -35,10 +35,10 @@ const ServicesSection = memo(() => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-secondary mb-4">
-            Nossos Serviços
+            Coberturas e Assistência 24h do Seguro Zurich
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Cobertura completa para todas as necessidades da sua residência com atendimento 24 horas.
+            Nosso seguro residencial inclui cobertura completa para todas as necessidades da sua residência com atendimento 24 horas.
           </p>
         </div>
 

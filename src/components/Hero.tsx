@@ -27,17 +27,17 @@ const Hero = () => {
             </div>
             
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight text-white">
-              Seguro residencial<br />
-              <span className="text-white/90">em 3 minutos</span>
+              Seguro Residencial Zurich:<br />
+              <span className="text-white/90">Faça sua Cotação em 3 Minutos</span>
             </h1>
 
             <p className="text-lg sm:text-xl lg:text-2xl text-white/90 max-w-lg">
-              Proteção completa a partir de R$ 2,90/dia
+              Proteção completa com assistência 24h a partir de R$ 2,90/dia
             </p>
             
             <p className="text-base sm:text-lg text-white/80 max-w-xl">
-              Proteção completa para sua casa com cobertura diferenciada,
-              pensada com todo cuidado para garantir itens básicos do dia-a-dia.
+              Proteção completa com assistência 24h para sua casa ou apartamento. 
+              Calcule o preço do seu seguro agora.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
@@ -53,7 +53,7 @@ const Hero = () => {
                   navigate("/onboard");
                 }}
               >
-                Solicitar Cotação Gratuita
+                Simular Cotação Grátis Agora
               </Button>
               <Button
                 size="lg"
@@ -63,7 +63,7 @@ const Hero = () => {
                   planosElement?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
-                Ver Planos Disponíveis
+                Simular Cotação Grátis Agora
               </Button>
             </div>
 

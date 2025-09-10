@@ -55,7 +55,7 @@ const ContactSection = () => {
                     size="lg"
                     onClick={() => navigate("/onboard")}
                   >
-                    Iniciar Cotação Personalizada
+                    Simular Cotação Grátis Agora
                   </Button>
                 </div>
               </CardContent>
