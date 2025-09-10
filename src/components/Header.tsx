@@ -91,7 +91,7 @@ const Header = () => {
               }`}
               onClick={() => navigate("/onboard")}
             >
-              {isScrolled ? 'Cotação' : 'Solicitar Cotação'}
+              {isScrolled ? 'Simular Cotação' : 'Simular Cotação Grátis Agora'}
             </Button>
           </div>
         </div>
@@ -134,7 +134,7 @@ const Header = () => {
                     setMobileMenuOpen(false);
                   }}
                 >
-                  Solicitar Cotação
+                  Simular Cotação Grátis Agora
                 </Button>
               </div>
             </nav>

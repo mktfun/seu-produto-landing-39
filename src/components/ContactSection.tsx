@@ -26,7 +26,7 @@ const ContactSection = () => {
             <Card className="card-gradient border-0 shadow-lg">
               <CardContent className="p-4 sm:p-6 lg:p-8">
                 <h3 className="text-xl sm:text-2xl font-bold text-secondary mb-4 sm:mb-6">
-                  Solicitar Cotação Personalizada
+                  Simular Cotação Personalizada
                 </h3>
 
                 <div className="space-y-4 sm:space-y-6">
