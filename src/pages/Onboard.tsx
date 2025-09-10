@@ -57,59 +57,41 @@ const Onboard = () => {
   };
 
   const calculateRecommendation = () => {
-    let scores = { essencial: 0, completo: 0, completoPlus: 0 };
+    // Implementação dos 4 fluxos do motor de recomendação
 
-    // Tipo de propriedade
-    if (formData.propertyType === "apartamento") {
-      scores.essencial += 2;
-      scores.completo += 1;
-    } else if (formData.propertyType === "casa") {
-      scores.completo += 2;
-      scores.completoPlus += 1;
-    } else if (formData.propertyType === "sobrado" || formData.propertyType === "chacara") {
-      scores.completoPlus += 3;
+    // Fluxo 1: "Conveniência e Serviços"
+    if (formData.mainPriority === "ajuda_rapida") {
+      // Se orçamento baixo, downgrade para Completo
+      if (formData.budgetRange === "ate_50") {
+        return "Completo";
+      }
+      return "Completo+";
     }
 
-    // Valor da propriedade
-    if (formData.propertyValue === "ate-300k") {
-      scores.essencial += 3;
-    } else if (formData.propertyValue === "300-600k") {
-      scores.completo += 3;
-    } else {
-      scores.completoPlus += 3;
+    // Fluxo 2: "Proteção Máxima" 
+    if (formData.mainPriority === "seguro_completo") {
+      // Se orçamento baixo, downgrade para Completo
+      if (formData.budgetRange === "ate_50") {
+        return "Completo";
+      }
+      return "Completo+";
     }
 
-    // Prioridade principal (agora engloba eletrônicos, bikes, etc)
-    if (formData.mainPriority === "preco") {
-      scores.essencial += 4;
-    } else if (formData.mainPriority === "emergencias") {
-      scores.completo += 4;
-    } else if (formData.mainPriority === "eletronicos") {
-      scores.completo += 4;
-      scores.completoPlus += 2;
-    } else if (formData.mainPriority === "bikes") {
-      scores.completo += 3;
-      scores.completoPlus += 3;
-    } else if (formData.mainPriority === "manutencao") {
-      scores.completoPlus += 4;
-    } else if (formData.mainPriority === "completo") {
-      scores.completo += 3;
-      scores.completoPlus += 3;
+    // Fluxo 3: "Segurança Essencial"
+    if (formData.mainPriority === "proteger_bens" || formData.mainPriority === "estabilidade_financeira") {
+      if (formData.budgetRange === "ate_50") {
+        return "Essencial";
+      }
+      return "Completo";
     }
 
-    // Orçamento
-    if (formData.budgetRange === "economico") {
-      scores.essencial += 3;
-    } else if (formData.budgetRange === "medio") {
-      scores.completo += 3;
-    } else {
-      scores.completoPlus += 3;
+    // Fluxo 4: "Ponto de Partida" (orçamento baixo + não é ajuda_rapida nem seguro_completo)
+    if (formData.budgetRange === "ate_50") {
+      return "Essencial";
     }
 
-    // Determinar recomendação
-    const maxScore = Math.max(scores.essencial, scores.completo, scores.completoPlus);
-    if (scores.essencial === maxScore) return "Essencial";
-    if (scores.completo === maxScore) return "Completo";
+    // Fallback para casos não cobertos
+    if (formData.budgetRange === "50_100") return "Completo";
     return "Completo+";
   };
 
@@ -413,34 +395,53 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
         return (
           <div className="space-y-6 text-center">
             <div className="mb-8">
-              <Star className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-secondary mb-2">O que é MAIS importante para você?</h2>
-              <p className="text-muted-foreground">Escolha sua principal prioridade em um seguro residencial</p>
+              <Shield className="w-16 h-16 text-primary mx-auto mb-4" />
+              <h2 className="text-3xl font-bold text-secondary mb-2">Suas prioridades de proteção</h2>
+              <p className="text-muted-foreground">Pensando na proteção do seu lar, qual a sua maior preocupação hoje?</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+            <div className="grid grid-cols-1 gap-4 max-w-3xl mx-auto">
               {[
-                { id: "preco", label: "Menor preço", icon: "💰", description: "Economia em primeiro lugar" },
-                { id: "emergencias", label: "Cobertura emergencial", icon: "🚨", description: "Atendimento 24h para emergências" },
-                { id: "eletronicos", label: "Proteção eletrônicos", icon: "📱", description: "Smartphones, notebooks, TVs", highlight: true },
-                { id: "bikes", label: "Assistência para bikes", icon: "🚲", description: "Ciclismo e bicicletas", highlight: true },
-                { id: "manutencao", label: "Manutenção preventiva", icon: "🔧", description: "Cuidado contínuo da casa" },
-                { id: "completo", label: "Proteção completa", icon: "🛡️", description: "Máxima tranquilidade" }
+                { 
+                  id: "proteger_bens", 
+                  label: "Proteger meus bens (móveis, eletrônicos) contra roubo e danos", 
+                  icon: "🛡️", 
+                  description: "Proteção patrimonial completa" 
+                },
+                { 
+                  id: "ajuda_rapida", 
+                  label: "Ter ajuda rápida para imprevistos do dia a dia (chaveiro, eletricista)", 
+                  icon: "🚨", 
+                  description: "Assistências emergenciais 24h" 
+                },
+                { 
+                  id: "estabilidade_financeira", 
+                  label: "Garantir a estabilidade financeira em caso de danos maiores (incêndio, vendaval)", 
+                  icon: "💰", 
+                  description: "Segurança contra grandes sinistros" 
+                },
+                { 
+                  id: "seguro_completo", 
+                  label: "Ter o seguro mais completo possível, cobrindo tudo que tenho direito", 
+                  icon: "👑", 
+                  description: "Máxima cobertura disponível" 
+                }
               ].map((option) => (
                 <Card
                   key={option.id}
                   className={`cursor-pointer transition-all hover:scale-105 border-2 hover:border-primary ${
                     formData.mainPriority === option.id ? 'border-primary bg-primary/5' : 'border-border'
-                  } ${option.highlight ? 'ring-2 ring-blue-200' : ''}`}
+                  }`}
                   onClick={() => selectOption('mainPriority', option.id)}
                 >
-                  <CardContent className="p-6 text-center">
-                    <div className="text-4xl mb-3">{option.icon}</div>
-                    <h3 className="font-semibold text-lg mb-2">{option.label}</h3>
-                    <p className="text-sm text-muted-foreground">{option.description}</p>
-                    {option.highlight && (
-                      <div className="mt-2 text-xs text-blue-600 font-medium">⭐ DESTAQUE</div>
-                    )}
+                  <CardContent className="p-6 text-left">
+                    <div className="flex items-start space-x-4">
+                      <div className="text-4xl">{option.icon}</div>
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-lg mb-2">{option.label}</h3>
+                        <p className="text-sm text-muted-foreground">{option.description}</p>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
@@ -453,15 +454,16 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
           <div className="space-y-6 text-center">
             <div className="mb-8">
               <DollarSign className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-secondary mb-2">Qual seu orçamento mensal?</h2>
-              <p className="text-muted-foreground">Vamos encontrar a melhor opção para seu bolso</p>
+              <h2 className="text-3xl font-bold text-secondary mb-2">Planejamento financeiro</h2>
+              <p className="text-muted-foreground">Para encontrarmos o plano com o melhor encaixe para você, qual valor mensal se alinha ao seu planejamento?</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
               {[
-                { id: "economico", label: "Até R$ 100/mês", icon: "💚", description: "Proteção essencial" },
-                { id: "medio", label: "R$ 100 - R$ 200/mês", icon: "💙", description: "Cobertura completa" },
-                { id: "premium", label: "Acima R$ 200/mês", icon: "💜", description: "Máxima proteção" }
+                { id: "ate_50", label: "Algo em torno de R$ 50/mês (Plano Essencial)", icon: "💚", description: "Proteção básica e econômica" },
+                { id: "50_100", label: "Entre R$ 50 e R$ 100/mês (Plano Conforto)", icon: "💙", description: "Cobertura equilibrada" },
+                { id: "acima_100", label: "Acima de R$ 100/mês (Plano Premium)", icon: "💜", description: "Máxima proteção" },
+                { id: "nao_certeza", label: "Não tenho certeza, quero ver as melhores opções", icon: "🤔", description: "Vamos encontrar juntos" }
               ].map((option) => (
                 <Card
                   key={option.id}
@@ -572,23 +574,58 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
 
       case 7:
         const recommendation = calculateRecommendation();
+        
+        // Função para obter texto personalizado baseado no fluxo
+        const getPersonalizedText = (plan: string) => {
+          const propertyTypeMap = {
+            "apartamento": "apartamento",
+            "casa": "casa",
+            "sobrado": "sobrado",
+            "chacara": "chácara"
+          };
+          
+          const propertyName = propertyTypeMap[formData.propertyType as keyof typeof propertyTypeMap] || "residência";
+          
+          // Fluxo 1: Conveniência e Serviços
+          if (formData.mainPriority === "ajuda_rapida") {
+            return `Perfeito, ${formData.name}! Vimos que ter assistências para resolver as pendências do dia a dia é sua maior prioridade. Por isso, seu plano ideal é o ${plan}. Ele é o único que, além de todas as coberturas de emergência, oferece um pacote de serviços de manutenção e inspeção para você usar como preferir, como limpeza de calhas para sua ${propertyName} e revisão elétrica completa.`;
+          }
+          
+          // Fluxo 2: Proteção Máxima
+          if (formData.mainPriority === "seguro_completo") {
+            return `Entendido, ${formData.name}! Você busca a proteção mais completa e definitiva para o seu lar. O plano que atende perfeitamente à sua necessidade é o ${plan}. Ele une todas as coberturas contra danos e roubo com o mais vasto pacote de assistências e serviços de manutenção do mercado. É a tranquilidade absoluta para sua ${propertyName}.`;
+          }
+          
+          // Fluxo 3: Segurança Essencial
+          if (formData.mainPriority === "proteger_bens" || formData.mainPriority === "estabilidade_financeira") {
+            if (plan === "Completo") {
+              return `Olá, ${formData.name}! Para garantir sua estabilidade financeira em imprevistos maiores, o plano ideal é o ${plan}. Além da proteção básica para sua ${propertyName}, ele oferece suportes cruciais como hospedagem e guarda de móveis caso você precise, e até conserto para seus eletrodomésticos.`;
+            } else {
+              return `${formData.name}, encontramos o plano inteligente para você. O ${plan} é a porta de entrada para a proteção do seu lar. Ele cabe no seu planejamento e garante as coberturas e assistências emergenciais mais importantes para sua ${propertyName}, como chaveiro, encanador e eletricista 24 horas.`;
+            }
+          }
+          
+          // Fluxo 4: Ponto de Partida
+          return `${formData.name}, encontramos o plano inteligente para você. O ${plan} é a porta de entrada para a proteção do seu lar. Ele cabe no seu planejamento e garante as coberturas e assistências emergenciais mais importantes para sua ${propertyName}, como chaveiro, encanador e eletricista 24 horas.`;
+        };
+        
         const planDetails = {
           "Essencial": {
             icon: "💚",
             color: "green",
-            description: "Proteção básica com excelente custo-benefício",
+            description: getPersonalizedText("Essencial"),
             features: ["Emergências essenciais", "Atendimento 24h", "Serviços básicos", "Proteção básica"]
           },
           "Completo": {
             icon: "💙",
-            color: "blue",
-            description: "Cobertura completa para o dia a dia",
+            color: "blue", 
+            description: getPersonalizedText("Completo"),
             features: ["Todas as emergências", "📱 Proteção para eletrônicos", "🚲 Assistência para bikes", "Hospedagem", "Assistência para pets"]
           },
           "Completo+": {
             icon: "💜",
             color: "purple",
-            description: "Máxima proteção com manutenção preventiva",
+            description: getPersonalizedText("Completo+"),
             features: ["Tudo do Completo", "📱 Eletrônicos premium", "🚲 Assistência completa bikes", "Manutenção preventiva", "Atendimento VIP"]
           }
         };

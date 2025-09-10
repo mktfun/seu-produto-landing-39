@@ -23,9 +23,9 @@ export type ElectronicsLevel = "sim-muito" | "sim-normal" | "nao" | "";
 
 export type BikeLevel = "sim-valiosa" | "sim-normal" | "nao" | "";
 
-export type MainPriority = "preco" | "emergencias" | "eletronicos" | "manutencao" | "completo" | "";
+export type MainPriority = "proteger_bens" | "ajuda_rapida" | "estabilidade_financeira" | "seguro_completo" | "";
 
-export type BudgetRange = "economico" | "medio" | "premium" | "";
+export type BudgetRange = "ate_50" | "50_100" | "acima_100" | "nao_certeza" | "";
 
 export type RecommendedPlan = "Essencial" | "Completo" | "Completo+" | "";
 
