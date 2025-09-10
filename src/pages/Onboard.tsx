@@ -577,36 +577,23 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
         
         // Função para obter texto personalizado baseado no fluxo
         const getPersonalizedText = (plan: string) => {
-          const propertyTypeMap = {
-            "apartamento": "apartamento",
-            "casa": "casa",
-            "sobrado": "sobrado",
-            "chacara": "chácara"
-          };
-          
-          const propertyName = propertyTypeMap[formData.propertyType as keyof typeof propertyTypeMap] || "residência";
-          
           // Fluxo 1: Conveniência e Serviços
           if (formData.mainPriority === "ajuda_rapida") {
-            return `Perfeito, ${formData.name}! Vimos que ter assistências para resolver as pendências do dia a dia é sua maior prioridade. Por isso, seu plano ideal é o ${plan}. Ele é o único que, além de todas as coberturas de emergência, oferece um pacote de serviços de manutenção e inspeção para você usar como preferir, como limpeza de calhas para sua ${propertyName} e revisão elétrica completa.`;
+            return "Vimos que sua prioridade é ter assistências completas para o dia a dia. Por isso, encontramos o plano que cobre tudo o que você precisa.";
           }
           
           // Fluxo 2: Proteção Máxima
           if (formData.mainPriority === "seguro_completo") {
-            return `Entendido, ${formData.name}! Você busca a proteção mais completa e definitiva para o seu lar. O plano que atende perfeitamente à sua necessidade é o ${plan}. Ele une todas as coberturas contra danos e roubo com o mais vasto pacote de assistências e serviços de manutenção do mercado. É a tranquilidade absoluta para sua ${propertyName}.`;
+            return "Você busca a proteção mais completa disponível. Encontramos o plano que oferece máxima cobertura para sua tranquilidade.";
           }
           
           // Fluxo 3: Segurança Essencial
           if (formData.mainPriority === "proteger_bens" || formData.mainPriority === "estabilidade_financeira") {
-            if (plan === "Completo") {
-              return `Olá, ${formData.name}! Para garantir sua estabilidade financeira em imprevistos maiores, o plano ideal é o ${plan}. Além da proteção básica para sua ${propertyName}, ele oferece suportes cruciais como hospedagem e guarda de móveis caso você precise, e até conserto para seus eletrodomésticos.`;
-            } else {
-              return `${formData.name}, encontramos o plano inteligente para você. O ${plan} é a porta de entrada para a proteção do seu lar. Ele cabe no seu planejamento e garante as coberturas e assistências emergenciais mais importantes para sua ${propertyName}, como chaveiro, encanador e eletricista 24 horas.`;
-            }
+            return "Sua prioridade é proteger seu patrimônio. Selecionamos o plano ideal para garantir sua segurança financeira.";
           }
           
           // Fluxo 4: Ponto de Partida
-          return `${formData.name}, encontramos o plano inteligente para você. O ${plan} é a porta de entrada para a proteção do seu lar. Ele cabe no seu planejamento e garante as coberturas e assistências emergenciais mais importantes para sua ${propertyName}, como chaveiro, encanador e eletricista 24 horas.`;
+          return "Encontramos o plano ideal para começar sua proteção residencial de forma inteligente e econômica.";
         };
         
         const planDetails = {
