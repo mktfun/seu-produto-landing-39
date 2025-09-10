@@ -707,9 +707,6 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
 
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-secondary mb-2">Qual plano é ideal para você?</h1>
-            <p className="text-muted-foreground text-lg">
-              Etapa {currentStep} de {totalSteps} - Descobrindo seu plano perfeito
-            </p>
           </div>
 
           {/* Progress bar */}
