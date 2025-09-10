@@ -18,6 +18,7 @@ export type Database = {
         Row: {
           budget_range: string
           created_at: string | null
+          email: string
           how_did_you_hear: string
           id: number
           ip_address: unknown | null
@@ -37,6 +38,7 @@ export type Database = {
         Insert: {
           budget_range: string
           created_at?: string | null
+          email: string
           how_did_you_hear: string
           id?: number
           ip_address?: unknown | null
@@ -56,6 +58,7 @@ export type Database = {
         Update: {
           budget_range?: string
           created_at?: string | null
+          email?: string
           how_did_you_hear?: string
           id?: number
           ip_address?: unknown | null

@@ -10,6 +10,7 @@ const corsHeaders = {
 
 interface QuoteEmailRequest {
   name: string;
+  email: string;
   phone: string;
   propertyType: string;
   propertyValue: string;
@@ -125,6 +126,10 @@ const handler = async (req: Request): Promise<Response> => {
             <div class="info-row">
               <span class="label">Nome:</span>
               <span class="value">${data.name}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Email:</span>
+              <span class="value">${data.email}</span>
             </div>
             <div class="info-row">
               <span class="label">WhatsApp:</span>

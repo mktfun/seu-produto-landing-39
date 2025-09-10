@@ -173,6 +173,7 @@ serve(async (req) => {
       leadData.id || '',
       leadData.name || '',
       leadData.phone || '',
+      leadData.email || '',
       leadData.how_did_you_hear || '',
       leadData.property_type || '',
       leadData.property_value || '',

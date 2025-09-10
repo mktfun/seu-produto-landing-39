@@ -19,6 +19,7 @@ export interface Lead {
   id?: number
   created_at?: string
   name: string
+  email: string
   phone: string
   how_did_you_hear: string
   property_type: string
@@ -42,10 +43,10 @@ export async function saveLead(leadData: Omit<Lead, 'id' | 'created_at'>): Promi
     console.log('📋 Dados completos:', leadData);
 
     // Verificar se os dados estão válidos
-    if (!leadData.name || !leadData.phone) {
+    if (!leadData.name || !leadData.phone || !leadData.email) {
       return {
         success: false,
-        error: 'Nome e telefone são obrigatórios'
+        error: 'Nome, email e telefone são obrigatórios'
       };
     }
 

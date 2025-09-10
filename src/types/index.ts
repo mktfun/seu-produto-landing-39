@@ -1,6 +1,7 @@
 // Form data types for onboarding
 export interface OnboardFormData {
   name: string;
+  email: string;
   phone: string;
   propertyType: PropertyType;
   propertyValue: PropertyValue;

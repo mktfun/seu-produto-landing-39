@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, CheckCircle, Phone, Star, Crown, Shield, Home, Zap, Users, Heart, Wrench, DollarSign, Smartphone, Bike, AlertCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle, Phone, Star, Crown, Shield, Home, Zap, Users, Heart, Wrench, DollarSign, Smartphone, Bike, AlertCircle, Mail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { saveLead, type Lead } from "@/lib/supabase";
 import { supabase } from "@/integrations/supabase/client";
@@ -16,6 +16,7 @@ const Onboard = () => {
   const [emailSent, setEmailSent] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
+    email: "",
     phone: "",
     howDidYouHear: "",
     propertyType: "",
@@ -28,7 +29,7 @@ const Onboard = () => {
     utm_campaign: ""
   });
 
-  const totalSteps = 5;
+  const totalSteps = 6;
 
   // Capture UTM parameters on component mount
   useEffect(() => {
@@ -112,8 +113,13 @@ const Onboard = () => {
     return "Completo+";
   };
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const validateForm = () => {
-    const required = ['name', 'phone', 'howDidYouHear', 'propertyType', 'propertyValue', 'mainPriority', 'budgetRange'];
+    const required = ['name', 'email', 'phone', 'howDidYouHear', 'propertyType', 'propertyValue', 'mainPriority', 'budgetRange'];
     const missing = required.filter(field => !formData[field as keyof typeof formData]);
 
     if (missing.length > 0) {
@@ -125,12 +131,22 @@ const Onboard = () => {
       });
       return false;
     }
+
+    if (!validateEmail(formData.email)) {
+      toast({
+        title: "❌ Email inválido",
+        description: "Por favor, insira um email válido",
+        variant: "destructive",
+      });
+      return false;
+    }
+
     return true;
   };
 
-  // Auto-send email when reaching step 5
+  // Auto-send email when reaching step 6
   useEffect(() => {
-    if (currentStep === 5 && !emailSent && !isSubmitting) {
+    if (currentStep === 6 && !emailSent && !isSubmitting) {
       sendEmailAutomatically();
     }
   }, [currentStep, emailSent, isSubmitting]);
@@ -152,6 +168,7 @@ const Onboard = () => {
       // Prepare data for email
       const leadData: Omit<Lead, 'id' | 'created_at'> = {
         name: formData.name,
+        email: formData.email,
         phone: formData.phone,
         how_did_you_hear: formData.howDidYouHear,
         property_type: formData.propertyType,
@@ -184,6 +201,7 @@ const Onboard = () => {
               id: supabaseResult.data?.id,
               name: formData.name,
               phone: formData.phone,
+              email: formData.email,
               how_did_you_hear: formData.howDidYouHear,
               property_type: formData.propertyType,
               property_value: formData.propertyValue,
@@ -204,6 +222,7 @@ const Onboard = () => {
       try {
         const emailData = {
           name: formData.name,
+          email: formData.email,
           phone: formData.phone,
           propertyType: formData.propertyType,
           propertyValue: formData.propertyValue,
@@ -257,6 +276,7 @@ const Onboard = () => {
               state: { 
                 formData: {
                   name: formData.name,
+                  email: formData.email,
                   recommendedPlan: recommendation,
                   propertyType: formData.propertyType,
                   propertyValue: formData.propertyValue,
@@ -294,6 +314,7 @@ const Onboard = () => {
 
 *DADOS DO CLIENTE:*
 • Nome: ${formData.name}
+• Email: ${formData.email}
 • WhatsApp: ${formData.phone}
 • Como conheceu: ${formData.howDidYouHear}
 
@@ -321,64 +342,6 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
   const renderStep = () => {
     switch (currentStep) {
       case 1:
-        return (
-          <div className="space-y-6 text-center">
-            <div className="mb-8">
-              <Home className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-secondary mb-2">Vamos começar!</h2>
-              <p className="text-muted-foreground">Seus dados para contato e como nos conheceu</p>
-            </div>
-
-            <div className="space-y-4 max-w-md mx-auto">
-              <Input
-                value={formData.name}
-                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                placeholder="Seu nome"
-                className="text-center"
-              />
-              <Input
-                value={formData.phone}
-                onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                placeholder="Seu WhatsApp"
-                className="text-center"
-              />
-
-              <div className="grid grid-cols-1 gap-3 mt-6">
-                <p className="text-sm font-medium text-secondary mb-2">Como nos conheceu?</p>
-                {[
-                  { id: "uber", label: "QR Code no Uber", icon: "🚗" },
-                  { id: "google", label: "Google/Busca", icon: "🔍" },
-                  { id: "indicacao", label: "Indicação", icon: "👥" },
-                  { id: "social", label: "Redes Sociais", icon: "📱" },
-                  { id: "outros", label: "Outros", icon: "💬" }
-                ].map((option) => (
-                  <button
-                    key={option.id}
-                    onClick={() => setFormData(prev => ({ ...prev, howDidYouHear: option.id }))}
-                    className={`p-3 rounded-lg border-2 transition-all text-left ${
-                      formData.howDidYouHear === option.id
-                        ? 'border-primary bg-primary/5'
-                        : 'border-border hover:border-primary/50'
-                    }`}
-                  >
-                    <span className="text-lg mr-2">{option.icon}</span>
-                    <span className="text-sm font-medium">{option.label}</span>
-                  </button>
-                ))}
-              </div>
-
-              <Button
-                onClick={handleNext}
-                disabled={!formData.name || !formData.phone || !formData.howDidYouHear}
-                className="w-full mt-6"
-              >
-                Continuar
-              </Button>
-            </div>
-          </div>
-        );
-
-      case 2:
         return (
           <div className="space-y-6 text-center">
             <div className="mb-8">
@@ -449,7 +412,7 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
           </div>
         );
 
-      case 3:
+      case 2:
         return (
           <div className="space-y-6 text-center">
             <div className="mb-8">
@@ -488,7 +451,7 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
           </div>
         );
 
-      case 4:
+      case 3:
         return (
           <div className="space-y-6 text-center">
             <div className="mb-8">
@@ -521,7 +484,96 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
           </div>
         );
 
+      case 4:
+        return (
+          <div className="space-y-6 text-center">
+            <div className="mb-8">
+              <Users className="w-16 h-16 text-primary mx-auto mb-4" />
+              <h2 className="text-3xl font-bold text-secondary mb-2">Seus dados para contato</h2>
+              <p className="text-muted-foreground">Para que possamos enviar sua cotação personalizada</p>
+            </div>
+
+            <div className="space-y-4 max-w-md mx-auto">
+              <div className="relative">
+                <Input
+                  value={formData.name}
+                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                  placeholder="Seu nome completo"
+                  className="pl-10"
+                />
+                <Users className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+              </div>
+              
+              <div className="relative">
+                <Input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                  placeholder="Seu melhor email"
+                  className={`pl-10 ${formData.email && !validateEmail(formData.email) ? 'border-red-300' : ''}`}
+                />
+                <Mail className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+                {formData.email && !validateEmail(formData.email) && (
+                  <p className="text-xs text-red-500 mt-1 text-left">Email deve conter @ e .</p>
+                )}
+              </div>
+              
+              <div className="relative">
+                <Input
+                  value={formData.phone}
+                  onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                  placeholder="Seu WhatsApp"
+                  className="pl-10"
+                />
+                <Phone className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+              </div>
+
+              <Button
+                onClick={handleNext}
+                disabled={!formData.name || !formData.email || !formData.phone || !validateEmail(formData.email)}
+                className="w-full mt-6"
+              >
+                Ver Minha Recomendação
+              </Button>
+            </div>
+          </div>
+        );
+
       case 5:
+        return (
+          <div className="space-y-6 text-center">
+            <div className="mb-8">
+              <Heart className="w-16 h-16 text-primary mx-auto mb-4" />
+              <h2 className="text-3xl font-bold text-secondary mb-2">Como nos conheceu?</h2>
+              <p className="text-muted-foreground">Isso nos ajuda a melhorar nossos serviços</p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-3 max-w-md mx-auto">
+              {[
+                { id: "uber", label: "QR Code no Uber", icon: "🚗" },
+                { id: "google", label: "Google/Busca", icon: "🔍" },
+                { id: "indicacao", label: "Indicação", icon: "👥" },
+                { id: "social", label: "Redes Sociais", icon: "📱" },
+                { id: "outros", label: "Outros", icon: "💬" }
+              ].map((option) => (
+                <button
+                  key={option.id}
+                  onClick={() => selectOption('howDidYouHear', option.id)}
+                  className={`p-3 rounded-lg border-2 transition-all text-left ${
+                    formData.howDidYouHear === option.id
+                      ? 'border-primary bg-primary/5'
+                      : 'border-border hover:border-primary/50'
+                  }`}
+                >
+                  <span className="text-lg mr-2">{option.icon}</span>
+                  <span className="text-sm font-medium">{option.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 6:
         const recommendation = calculateRecommendation();
         const planDetails = {
           "Essencial": {
