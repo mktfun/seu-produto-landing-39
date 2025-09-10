@@ -29,7 +29,7 @@ const Onboard = () => {
     utm_campaign: ""
   });
 
-  const totalSteps = 6;
+  const totalSteps = 7;
 
   // Capture UTM parameters on component mount
   useEffect(() => {
@@ -144,9 +144,9 @@ const Onboard = () => {
     return true;
   };
 
-  // Auto-send email when reaching step 6
+  // Auto-send email when reaching step 7
   useEffect(() => {
-    if (currentStep === 6 && !emailSent && !isSubmitting) {
+    if (currentStep === 7 && !emailSent && !isSubmitting) {
       sendEmailAutomatically();
     }
   }, [currentStep, emailSent, isSubmitting]);
@@ -346,73 +346,70 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
           <div className="space-y-6 text-center">
             <div className="mb-8">
               <Home className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-secondary mb-2">Sobre sua residência</h2>
-              <p className="text-muted-foreground">Tipo e valor estimado do seu imóvel</p>
+              <h2 className="text-3xl font-bold text-secondary mb-2">Tipo de residência</h2>
+              <p className="text-muted-foreground">Qual tipo de imóvel você mora?</p>
             </div>
 
-            <div className="space-y-8 max-w-2xl mx-auto">
-              {/* Tipo de propriedade */}
-              <div>
-                <h3 className="text-lg font-semibold text-secondary mb-2">Tipo de residência que você mora:</h3>
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { id: "apartamento", label: "Apartamento", icon: "🏢", description: "Unidade em edifício" },
-                    { id: "casa", label: "Casa", icon: "🏠", description: "Residência térrea ou com múltiplos andares" },
-                    { id: "sobrado", label: "Sobrado", icon: "🏘️", description: "Casa de dois ou mais pavimentos" },
-                    { id: "chacara", label: "Chácara/Sítio", icon: "🌳", description: "Propriedade rural ou de lazer" }
-                  ].map((option) => (
-                    <button
-                      key={option.id}
-                      onClick={() => setFormData(prev => ({ ...prev, propertyType: option.id }))}
-                      className={`p-4 rounded-lg border-2 transition-all ${
-                        formData.propertyType === option.id ? 'border-primary bg-primary/5' : 'border-border'
-                      }`}
-                    >
-                      <div className="text-2xl mb-2">{option.icon}</div>
-                      <div className="text-sm font-medium mb-1">{option.label}</div>
-                      <div className="text-xs text-muted-foreground">{option.description}</div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Valor da propriedade */}
-              {formData.propertyType && (
-                <div>
-                  <h3 className="text-lg font-semibold text-secondary mb-2">Valor estimado do seu imóvel:</h3>
-                  <div className="grid grid-cols-2 gap-3">
-                    {[
-                      { id: "ate-300k", label: "Até R$ 300mil", icon: "💰", description: "Residências de entrada" },
-                      { id: "300-600k", label: "R$ 300k - 600k", icon: "💎", description: "Padrão médio do mercado" },
-                      { id: "600k-1m", label: "R$ 600k - 1M", icon: "👑", description: "Imóveis de alto padrão" },
-                      { id: "acima-1m", label: "Acima R$ 1M", icon: "🏆", description: "Propriedades de luxo" }
-                    ].map((option) => (
-                      <button
-                        key={option.id}
-                        onClick={() => setFormData(prev => ({ ...prev, propertyValue: option.id }))}
-                        className={`p-4 rounded-lg border-2 transition-all ${
-                          formData.propertyValue === option.id ? 'border-primary bg-primary/5' : 'border-border'
-                        }`}
-                      >
-                        <div className="text-2xl mb-2">{option.icon}</div>
-                        <div className="text-sm font-medium mb-1">{option.label}</div>
-                        <div className="text-xs text-muted-foreground">{option.description}</div>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {formData.propertyType && formData.propertyValue && (
-                <Button onClick={handleNext} className="w-full">
-                  Continuar
-                </Button>
-              )}
+            <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
+              {[
+                { id: "apartamento", label: "Apartamento", icon: "🏢", description: "Unidade em edifício" },
+                { id: "casa", label: "Casa", icon: "🏠", description: "Residência térrea ou com múltiplos andares" },
+                { id: "sobrado", label: "Sobrado", icon: "🏘️", description: "Casa de dois ou mais pavimentos" },
+                { id: "chacara", label: "Chácara/Sítio", icon: "🌳", description: "Propriedade rural ou de lazer" }
+              ].map((option) => (
+                <Card
+                  key={option.id}
+                  className={`cursor-pointer transition-all hover:scale-105 border-2 hover:border-primary ${
+                    formData.propertyType === option.id ? 'border-primary bg-primary/5' : 'border-border'
+                  }`}
+                  onClick={() => selectOption('propertyType', option.id)}
+                >
+                  <CardContent className="p-6 text-center">
+                    <div className="text-4xl mb-3">{option.icon}</div>
+                    <h3 className="font-semibold text-lg mb-2">{option.label}</h3>
+                    <p className="text-sm text-muted-foreground">{option.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         );
 
       case 2:
+        return (
+          <div className="space-y-6 text-center">
+            <div className="mb-8">
+              <DollarSign className="w-16 h-16 text-primary mx-auto mb-4" />
+              <h2 className="text-3xl font-bold text-secondary mb-2">Valor do seu imóvel</h2>
+              <p className="text-muted-foreground">Qual o valor estimado da sua residência?</p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
+              {[
+                { id: "ate-300k", label: "Até R$ 300mil", icon: "💰", description: "Residências de entrada" },
+                { id: "300-600k", label: "R$ 300k - 600k", icon: "💎", description: "Padrão médio do mercado" },
+                { id: "600k-1m", label: "R$ 600k - 1M", icon: "👑", description: "Imóveis de alto padrão" },
+                { id: "acima-1m", label: "Acima R$ 1M", icon: "🏆", description: "Propriedades de luxo" }
+              ].map((option) => (
+                <Card
+                  key={option.id}
+                  className={`cursor-pointer transition-all hover:scale-105 border-2 hover:border-primary ${
+                    formData.propertyValue === option.id ? 'border-primary bg-primary/5' : 'border-border'
+                  }`}
+                  onClick={() => selectOption('propertyValue', option.id)}
+                >
+                  <CardContent className="p-6 text-center">
+                    <div className="text-4xl mb-3">{option.icon}</div>
+                    <h3 className="font-semibold text-lg mb-2">{option.label}</h3>
+                    <p className="text-sm text-muted-foreground">{option.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 3:
         return (
           <div className="space-y-6 text-center">
             <div className="mb-8">
@@ -451,7 +448,7 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
           </div>
         );
 
-      case 3:
+      case 4:
         return (
           <div className="space-y-6 text-center">
             <div className="mb-8">
@@ -484,7 +481,7 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
           </div>
         );
 
-      case 4:
+      case 5:
         return (
           <div className="space-y-6 text-center">
             <div className="mb-8">
@@ -533,13 +530,13 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
                 disabled={!formData.name || !formData.email || !formData.phone || !validateEmail(formData.email)}
                 className="w-full mt-6"
               >
-                Ver Minha Recomendação
+                Continuar
               </Button>
             </div>
           </div>
         );
 
-      case 5:
+      case 6:
         return (
           <div className="space-y-6 text-center">
             <div className="mb-8">
@@ -573,7 +570,7 @@ _Enviado automaticamente pelo sistema de cotacao em ${new Date().toLocaleString(
           </div>
         );
 
-      case 6:
+      case 7:
         const recommendation = calculateRecommendation();
         const planDetails = {
           "Essencial": {
