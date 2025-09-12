@@ -53,6 +53,13 @@ const Header = () => {
             }`}>
               <p className="text-sm font-medium text-secondary">Residência</p>
             </div>
+            <div className="hidden sm:flex items-center space-x-3">
+              <div className="w-px bg-border h-8"></div>
+              <div className={`transition-all duration-500 ease-in-out ${isScrolled ? 'text-xs' : 'text-sm'}`}>
+                <p className="font-medium text-secondary">JJ & Amorim</p>
+                <p className="text-xs text-muted-foreground">Corretora Autorizada</p>
+              </div>
+            </div>
           </div>
 
           <nav className="hidden md:flex items-center space-x-6">

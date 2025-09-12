@@ -9,7 +9,13 @@ const Footer = memo(() => {
             <div className="flex items-center space-x-3">
               <img src="/lovable-uploads/286307c9-2b48-4465-8943-9d890a8bfd04.png" alt="Zurich Logo" className="h-8 w-auto brightness-0 invert" />
               <div>
-                <p className="text-sm font-medium text-white/90">Residência</p>
+                <p className="text-sm font-medium text-white/90">Zurich</p>
+                <p className="text-xs text-white/70">Residência</p>
+              </div>
+              <div className="w-px bg-white/20 h-8"></div>
+              <div>
+                <p className="text-sm font-medium text-white/90">JJ & Amorim</p>
+                <p className="text-xs text-white/70">Corretora Autorizada</p>
               </div>
             </div>
             <p className="text-white/80 text-sm">
@@ -40,11 +46,17 @@ const Footer = memo(() => {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Contato</h4>
+            <h4 className="font-semibold mb-4">JJ & Amorim Corretora</h4>
             <ul className="space-y-2 text-sm text-white/80">
+              <li>CNPJ: 21.364.352/0001-04</li>
+              <li>SUSEP: 37NDXJ</li>
               <li>+55 11 97969-9832</li>
               <li>contato@jjamorimseguros.com.br</li>
-              <li>CNPJ: 21.364.352/0001-04</li>
+              <li className="pt-1">
+                <span className="text-xs">R. Frei Gaspar, 941 - Sala 603</span><br />
+                <span className="text-xs">São Bernardo do Campo - SP</span><br />
+                <span className="text-xs">CEP: 09720-440</span>
+              </li>
             </ul>
           </div>
         </div>
@@ -57,9 +69,9 @@ const Footer = memo(() => {
             <p>Especialistas em Seguro Residencial</p>
           </div>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">Política de Privacidade</a>
-            <a href="#" className="hover:text-white transition-colors">Termos de Uso</a>
-            <a href="#" className="hover:text-white transition-colors">SUSEP</a>
+            <a href="/politica-de-privacidade" className="hover:text-white transition-colors">Política de Privacidade</a>
+            <a href="/termos-de-uso" className="hover:text-white transition-colors">Termos de Uso</a>
+            <a href="https://www.susep.gov.br" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">SUSEP</a>
           </div>
         </div>
       </div>
